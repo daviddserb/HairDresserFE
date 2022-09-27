@@ -1,0 +1,65 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
+import { HairDresserService } from 'src/app/services/hairdresser.service';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+
+  customerRegisterForm = new FormGroup({
+    // name: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required, this.noWhitespaceAllowed]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    // email: new FormControl('', [Validators.required, Validators.email]),
+    // phone: new FormControl('', [Validators.required, this.noLettersAllowed]),
+    // address: new FormControl('', Validators.required),
+  });
+
+  apiUrl = "https://localhost:7192/api";
+
+  constructor(private hairdresserService: HairDresserService,
+    private router: Router,
+    private popUpMessagesService: PopUpMessagesService) { }
+
+  ngOnInit(): void {
+  }
+
+  createAccount() {
+    // TODO: Use EventEmitter with form value
+    let userInfo = this.customerRegisterForm.value;
+    console.log(userInfo);
+
+    this.hairdresserService
+    .registerUser(userInfo.username!, userInfo.password!)
+    .subscribe(response => {
+      this.popUpMessagesService.showPopUpMessage("Account successfully created!", "OK", "success");
+      console.log("response:");
+      console.log(response);
+      this.router.navigate(['log-in']);
+    }, err => {
+      this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error");
+      console.log("err:");
+      console.log(err);
+    });
+  }
+
+  get formGetter() { return this.customerRegisterForm.controls; }
+
+  // ??? Trebuie sa fac un folder special pt. Custom Validators?
+  noWhitespaceAllowed(control: FormControl) {
+    //if(control.value != null && control.value.indexOf(' ') != -1) return {noSpaceAllowed: true} //method 1
+    if(/\s/.test(control.value)) return {noSpaceAllowed: true}
+    return null;
+  }
+
+  noLettersAllowed(control: FormControl) {
+    let regExp = /[a-zA-Z]/g;
+    if (regExp.test(control.value)) return {noLetterAllowed: true};
+    return null;
+  }
+}

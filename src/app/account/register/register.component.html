@@ -1,0 +1,92 @@
+<div class="card">
+    <h4 class="card-header">Register</h4>
+
+    <div class="card-body">
+        <form [formGroup]="customerRegisterForm" (ngSubmit)="createAccount()">
+            <!-- <div class="form-group">
+                <label for="name">Name: </label>
+                <input id="name" type="text" formControlName="name" class="form-control">
+                
+                <div *ngIf="formGetter.name.touched && formGetter.name.invalid" style="color:red">
+                    Name is required!
+                </div>
+            </div> -->
+        
+            <div class="form-group">
+                <label for="username">Username: </label>
+                <input id="username" type="text" class="form-control" formControlName="username">
+                
+                <div *ngIf="formGetter.username.touched" style="color:red">
+                    <div *ngIf="formGetter.username.errors?.['required']">
+                        Username is required!
+                    </div>
+
+                    <div *ngIf="formGetter.username.errors?.['noSpaceAllowed']">
+                        No whitespace allowed!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input id="password" type="password" formControlName="password" class="form-control">
+            
+                <div *ngIf="formGetter.password.touched" style="color:red">
+                    <div *ngIf="formGetter.password.errors?.['required']">
+                        Password is required!
+                    </div>
+                    <div *ngIf="formGetter.password.errors?.['minlength']">
+                        Password needs a length of at least 6!
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="email">Email: </label>
+                <input id="email" type="email" formControlName="email" class="form-control">
+            
+                <div *ngIf="formGetter.email.touched" style="color:red">
+                    <div *ngIf="formGetter.email.errors?.['required']">
+                        Email is required!
+                    </div>
+
+                    <div *ngIf="formGetter.email.errors?.['email']">
+                        Email needs to be valid!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone: </label>
+                <input id="phone" type="text" formControlName="phone" class="form-control">
+            
+                <div *ngIf="formGetter.phone.touched" style="color:red">
+                    <div *ngIf="formGetter.phone.errors?.['required']">
+                        Phone is required!
+                    </div>
+
+                    <div *ngIf="formGetter.phone.errors?.['noLetterAllowed']">
+                        No letters allowed!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address: </label>
+                <input id="address" type="text" formControlName="address" class="form-control">
+            
+                <div *ngIf="formGetter.address.touched && formGetter.address.invalid" style="color:red">
+                    Address is required!
+                </div>
+            </div> -->
+
+            <p>Form status: {{customerRegisterForm.status}}</p>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="!customerRegisterForm.valid">Submit</button>
+                
+                <a routerLink="../log-in" class="btn btn-link">Already have an account? Log in here.</a>
+            </div>
+        </form>
+    </div>
+</div>
