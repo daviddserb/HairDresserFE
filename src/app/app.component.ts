@@ -7,9 +7,8 @@ import { HairDresserService } from './services/hairdresser.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'HairDresser';
 
-  constructor(private hairdresserService: HairDresserService) {}
+  constructor(public hairdresserService: HairDresserService) {}
 
   ngOnInit(): void {
     // this.hairdresserService.getAllAppointments().subscribe(x => console.log(x));

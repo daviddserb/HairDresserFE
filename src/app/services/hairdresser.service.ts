@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
-import { Observable, tap } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
@@ -11,9 +11,20 @@ import { User } from "../models/User";
 export class HairDresserService {
     apiUrl = "https://localhost:7192/api";
 
+    // Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
+    private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+    isLoggedIn$ = this._isLoggedIn$.asObservable(); // Public so we can change it.
+
+    user_username = localStorage.getItem('username');
+
     constructor(
         private httpClient: HttpClient
-        ) {}
+        ) {
+            // Get the value of the token, from the local storage, from the logged in user.
+            const token = localStorage.getItem('token');
+            // If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
+            this._isLoggedIn$.next(!!token);
+        }
 
     getAllAppointments(): Observable<Appointment> {
         let pageNumberValue = 1;
@@ -117,12 +128,34 @@ export class HairDresserService {
         return this.httpClient.post<User>(`${this.apiUrl}/user/register`, userObject);
     }
 
-    loginUser(user_username: string, user_password: string): Observable<{}> {
-        console.log("loginUser():");
+    logInUser(user_username: string, user_password: string): Observable<{}> {
+        console.log("HairDresserService -> logInUser()");
         let userObject: User = {
             username: user_username,
             password: user_password,
         }
-        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, userObject);
+
+        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, userObject)
+        .pipe(
+            tap((response: any ) => {
+                // Save information in Local Storage (key - value).
+                // To see it: Inspect on the web page - Application
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('username', response.username);
+
+                // Using method next() we know that every subscriber of the public observable will be notified.
+                this._isLoggedIn$.next(true);
+
+                console.log("response.token:");
+                console.log(response.token);
+            })
+        );
+    }
+
+    logOutUser() {
+        console.log("HairDresserService -> logOutUser()");
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        // ??? Ma redirectioneaza automat pe pagina de home
     }
 }

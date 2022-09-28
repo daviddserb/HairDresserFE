@@ -19,14 +19,15 @@ export class LogInComponent implements OnInit {
   }
 
   loginUser(item: any) {
+    console.log("item.value (user info):")
     console.log(item.value);
 
     this.hairdresserService
-    .loginUser(item.value.username, item.value.password)
+    .logInUser(item.value.username, item.value.password)
     .subscribe(response => {
       this.popUpMessagesService.showPopUpMessage("Successfully logged in your account!", "OK", "success");
       console.log("response:");
-      console.log(response);
+      console.log(response); // The response from the back-end, from the UsersController -> Login().
       this.router.navigate(['profile']);
     }, err => {
       this.popUpMessagesService.showPopUpMessage("This account doesn't exist!", "OK", "error");
