@@ -1,9 +1,16 @@
 export interface Appointment {
-    customerName?: string; //for get
-    employeeName?: string; //for get
-    customerId?: number; //for post
-    employeeId?: number; //for post, put
+    customerId?: number;
+    customerName?: string;
+
+    employeeId?: number;
+    employeeName?: string;
+
     hairServicesIds: number[];
+
     startDate: Date;
     endDate: Date;
+
+    price: number;
+    
+    isDeleted?: string;
 }

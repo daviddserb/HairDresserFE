@@ -1,0 +1,49 @@
+ALL HAIR SERVICES PAGE
+
+<table mat-table [dataSource]="allHairServices$" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element; let i = index">{{element.name}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef> Duration </th>
+
+      <td mat-cell *matCellDef="let element; let i = index">{{element.duration}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+
+        <td mat-cell *matCellDef="let element; let i = index ">{{element.price}} $</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+
+        <td mat-cell *matCellDef="let element; let i = index">
+            <a routerLink="../update/{{element.id}}">
+                <!-- Angular Material Tooltip
+                    matToolTip - provides a text label that is displayed when the user hovers over or longpresses an element.
+                    matTooltipPosition - where the text to be displayed.
+                -->
+                <button mat-icon-button matTooltip="Edit" matTooltipPosition="above">
+                    <mat-icon class="icon_edit_button">edit</mat-icon>
+                </button>
+            </a>
+  
+            <button mat-icon-button matTooltip="Delete" (click)="deleteHairService(element.id)">
+                <mat-icon class="icon_delete_button">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

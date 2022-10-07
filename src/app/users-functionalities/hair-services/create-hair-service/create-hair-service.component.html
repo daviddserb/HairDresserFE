@@ -1,0 +1,45 @@
+<div class="card">
+    <h4 class="card-header">Create Hair Service</h4>
+
+    <div class="card-body">
+        <form [formGroup]="formHairService" (ngSubmit)="createHairService()">
+        
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input class="form-control" formControlName="name">
+                
+                <div *ngIf="formGetter.name.touched" style="color:red">
+                    <div *ngIf="formGetter.name.errors?.['required']">
+                        Name is required!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="durationInMinutes">Duration in minutes: </label>
+                <input formControlName="durationInMinutes" class="form-control">
+            
+                <div *ngIf="formGetter.durationInMinutes.touched" style="color:red">
+                    <div *ngIf="formGetter.durationInMinutes.errors?.['required']">
+                        Duration is required!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price: </label>
+                <input id="price" type="price" formControlName="price" class="form-control">
+            
+                <div *ngIf="formGetter.price.touched" style="color:red">
+                    <div *ngIf="formGetter.price.errors?.['required']">
+                        Price is required!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="!formHairService.valid">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

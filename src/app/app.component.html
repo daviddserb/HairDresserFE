@@ -1,17 +1,16 @@
 <!-- All the elements from here are printed on all the other html pages, so this page is manly used for: header, side navbar, footer, etc... -->
-<p>app.component.html (se vede tot timpul si daca ii logat si daca nu-i)</p>
 
 <!-- If user logged in-->
-<ul *ngIf="hairdresserService.isLoggedIn$ | async; else notLoggedIn">
-    <p> Hi, {{ hairdresserService.user_username }} </p>
+<!-- <ul *ngIf="hairdresserService.isLoggedIn$ | async; else notLoggedIn">
+    <p> Hi, {{ hairdresserService.loggedInUser_Username }} </p>
 
-    <p>(is logged in): hair services, make appointment, log out, etc...</p>
+    <p> (is logged in): log out (? etc...) </p>
     <a href style="cursor:pointer" (click)="hairdresserService.logOutUser()">Log out</a>
-</ul>
+</ul> -->
 <!-- Else (if user not logged in) -->
-<ng-template #notLoggedIn>
-    (is not logged in): register, login, hair services, etc...
-</ng-template>
+<!-- <ng-template #notLoggedIn>
+    <p> (is not logged in): register, login, hair services (? etc...) </p>
+</ng-template> -->
 
 <!-- Routed views go here (and they should only stay in app.component.html): -->
 <router-outlet></router-outlet>
