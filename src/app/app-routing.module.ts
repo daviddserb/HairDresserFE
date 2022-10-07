@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { RegisterComponent } from './account/register/register.component';
 import { LogInComponent } from './account/log-in/log-in.component';
 import { HomeComponent } from './home/home.component';
@@ -13,7 +14,6 @@ import { ReadAllAppointmentsComponent } from './users-functionalities/appointmen
 import { CreateHairServiceComponent } from './users-functionalities/hair-services/create-hair-service/create-hair-service.component';
 import { ReadAllHairServicesComponent } from './users-functionalities/hair-services/read-all-hair-services/read-all-hair-services.component';
 import { UpdateComponent } from './users-functionalities/hair-services/update/update.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 const routes: Routes = [
   //! After adding the path, add it in routingComponents.

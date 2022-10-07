@@ -166,7 +166,7 @@ export class HairDresserService {
         console.log("api url= ", `${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
 
         this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`).subscribe(res => console.log("price= ", res));
-
+        
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
 
@@ -190,7 +190,7 @@ export class HairDresserService {
         console.log("api url= ", `${this.apiUrl}/employee/all/by-services?${stringForApi}`);
 
         this.httpClient.get(`${this.apiUrl}/employee/all/by-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
-        
+
         return this.httpClient.get(`${this.apiUrl}/employee/all/by-services?${stringForApi}`);
     }
 

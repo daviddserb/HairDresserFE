@@ -1,3 +1,11 @@
+.mat-stepper-vertical {
+    margin-top: 8px;
+}
+  
+.mat-form-field {
+    margin-top: 16px;
+}
+
 table {
     width: 85%;
 }
@@ -15,9 +23,8 @@ table {
 /* Selected row (hair service). */
 .row-is-clicked {
     font-weight: bold;
-  }
+}
 
 mat-form-field {
    background-color: grey; 
 }
-

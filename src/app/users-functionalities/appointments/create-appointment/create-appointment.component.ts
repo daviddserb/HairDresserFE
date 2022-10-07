@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HairDresserService } from 'src/app/services/hairdresser.service';
-import { switchMap} from 'rxjs';
-import { Appointment } from 'src/app/models/Appointment';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { HairDresserService } from 'src/app/services/hairdresser.service';
+import { Appointment } from 'src/app/models/Appointment';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 
 @Component({
   selector: 'app-create-appointment',
@@ -10,6 +13,14 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
+  isLinear = true;
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: [Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  
   allHairServices$!: any;
   displayedColumns: string[] = ['checkBox', 'id', 'name', 'duration', 'price'];
 
@@ -37,7 +48,12 @@ export class CreateAppointmentComponent implements OnInit {
 
   validIntervals: any;
 
-  constructor(public hairdresserService: HairDresserService) {}
+  constructor(
+    public hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService,
+    private router: Router,
+    private _formBuilder: FormBuilder
+    ) {}
 
   ngOnInit(): void {
     this.allHairServices$ = this.hairdresserService.getAllHairServices();
@@ -55,8 +71,20 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   getEmployeesForAppointment() {
+    console.log("-> getEmployeesForAppointment");
+    
     this.hairdresserService.getEmployeesByHairServicesIds(this.selection.selected.map(hairServices => hairServices.id))
-    .subscribe(result => this.employeesByHairServices = result);
+    .subscribe(
+      result => {
+        console.log("resut= ", result);
+        this.employeesByHairServices = result;
+      },
+      err => {
+      console.log("err= ", err);
+      this.popUpMessagesService.showPopUpMessage("No employee for the selected hair services!", "OK", "error");
+      }
+    );
+    console.log("getEmployeesForAppointment ->");
   }
 
   getDurationForAppointment() {
@@ -69,8 +97,8 @@ export class CreateAppointmentComponent implements OnInit {
     .subscribe(result => this.appointmentPrice = result);
   }
 
-  saveEmployeeID(employeeId: number) {
-    console.log("saveEmployeeID():");
+  saveEmployeeId(employeeId: number) {
+    console.log("saveEmployeeId():");
 
     this.selectedEmployeeId = employeeId;
     console.log("selected employee id= ", this.selectedEmployeeId);
@@ -121,6 +149,10 @@ export class CreateAppointmentComponent implements OnInit {
     }
     console.log("appointment= ", appointment);
 
-    this.hairdresserService.postAppointment(appointment).subscribe();
+    this.hairdresserService.postAppointment(appointment)
+    .subscribe(res => {
+      this.popUpMessagesService.showPopUpMessage("Appointment successfully created!", "OK", "success");
+      this.router.navigate(['customer/appointment/all']);
+    });
   }
 }

@@ -42,9 +42,8 @@ export class RegisterComponent implements OnInit {
       console.log(response);
       this.router.navigate(['log-in']);
     }, err => {
+      console.log("err= ", err);
       this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error");
-      console.log("err:");
-      console.log(err);
     });
   }
 
