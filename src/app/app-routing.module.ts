@@ -14,6 +14,8 @@ import { GetAllCustomerAppointmentsComponent } from './users-functionalities/app
 import { CreateHairServiceComponent } from './users-functionalities/hair-services/create-hair-service/create-hair-service.component';
 import { GetAllHairServicesComponent } from './users-functionalities/hair-services/get-all-hair-services/get-all-hair-services.component';
 import { UpdateHairServiceComponent } from './users-functionalities/hair-services/update-hair-service/update-hair-service.component';
+import { GetAllAppointmentsComponent } from './users-functionalities/appointments/get-all-appointments/get-all-appointments.component';
+import { GetAllEmployeesComponent } from './users-functionalities/appointments/get-all-employees/get-all-employees.component';
 
 const routes: Routes = [
   //! After adding the path, add it in routingComponents.
@@ -26,7 +28,9 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent, children: [
     {path: 'hair-service', component: CreateHairServiceComponent},
     {path: 'hair-service/all', component: GetAllHairServicesComponent},
-    {path: 'hair-service/update/:id', component: UpdateHairServiceComponent}
+    {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
+    {path: 'appointment/all', component: GetAllAppointmentsComponent},
+    {path: 'employee/all', component: GetAllEmployeesComponent},
   ]},
 
   {path: 'employee', component: EmployeeComponent},

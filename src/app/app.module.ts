@@ -24,6 +24,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { InterceptorService } from './loader/interceptor.service';
+import { GetAllAppointmentsComponent } from './users-functionalities/appointments/get-all-appointments/get-all-appointments.component';
+import { GetAllEmployeesComponent } from './users-functionalities/appointments/get-all-employees/get-all-employees.component';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -46,6 +48,8 @@ const MaterialComponents = [
     routingComponents,
     NoWhitespaceAllowedDirective,
     NotifierComponent,
+    GetAllAppointmentsComponent,
+    GetAllEmployeesComponent,
   ],
   imports: [
     BrowserModule,

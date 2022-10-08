@@ -31,11 +31,8 @@ export class HairDresserService {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
 
-    getAllAppointments(): Observable<Appointment> {
-        let pageNumberValue = 1;
-        let pageSizeValue = 4;
-        //return this.httpClient.get("https://localhost:7192/api/appointment/all?PageNumber="+pageNumberValue+"&PageSize="+pageSizeValue+""); //different method to use variables in url
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumberValue}&PageSize=${pageSizeValue}`);
+    getAllAppointments(pageNumber: number, pageSize: number): Observable<Appointment> {
+        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumber}&PageSize=${pageSize}`);
     }
 
     getAppointmentById(appointmentId: number): Observable<Appointment> { 
