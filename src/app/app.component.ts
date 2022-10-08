@@ -8,7 +8,9 @@ import { LoaderService } from './loader/loader.service';
 })
 export class AppComponent {
 
-  constructor(public loaderService: LoaderService,) {}
+  constructor(
+    public loaderService: LoaderService,
+    ) {}
 
   ngOnInit(): void {
   }

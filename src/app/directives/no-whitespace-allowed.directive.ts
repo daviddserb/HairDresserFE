@@ -13,7 +13,6 @@ export class NoWhitespaceAllowedDirective implements Validator {
   constructor() { }
 
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
-    const elementValue = control.value;
     if(/\s/.test(control.value)) return {noSpaceAllowed: true}
     return null; // if there is no error (errors) you have to return null, it is compulsory
   

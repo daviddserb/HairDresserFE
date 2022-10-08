@@ -1,0 +1,43 @@
+h1 {
+    text-align: center;
+    border-bottom: 1px solid aquamarine;
+}
+
+.update-hair-service-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 2px solid orange;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.update-hair-service-form label {
+    display: block;
+    padding: 1rem 0 .25rem;
+    font-size: 14px;
+}
+
+.update-hair-service-form input {
+    display: block;
+    width: 100%;
+    border: 2px solid navy;
+    padding: .5rem;
+    border-radius: 5px;
+}
+
+.update-hair-service-form #submitBtn {
+    border: 0;
+    background: navy;
+    padding: .5rem;
+    cursor: pointer;
+    color: white;
+    margin: 1rem 0;
+    width: auto;
+    text-transform: uppercase;
+}
+
+.update-hair-service-form #submitBtn:hover {
+    background-color: brown;
+    transition: 0.3s;
+    border-radius: 10px;
+}

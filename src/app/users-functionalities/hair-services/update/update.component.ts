@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import {ActivatedRoute} from '@angular/router'
+import { TimeSpan } from 'src/app/models/TimeSpan';
 
 @Component({
   selector: 'app-update',
@@ -49,6 +50,9 @@ export class UpdateComponent implements OnInit {
 
       console.log(result[name]);
       console.log(result[durationInMinutes]);
+      console.log(typeof result[durationInMinutes]);
+      //var a = result[durationInMinutes].split(':'); // split it at the colons
+
       console.log(result[price]);
 
       //Add the values from the selected hair service.

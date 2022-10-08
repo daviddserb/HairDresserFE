@@ -1,6 +1,6 @@
 <form [formGroup]="formHairService" (ngSubmit)="createHairService()" class="create-hair-service-form">
     <h1>Create Hair Service</h1>
-    
+
     <div>
         <!-- The connection between 'label for="name"' and 'input id="name"' means that when click on the label text it does activate the input area. -->
         <label for="name">Name</label>
@@ -15,7 +15,7 @@
 
     <div>
         <label for="duration">Duration in minutes</label>
-        <input type="number" class="form-control" formControlName="name" id="duration">
+        <input type="number" class="form-control" formControlName="duration" id="duration">
     
         <div *ngIf="formGetter.durationInMinutes.touched" style="color:red">
             <div *ngIf="formGetter.durationInMinutes.errors?.['required']">
@@ -26,7 +26,7 @@
 
     <div>
         <label for="price">Price</label>
-        <input type="number" class="form-control" formControlName="name" id="price">
+        <input type="number" class="form-control" formControlName="price" id="price">
 
         <div *ngIf="formGetter.price.touched" style="color:red">
             <div *ngIf="formGetter.price.errors?.['required']">
