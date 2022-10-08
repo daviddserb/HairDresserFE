@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/loader/loader.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-read-all-hair-services',
@@ -8,15 +8,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./read-all-hair-services.component.css']
 })
 export class ReadAllHairServicesComponent implements OnInit {
-
   allHairServices$: any;
 
   displayedColumns: string[] = ['id', 'name', 'duration', 'price', 'actions'];
-  
-  constructor(private hairdresserService: HairDresserService) { }
+
+  constructor(
+    private hairdresserService: HairDresserService,
+    public loaderService: LoaderService,
+    ) { }
 
   ngOnInit(): void {
-    this.allHairServices$ = this.hairdresserService.getAllHairServices();
+    // Timeout just for testing.
+    setTimeout(() => {
+      this.allHairServices$ = this.hairdresserService.getAllHairServices();
+    }, 2000);
   }
 
   deleteHairService(hairServiceId: number) {

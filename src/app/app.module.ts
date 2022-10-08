@@ -6,7 +6,7 @@ import { NoWhitespaceAllowedDirective } from './directives/no-whitespace-allowed
 
 import { NotifierComponent } from './notifier/notifier.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,6 +22,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { InterceptorService } from './loader/interceptor.service';
+
+const MaterialComponents = [
+  MatSnackBarModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatTooltipModule,
+  MatStepperModule,
+  MatProgressSpinnerModule,
+]
 
 @NgModule({
   declarations: [
@@ -37,19 +54,12 @@ import {MatStepperModule} from '@angular/material/stepper';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatStepperModule,
+    MaterialComponents
   ],
-  providers: [HttpClientModule],
+  providers: [
+    HttpClientModule,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
