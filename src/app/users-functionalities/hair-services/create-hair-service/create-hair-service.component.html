@@ -15,7 +15,7 @@
 
     <div>
         <label for="duration">Duration in minutes</label>
-        <input type="number" class="form-control" formControlName="duration" id="duration">
+        <input type="number" class="form-control" formControlName="durationInMinutes" id="duration">
     
         <div *ngIf="formGetter.durationInMinutes.touched" style="color:red">
             <div *ngIf="formGetter.durationInMinutes.errors?.['required']">

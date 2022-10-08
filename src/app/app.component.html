@@ -1,9 +1,5 @@
 <!-- All the elements from here are printed on all the other html pages, so this page is manly used for: header, footer, side navbar, etc... -->
 
-<div *ngIf="loaderService.isLoading | async" class="loading-spinner">
-    <mat-spinner></mat-spinner>
-</div>
-
 <!-- If user logged in-->
 <!-- <ul *ngIf="hairdresserService.isLoggedIn$ | async; else notLoggedIn">
     <p> Hi, {{ hairdresserService.loggedInUser_Username }} </p>

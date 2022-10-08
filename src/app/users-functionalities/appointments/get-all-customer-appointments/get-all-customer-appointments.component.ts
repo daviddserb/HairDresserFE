@@ -5,16 +5,15 @@ import { filter } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-read-all-appointments',
-  templateUrl: './read-all-appointments.component.html',
-  styleUrls: ['./read-all-appointments.component.css']
+  selector: 'app-get-all-customer-appointments',
+  templateUrl: './get-all-customer-appointments.component.html',
+  styleUrls: ['./get-all-customer-appointments.component.css']
 })
-export class ReadAllAppointmentsComponent implements OnInit {
+export class GetAllCustomerAppointmentsComponent implements OnInit {
   customerId!: number;
 
   allAppointmentsByCustomerId$!: any;
 
-  // ??? how to put 'employee name' instead of employeeName and to be able to access it in HTML
   displayedColumns: string[] = ['id', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];
 
   filteredCustomerAppointment!: any;

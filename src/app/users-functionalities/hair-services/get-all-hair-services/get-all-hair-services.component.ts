@@ -3,11 +3,11 @@ import { LoaderService } from 'src/app/loader/loader.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
-  selector: 'app-read-all-hair-services',
-  templateUrl: './read-all-hair-services.component.html',
-  styleUrls: ['./read-all-hair-services.component.css']
+  selector: 'app-get-all-hair-services',
+  templateUrl: './get-all-hair-services.component.html',
+  styleUrls: ['./get-all-hair-services.component.css']
 })
-export class ReadAllHairServicesComponent implements OnInit {
+export class GetAllHairServicesComponent implements OnInit {
   allHairServices$: any;
 
   displayedColumns: string[] = ['id', 'name', 'duration', 'price', 'actions'];

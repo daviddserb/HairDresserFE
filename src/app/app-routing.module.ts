@@ -10,10 +10,10 @@ import { AdminComponent } from './users/admin/admin.component';
 import { EmployeeComponent } from './users/employee/employee.component';
 import { CustomerComponent } from './users/customer/customer.component';
 import { CreateAppointmentComponent } from './users-functionalities/appointments/create-appointment/create-appointment.component';
-import { ReadAllAppointmentsComponent } from './users-functionalities/appointments/read-all-appointments/read-all-appointments.component';
+import { GetAllCustomerAppointmentsComponent } from './users-functionalities/appointments/get-all-customer-appointments/get-all-customer-appointments.component';
 import { CreateHairServiceComponent } from './users-functionalities/hair-services/create-hair-service/create-hair-service.component';
-import { ReadAllHairServicesComponent } from './users-functionalities/hair-services/read-all-hair-services/read-all-hair-services.component';
-import { UpdateComponent } from './users-functionalities/hair-services/update/update.component';
+import { GetAllHairServicesComponent } from './users-functionalities/hair-services/get-all-hair-services/get-all-hair-services.component';
+import { UpdateHairServiceComponent } from './users-functionalities/hair-services/update-hair-service/update-hair-service.component';
 
 const routes: Routes = [
   //! After adding the path, add it in routingComponents.
@@ -25,15 +25,15 @@ const routes: Routes = [
 
   {path: 'admin', component: AdminComponent, children: [
     {path: 'hair-service', component: CreateHairServiceComponent},
-    {path: 'hair-service/all', component: ReadAllHairServicesComponent},
-    {path: 'hair-service/update/:id', component: UpdateComponent}
+    {path: 'hair-service/all', component: GetAllHairServicesComponent},
+    {path: 'hair-service/update/:id', component: UpdateHairServiceComponent}
   ]},
 
   {path: 'employee', component: EmployeeComponent},
 
   {path: 'customer', component: CustomerComponent, children : [
     {path: 'appointment', component: CreateAppointmentComponent},
-    {path: 'appointment/all', component: ReadAllAppointmentsComponent},
+    {path: 'appointment/all', component: GetAllCustomerAppointmentsComponent},
   ]},
   
   {path: '**', component: PageNotFoundComponent}
@@ -57,14 +57,14 @@ export const routingComponents = [
 
   AdminComponent,
   CreateHairServiceComponent,
-  ReadAllHairServicesComponent,
-  UpdateComponent,
+  GetAllHairServicesComponent,
+  UpdateHairServiceComponent,
 
   EmployeeComponent,
 
   CustomerComponent,
   CreateAppointmentComponent,
-  ReadAllAppointmentsComponent,
+  GetAllCustomerAppointmentsComponent,
 
   PageNotFoundComponent
 ]

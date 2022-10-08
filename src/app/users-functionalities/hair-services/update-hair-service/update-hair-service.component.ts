@@ -6,10 +6,10 @@ import { TimeSpan } from 'src/app/models/TimeSpan';
 
 @Component({
   selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: ['./update.component.css']
+  templateUrl: './update-hair-service.component.html',
+  styleUrls: ['./update-hair-service.component.css']
 })
-export class UpdateComponent implements OnInit {
+export class UpdateHairServiceComponent implements OnInit {
   //before:
   // formHairServiceEdited = new FormGroup({
   //   name: new FormControl('', Validators.required),
