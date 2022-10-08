@@ -124,7 +124,15 @@ export class CreateAppointmentComponent implements OnInit {
     console.log("getValidIntervalsForAppointment()")
 
     this.hairdresserService.getValidIntervals(this.selectedEmployeeId, this.selectedDate, this.appointmentDuration, this.customerId)
-    .subscribe(res => this.validIntervals = res);
+    .subscribe(
+      res => {
+        this.validIntervals = res
+      },
+      err => {
+        this.popUpMessagesService.showPopUpMessage("The employee has no working intervals in this day", "OK", "error");
+      }
+    );
+    
   }
 
   // Create Appointment
