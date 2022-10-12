@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,9 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatPaginatorModule } from '@angular/material/paginator'
+
 import { InterceptorService } from './loader/interceptor.service';
-import { GetAllAppointmentsComponent } from './users-functionalities/appointments/get-all-appointments/get-all-appointments.component';
-import { GetAllEmployeesComponent } from './users-functionalities/appointments/get-all-employees/get-all-employees.component';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -40,6 +41,7 @@ const MaterialComponents = [
   MatTooltipModule,
   MatStepperModule,
   MatProgressSpinnerModule,
+  MatPaginatorModule,
 ]
 
 @NgModule({
@@ -48,8 +50,6 @@ const MaterialComponents = [
     routingComponents,
     NoWhitespaceAllowedDirective,
     NotifierComponent,
-    GetAllAppointmentsComponent,
-    GetAllEmployeesComponent,
   ],
   imports: [
     BrowserModule,

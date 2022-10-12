@@ -24,15 +24,13 @@ export class LogInComponent implements OnInit {
 
     this.hairdresserService
     .logInUser(item.value.username, item.value.password)
-    .subscribe(response => {
-      this.popUpMessagesService.showPopUpMessage("Successfully logged in your account!", "OK", "success");
-      console.log("response:");
-      console.log(response); // The response from the back-end, from the UsersController -> Login().
-      this.router.navigate(['profile']);
-    }, err => {
-      this.popUpMessagesService.showPopUpMessage("This account doesn't exist!", "OK", "error");
-      console.log("err:");
-      console.log(err);
+    .subscribe({
+      next: (v) => console.log(v),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("This account doesn't exist!", "OK", "error"),
+      complete: () =>  {
+        this.popUpMessagesService.showPopUpMessage("Successfully logged in your account!", "OK", "success");
+        this.router.navigate(['profile']);
+      }
     });
   }
 

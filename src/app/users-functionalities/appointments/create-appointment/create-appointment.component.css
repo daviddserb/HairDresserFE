@@ -1,13 +1,17 @@
 .mat-stepper-vertical {
     margin-top: 8px;
 }
-  
+
 .mat-form-field {
     margin-top: 16px;
 }
+  
+button:hover {
+    background-color: white;
+}
 
 table {
-    width: 85%;
+    width: 100%;
 }
 
 .mat-row .mat-cell {
@@ -15,12 +19,12 @@ table {
     border-top: 1px solid transparent;
     cursor: pointer;
 }
-  
+
 .mat-row:hover .mat-cell {
     border-color: currentColor;
 }
 
-/* Selected row (hair service). */
+/*Selected row (hair service)*/
 .row-is-clicked {
     font-weight: bold;
 }

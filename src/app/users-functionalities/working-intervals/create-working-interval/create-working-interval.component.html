@@ -1,0 +1,50 @@
+<form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()" class="create-working-interval-form">
+    <h1>Create Working Interval</h1>
+
+    <div>
+        <!-- The connection between 'label for="name"' and 'input id="name"' means that when click on the label text it does activate the input area. -->
+        <label for="workingDayId">Working day Id</label>
+        <input type="number" class="form-control" formControlName="workingDayId" id="workingDayId">
+        
+        <div *ngIf="formGetter.workingDayId.touched" style="color:red">
+            <div *ngIf="formGetter.workingDayId.errors?.['required']">
+                Working Day Id is required!
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <label for="employeeId">Employee Id</label>
+        <input type="number" class="form-control" formControlName="employeeId" id="employeeId">
+    
+        <div *ngIf="formGetter.employeeId.touched" style="color:red">
+            <div *ngIf="formGetter.employeeId.errors?.['required']">
+                Employee id is required!
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <label for="startTime">Start Time</label>
+        <input type="time" class="form-control" formControlName="startTime" id="startTime">
+
+        <div *ngIf="formGetter.startTime.touched" style="color:red">
+            <div *ngIf="formGetter.startTime.errors?.['required']">
+                Start time is required!
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <label for="endTime">End Time</label>
+        <input type="time" class="form-control" formControlName="endTime" id="endTime">
+
+        <div *ngIf="formGetter.endTime.touched" style="color:red">
+            <div *ngIf="formGetter.endTime.errors?.['required']">
+                End time is required!
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!formWorkingInterval.valid" id="submitBtn">Save</button>
+</form>

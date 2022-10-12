@@ -8,7 +8,6 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./create-hair-service.component.css']
 })
 export class CreateHairServiceComponent implements OnInit {
-
   formHairService = new FormGroup({
     name: new FormControl('', Validators.required),
     durationInMinutes: new FormControl('', Validators.required),

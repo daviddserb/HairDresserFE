@@ -36,14 +36,13 @@ export class RegisterComponent implements OnInit {
 
     this.hairdresserService
     .registerUser(userInfo.username!, userInfo.password!)
-    .subscribe(response => {
-      this.popUpMessagesService.showPopUpMessage("Account successfully created!", "OK", "success");
-      console.log("response:");
-      console.log(response);
-      this.router.navigate(['log-in']);
-    }, err => {
-      console.log("err= ", err);
-      this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error");
+    .subscribe({
+      next: (v) => console.log(v),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error"),
+      complete: () =>  {
+        this.popUpMessagesService.showPopUpMessage("Account successfully created!", "OK", "success");
+        this.router.navigate(['log-in']);
+      }
     });
   }
 

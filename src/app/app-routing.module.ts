@@ -15,7 +15,12 @@ import { CreateHairServiceComponent } from './users-functionalities/hair-service
 import { GetAllHairServicesComponent } from './users-functionalities/hair-services/get-all-hair-services/get-all-hair-services.component';
 import { UpdateHairServiceComponent } from './users-functionalities/hair-services/update-hair-service/update-hair-service.component';
 import { GetAllAppointmentsComponent } from './users-functionalities/appointments/get-all-appointments/get-all-appointments.component';
-import { GetAllEmployeesComponent } from './users-functionalities/appointments/get-all-employees/get-all-employees.component';
+import { GetAllEmployeesComponent } from './users-functionalities/employees/get-all-employees/get-all-employees.component';
+import { AddHairServiceComponent } from './users-functionalities/hair-services/add-hair-service/add-hair-service.component';
+import { GetEmployeeHairServicesComponent } from './users-functionalities/hair-services/get-employee-hair-services/get-employee-hair-services.component';
+import { GetAllEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-all-employee-appointments/get-all-employee-appointments.component';
+import { GetAllEmployeeWorkingIntervalsComponent } from './users-functionalities/working-intervals/get-all-employee-working-intervals/get-all-employee-working-intervals.component';
+import { CreateWorkingIntervalComponent } from './users-functionalities/working-intervals/create-working-interval/create-working-interval.component';
 
 const routes: Routes = [
   //! After adding the path, add it in routingComponents.
@@ -33,7 +38,15 @@ const routes: Routes = [
     {path: 'employee/all', component: GetAllEmployeesComponent},
   ]},
 
-  {path: 'employee', component: EmployeeComponent},
+  {path: 'employee', component: EmployeeComponent, children: [
+    {path: 'hair-service', component: AddHairServiceComponent},
+    {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
+
+    {path: 'appointment/all', component: GetAllEmployeeAppointmentsComponent},
+
+    {path: 'working-interval', component: CreateWorkingIntervalComponent},
+    {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
+  ]},
 
   {path: 'customer', component: CustomerComponent, children : [
     {path: 'appointment', component: CreateAppointmentComponent},
@@ -63,8 +76,15 @@ export const routingComponents = [
   CreateHairServiceComponent,
   GetAllHairServicesComponent,
   UpdateHairServiceComponent,
+  GetAllAppointmentsComponent,
+  GetAllEmployeesComponent,
 
   EmployeeComponent,
+  AddHairServiceComponent,
+  GetEmployeeHairServicesComponent,
+  GetAllEmployeeAppointmentsComponent,
+  CreateWorkingIntervalComponent,
+  GetAllEmployeeWorkingIntervalsComponent,
 
   CustomerComponent,
   CreateAppointmentComponent,

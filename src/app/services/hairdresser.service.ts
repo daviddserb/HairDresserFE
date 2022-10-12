@@ -40,12 +40,6 @@ export class HairDresserService {
     }
 
     getAllAppointmentsByCustomerId(customerId: number): Observable<Appointment[]> {
-        console.log("getAllAppointmentsByCustomerId(): Observable");
-
-        console.log("all appointments by customer id:");
-        this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`)
-        .subscribe(response => console.log(response));
-        
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
@@ -53,8 +47,7 @@ export class HairDresserService {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
     }
 
-    getAllAppointmentsByEmployeeId(): Observable<Appointment> {
-        let employeeId = 1;
+    getAllAppointmentsByEmployeeId(employeeId: number): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
     }
 
@@ -113,6 +106,18 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
+    getHairServicesByEmployeeId(employeeId: number): Observable<{}> {
+        console.log("getHairServicesByEmployeeId(): Observable");
+
+        return this.httpClient.get(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
+    }
+
+    getMissingHairServicesByEmployeeId(employeeId: number): Observable<{}> {
+        console.log("getHairServicesByEmployeeId(): Observable");
+
+        return this.httpClient.get(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
+    }
+
     putHairService(hairServiceId: number, hairService: object): Observable<{}> {
         return this.httpClient.put(`${this.apiUrl}/hairservice/${hairServiceId}`, hairService);
     }
@@ -168,6 +173,12 @@ export class HairDresserService {
     }
 
     // EMPLOYEE
+    getEmployeeById(employeeId: number): Observable<{}> {
+        console.log("getEmployeeById(): Observable");
+
+        return this.httpClient.get(`${this.apiUrl}/employee/${employeeId}`);
+    }
+
     getEmployeesByHairServicesIds(hairServicesIds: any): Observable<{}> {
         console.log("getEmployeesByHairServicesIds(): Observable");
 
@@ -214,6 +225,29 @@ export class HairDresserService {
         //this.httpClient.get(`${this.apiUrl}/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`).subscribe(response => console.log(response));
 
         return this.httpClient.get(`${this.apiUrl}/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
+    }
+
+    deleteHairServiceFromEmployee(employeeHairServiceId: number): Observable<{}> {
+        console.log("deleteHairServiceFromEmployee(): Observable");
+
+        return this.httpClient.delete(`${this.apiUrl}/employee/hair-service/${employeeHairServiceId}`);
+    }
+
+    // WORKING INTERVALS
+    postWorkingInterval(workingInterval: any): Observable<{}> {
+        console.log("postWorkingInterval(): Observable");
+        
+        return this.httpClient.post(`${this.apiUrl}/workinginterval`, workingInterval);
+    }
+
+
+    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: number): Observable<{}> {
+        return this.httpClient.get(`${this.apiUrl}/workinginterval/all/${employeeId}`);
+    }
+
+    deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
+        console.log("deleteWorkingIntervalById(): Observable");
+        return this.httpClient.delete(`${this.apiUrl}/workinginterval/${workingIntervalId}`);
     }
 
     // AUTH USER

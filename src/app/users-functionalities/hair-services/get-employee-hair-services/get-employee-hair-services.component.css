@@ -1,0 +1,10 @@
+table {
+    width: 100%;
+}
+
+.icon_delete_button {
+    font-size: 20px !important;
+    background:linear-gradient(to right,yellow 0%, white 100%);
+    color: red;
+    border-radius: 50%;
+}

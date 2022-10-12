@@ -1,29 +1,29 @@
-<input type="number" [(ngModel)]="customerId" placeholder="Customer id">
-<button *ngIf="customerId != null" (click)="getAppointmentsByCustomerId()">Show</button>
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
+<button (click)="getAppointmentsByEmployeeId()">Save</button>
 
-<table mat-table [dataSource]="allCustomerAppointmentsNotCanceled$" class="mat-elevation-z8">
+<table mat-table [dataSource]="allEmployeeAppointments$" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="employeeName">
-      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
-      <td mat-cell *matCellDef="let element; let i = index">{{element.employeeName}}</td>
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{element.customerName}}</td>
     </ng-container>
   
     <ng-container matColumnDef="startDate">
-      <th mat-header-cell *matHeaderCellDef> Start Date </th>
+      <th mat-header-cell *matHeaderCellDef>Start Date</th>
       <td mat-cell *matCellDef="let element; let i = index">{{element.startDate | date:'short'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef> End Date </th>
+        <th mat-header-cell *matHeaderCellDef>End Date</th>
         <td mat-cell *matCellDef="let element; let i = index">{{element.endDate | date:'short'}}</td>
     </ng-container>
   
     <ng-container matColumnDef="hairServices">
-        <th mat-header-cell *matHeaderCellDef> Hair Services </th>
+        <th mat-header-cell *matHeaderCellDef>Hair Services</th>
         <td mat-cell *matCellDef="let element; let i = index ">
             <div *ngFor="let services of element.appointmentHairServices">
                 {{services.hairService.name}}
@@ -32,21 +32,21 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <th mat-header-cell *matHeaderCellDef>Price</th>
         <td mat-cell *matCellDef="let element; let i = index">{{element.price}} $</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element; let i = index">
-            <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" *ngIf="checkIfAppointmentIsInWork(element.startDate)" (click)="cancelAppointmentInWork(element.id)">
+            <!-- <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" *ngIf="isAppointmentInWork(element.startDate)" (click)="deleteAppointmentInWork(element.id)">
                 <mat-icon class="icon_cancel_button">cancel</mat-icon>
-            </button>
+            </button> -->
         </td>
     </ng-container>
   
-    <!--Print table columns.-->
+    <!-- Prints the table columns. -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!--Print table rows.-->
+    <!-- Prints the table rows. -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

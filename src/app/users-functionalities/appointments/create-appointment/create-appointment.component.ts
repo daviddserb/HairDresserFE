@@ -74,17 +74,10 @@ export class CreateAppointmentComponent implements OnInit {
     console.log("-> getEmployeesForAppointment");
     
     this.hairdresserService.getEmployeesByHairServicesIds(this.selection.selected.map(hairServices => hairServices.id))
-    .subscribe(
-      result => {
-        console.log("resut= ", result);
-        this.employeesByHairServices = result;
-      },
-      err => {
-      console.log("err= ", err);
-      this.popUpMessagesService.showPopUpMessage("No employee for the selected hair services!", "OK", "error");
-      }
-    );
-    console.log("getEmployeesForAppointment ->");
+    .subscribe({
+      next: (result) => this.employeesByHairServices = result,
+      error: (e) => this.popUpMessagesService.showPopUpMessage("No employee for the selected hair services!", "OK", "error"),
+    });
   }
 
   getDurationForAppointment() {
@@ -102,6 +95,8 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.selectedEmployeeId = employeeId;
     console.log("selected employee id= ", this.selectedEmployeeId);
+
+    this.popUpMessagesService.showPopUpMessage("Employee saved", "OK", "success");
   }
 
   getSelectedDate(date: any) {
@@ -124,18 +119,15 @@ export class CreateAppointmentComponent implements OnInit {
     console.log("getValidIntervalsForAppointment()")
 
     this.hairdresserService.getValidIntervals(this.selectedEmployeeId, this.selectedDate, this.appointmentDuration, this.customerId)
-    .subscribe(
-      res => {
-        this.validIntervals = res
+    .subscribe({
+      next: (res) => {
+        console.log("next - valid intervals (res)= ", res);
+        this.validIntervals = res;
       },
-      err => {
-        this.popUpMessagesService.showPopUpMessage("The employee has no working intervals in this day", "OK", "error");
-      }
-    );
-    
+      error: (e) => this.popUpMessagesService.showPopUpMessage("The employee has no working intervals in this day", "OK", "error"),
+    });
   }
 
-  // Create Appointment
   CreateAppointment(interval: any) {
     console.log("CreateAppointment()");
     

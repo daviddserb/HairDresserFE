@@ -19,10 +19,15 @@ h1 {
 
 .update-hair-service-form input {
     display: block;
-    width: 100%;
-    border: 2px solid navy;
+    width: 50%;
+    border: 2px solid blue;
     padding: .5rem;
     border-radius: 5px;
+}
+
+.update-hair-service-form input:focus {
+    width: 75%;
+    border: 5px solid darkgoldenrod;
 }
 
 .update-hair-service-form #submitBtn {
