@@ -6,11 +6,14 @@ import { NoWhitespaceAllowedDirective } from './directives/no-whitespace-allowed
 
 import { NotifierComponent } from './notifier/notifier.component';
 
+import { InterceptorService } from './loader/interceptor.service';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from "@angular/material/table";
@@ -25,8 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatPaginatorModule } from '@angular/material/paginator'
-
-import { InterceptorService } from './loader/interceptor.service';
+import { MatSelectModule } from '@angular/material/select';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -42,6 +44,7 @@ const MaterialComponents = [
   MatStepperModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
+  MatSelectModule,
 ]
 
 @NgModule({

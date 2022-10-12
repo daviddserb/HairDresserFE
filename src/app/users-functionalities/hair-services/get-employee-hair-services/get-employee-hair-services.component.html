@@ -1,5 +1,5 @@
-<input [(ngModel)]="employeeId" placeholder="Employee id">
-<button (click)="getHairServicesByEmployeeId()">Save</button>
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
+<button *ngIf="employeeId != null" (click)="getHairServicesByEmployeeId()">Save</button>
 
 <table mat-table [dataSource]="employeeHairServices$" class="mat-elevation-z8">
     <ng-container matColumnDef="id">

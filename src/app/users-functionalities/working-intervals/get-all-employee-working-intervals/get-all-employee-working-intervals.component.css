@@ -1,3 +1,10 @@
 table {
-    width: 85%;
+    width: 100%;
+}
+
+.icon_delete_button {
+    font-size: 20px;
+    background-color: white;
+    color: red;
+    border-radius: 50%;
 }

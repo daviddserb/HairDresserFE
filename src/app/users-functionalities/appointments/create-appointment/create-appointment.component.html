@@ -41,7 +41,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <button mat-button matStepperNext (click)="getDataBySelectedHairServices()">Save</button>
+    <button *ngIf="selection.selected.length" mat-button matStepperNext (click)="getDataBySelectedHairServices()">Save</button>
   </mat-step>
 
   <mat-step label="Select the employee">
@@ -52,7 +52,7 @@
     </ul>
 
     <button mat-button matStepperPrevious>Back</button>
-    <button mat-button matStepperNext>Next</button>
+    <button *ngIf="selectedEmployeeId != null" mat-button matStepperNext>Next</button>
   </mat-step>
 
   <mat-step label="Select the date">
@@ -63,13 +63,13 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
-    <button mat-button matStepperNext type="button" (click)="getValidIntervalsForAppointment()">Save</button>
+    <button mat-button matStepperNext *ngIf="selectedDate != null" (click)="getValidIntervalsForAppointment()">Save</button>
   </mat-step>
 
   <mat-step label="Select the interval">
     <ol>
       <li *ngFor="let validInterval of validIntervals">
-          <button (click)="CreateAppointment(validInterval)">{{validInterval.startDate | date:'short'}} - {{validInterval.endDate | date:'short'}}</button>
+          <button (click)="CreateAppointment(validInterval)">{{validInterval.startDate | date:'dd/MM/yyyy h:mm a'}} - {{validInterval.endDate | date:'dd/MM/yyyy h:mm a'}}</button>
       </li>
     </ol>
   </mat-step>

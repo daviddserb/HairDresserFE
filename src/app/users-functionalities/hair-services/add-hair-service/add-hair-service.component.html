@@ -1,5 +1,5 @@
-<input [(ngModel)]="employeeId" placeholder="Employee id">
-<button (click)="getMissingHairServices(employeeId)">Get the missing hair services</button>
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
+<button *ngIf="employeeId != null" (click)="getMissingHairServices(employeeId)">Get missing hair services</button>
 
 <table mat-table [dataSource]="missingHairServices$" class="mat-elevation-z8">
     <ng-container matColumnDef="checkBox">
@@ -33,6 +33,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<button mat-icon-button matTooltip="Save" (click)="getSelectedHairServices()">
+<button *ngIf="selection.selected.length" mat-icon-button matTooltip="Save" (click)="getSelectedHairServices()">
     <mat-icon class="icon_save_button">save</mat-icon>
 </button>

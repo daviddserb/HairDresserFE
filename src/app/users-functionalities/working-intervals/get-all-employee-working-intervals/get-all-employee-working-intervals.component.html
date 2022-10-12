@@ -1,5 +1,5 @@
-<input [(ngModel)]="employeeId" placeholder="Employee id">
-<button (click)="getWorkingIntervals(employeeId)">Get the missing hair services</button>
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
+<button *ngIf="employeeId != null" (click)="getWorkingIntervals(employeeId)">Get the missing hair services</button>
 
 <table mat-table [dataSource]="employeeWorkingIntervals$" class="mat-elevation-z8">  
     <ng-container matColumnDef="id">

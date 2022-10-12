@@ -43,23 +43,18 @@ export class UpdateHairServiceComponent implements OnInit {
       console.log("result:", result);
 
       // Extract the value from the object's properties.
-      type ObjectKey = keyof typeof result;
-      const name = 'name' as ObjectKey;
-      const durationInMinutes = 'duration' as ObjectKey;
-      const price = 'price' as ObjectKey;
+      const name = Object(result)["name"];
+      const duration = Object(result)["duration"];
+      const price = Object(result)["price"];
 
-      console.log(result[name]);
-      console.log(result[durationInMinutes]);
-      console.log(typeof result[durationInMinutes]);
-      //var a = result[durationInMinutes].split(':'); // split it at the colons
-
-      console.log(result[price]);
+      const durationSplit = duration.split(':'); // split it at the colons
+      const durationInMinutes = (+durationSplit[0]) * 60 + (+durationSplit[1]);
 
       //Add the values from the selected hair service.
       this.formHairServiceEdited = new FormGroup({
-        name: new FormControl(result[name], Validators.required),
-        durationInMinutes: new FormControl(result[durationInMinutes], Validators.required),
-        price: new FormControl(result[price], Validators.required),
+        name: new FormControl(name, Validators.required),
+        durationInMinutes: new FormControl(durationInMinutes, Validators.required),
+        price: new FormControl(price, Validators.required),
       });
     });
 
