@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http"
 import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, Observable, tap, timeout } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -31,8 +31,8 @@ export class HairDresserService {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
 
-    getAllAppointments(pageNumber: number, pageSize: number): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumber}&PageSize=${pageSize}`);
+    getAllAppointments(pageNumber: number, pageSize: number): Observable<any> {
+        return this.httpClient.get<any>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumber}&PageSize=${pageSize}`);
     }
 
     getAppointmentById(appointmentId: number): Observable<Appointment> { 
@@ -57,14 +57,6 @@ export class HairDresserService {
 
     // CUSTOMER
     postCustomer(customer: any): Observable<Customer> {
-        // let customerObject: Customer = {
-        //     name: "Anastasia Anghel",
-        //     username: "anastasia_angheL",
-        //     password: "parola@#12FT123#",
-        //     email: "anastasia_ang@gmail.com",
-        //     phone: "+40743567821",
-        //     address: "Suceava"
-        // }
         return this.httpClient.post<Customer>(`${this.apiUrl}/customer`, customer);
     }
     
@@ -96,7 +88,17 @@ export class HairDresserService {
     }
 
     getAllHairServices(): Observable<{}> {
+        console.log("# timeout");
+        setTimeout(() => {
+            console.log("-> timeout");
+            this.httpClient.get(`${this.apiUrl}/hairservice/all`).pipe(timeout(5000)).subscribe();
+            console.log("timeout ->");
+        }, 2000);
+        console.log("timeout #");
+
         return this.httpClient.get(`${this.apiUrl}/hairservice/all`);
+
+        //return this.httpClient.get(`${this.apiUrl}/hairservice/all`);
     }
 
     getHairServiceById(hairServiceId: number): Observable<{}> {
@@ -173,6 +175,11 @@ export class HairDresserService {
     }
 
     // EMPLOYEE
+    addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
+        console.log("addHairServicesToEmployee");
+        return this.httpClient.post(`${this.apiUrl}/employee/hair-service`, employeeHairService);
+    }
+
     getEmployeeById(employeeId: number): Observable<{}> {
         console.log("getEmployeeById(): Observable");
 

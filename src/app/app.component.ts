@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 import { LoaderService } from './loader/loader.service';
 
 @Component({
@@ -10,6 +11,5 @@ export class AppComponent {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

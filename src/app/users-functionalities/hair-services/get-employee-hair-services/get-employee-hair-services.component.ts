@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -13,25 +14,24 @@ export class GetEmployeeHairServicesComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'duration', 'price', 'actions'];
 
-  constructor(private hairdresserService: HairDresserService) { }
+  constructor(private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
   }
 
   getHairServicesByEmployeeId() {
-    console.log("getHairServicesByEmployeeId():");
+    this.hairdresserService.getHairServicesByEmployeeId(this.employeeId)
+    .subscribe({
+      next: (res) =>  {
+        this.employeeHairServices$ = res;
 
-    this.hairdresserService.getHairServicesByEmployeeId(this.employeeId).subscribe(res => {
-      this.employeeHairServices$ = res
-      console.log("employee hair services =", this.employeeHairServices$);
+        if (Object.keys(res).length === 0) this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error");
+      }
     });
   }
 
   deleteHairService(employeeHairServiceId: number) {
-    console.log("deleteHairService():");
-
-    console.log("id= ", employeeHairServiceId);
-
     this.hairdresserService.deleteHairServiceFromEmployee(employeeHairServiceId).subscribe();
   }
 }

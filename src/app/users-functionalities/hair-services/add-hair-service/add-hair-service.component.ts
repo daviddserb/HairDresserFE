@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -16,27 +17,38 @@ export class AddHairServiceComponent implements OnInit {
   // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
   selection = new SelectionModel<any>(true, []);
   
-  constructor(private hairdresserService: HairDresserService) {}
+  constructor(
+    private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService,) {}
 
   ngOnInit(): void {
   }
 
   getMissingHairServices(employeeId: number) {
-    console.log("getMissingHairServices():");
-
-    console.log("employeeId = ", employeeId);
-
     this.hairdresserService.getMissingHairServicesByEmployeeId(employeeId)
-    .subscribe(res => this.missingHairServices$ = res);
+    .subscribe
+    ({
+      next: (res) =>  {
+        this.missingHairServices$ = res;
+        if (Object.keys(res).length === 0) this.popUpMessagesService.showPopUpMessage("You have all the hair services!", "OK", "success");
+      }
+    });
   }
 
-  getSelectedHairServices() {
-    console.log("getSelectedHairServices()");
+  saveHairServicesForEmployee() {
+    console.log("saveHairServicesForEmployee()");
+    console.log("employee id = ", this.employeeId);
 
-    //console.log("employee id = ", this.employeeId);
+    console.log("selected hair services= ", this.selection.selected);
+    let hairServicesIds = this.selection.selected.map(hairServices => hairServices.id);
+    console.log("selected hair services ids= ", hairServicesIds)
 
-    //this.selection.selected.map(hairServices => hairServices.id)
-    console.log("selected hair services =", this.selection.selected);
+    let employeeHairService = {
+      employeeId: this.employeeId,
+      hairServicesIds: hairServicesIds
+    };
+
+    this.hairdresserService.addHairServicesToEmployee(employeeHairService).subscribe();
   }
 
 }

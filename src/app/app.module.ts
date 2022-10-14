@@ -29,6 +29,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSelectModule } from '@angular/material/select';
+import { LoadingSpinnerComponent } from './loader/loading-spinner/loading-spinner.component';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -53,6 +54,7 @@ const MaterialComponents = [
     routingComponents,
     NoWhitespaceAllowedDirective,
     NotifierComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

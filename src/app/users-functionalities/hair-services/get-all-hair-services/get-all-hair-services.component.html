@@ -1,7 +1,3 @@
-<div *ngIf="loaderService.isLoading | async" class="loading-spinner">
-    <mat-spinner></mat-spinner>
-</div>
-
 <table mat-table [dataSource]="allHairServices$" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>

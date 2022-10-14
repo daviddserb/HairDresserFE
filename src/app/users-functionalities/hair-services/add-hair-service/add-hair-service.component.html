@@ -1,5 +1,5 @@
 <input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
-<button *ngIf="employeeId != null" (click)="getMissingHairServices(employeeId)">Get missing hair services</button>
+<button *ngIf="employeeId != null" (click)="getMissingHairServices(employeeId)">Missing hair services</button>
 
 <table mat-table [dataSource]="missingHairServices$" class="mat-elevation-z8">
     <ng-container matColumnDef="checkBox">
@@ -10,29 +10,38 @@
     </ng-container>
   
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
     </ng-container>
   
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
     </ng-container>
   
     <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef> Duration </th>
-      <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+      <th mat-header-cell *matHeaderCellDef>Duration</th>
+      <td mat-cell *matCellDef="let element">{{element.duration}}</td>
     </ng-container>
   
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} $ </td>
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{element.price}} $</td>
     </ng-container>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!--???-->
+    <tr>dsa</tr>
+    <td>d123</td>
+    <p>#</p>
+    <div *ngIf="selection.selected.length">
+      <p>-</p>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <p>-</p>
+    </div>
+    <p>#</p>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<button *ngIf="selection.selected.length" mat-icon-button matTooltip="Save" (click)="getSelectedHairServices()">
+<button *ngIf="selection.selected.length" mat-icon-button matTooltip="Save" (click)="saveHairServicesForEmployee()">
     <mat-icon class="icon_save_button">save</mat-icon>
 </button>

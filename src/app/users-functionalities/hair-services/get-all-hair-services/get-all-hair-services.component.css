@@ -4,14 +4,14 @@ table {
 
 .icon_edit_button {
     font-size: 20px !important;
-    background:linear-gradient(to right, #00c5fb 0%, #0253cc 100%);
+    background: blue;
     color: white;
     border-radius: 50%;
 }
 
 .icon_delete_button {
     font-size: 20px !important;
-    background:linear-gradient(to left, #00eafb 0%, #2acc02 100%);
+    background: white;
     color: red;
     border-radius: 50%;
 }

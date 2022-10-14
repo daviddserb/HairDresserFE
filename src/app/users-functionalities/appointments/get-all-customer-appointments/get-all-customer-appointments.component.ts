@@ -33,9 +33,9 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
         return customerAppointmentsNotCanceled;
       })
     )
-    // ???
+    //???
     // .subscribe({
-    //   next: (v) => console.log(v),
+    //   next: (res) => console.log("next, res = ", res),
     //   error: (e) => this.popUpMessagesService.showPopUpMessage("Customer id doesn't exists!", "OK", "error"),
     // });
   }

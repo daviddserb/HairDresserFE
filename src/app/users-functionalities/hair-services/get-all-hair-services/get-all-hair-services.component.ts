@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timeout } from 'rxjs';
 import { LoaderService } from 'src/app/loader/loader.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
@@ -14,14 +15,11 @@ export class GetAllHairServicesComponent implements OnInit {
 
   constructor(
     private hairdresserService: HairDresserService,
-    public loaderService: LoaderService,
-    ) { }
+    public loaderService: LoaderService
+    ) {}
 
   ngOnInit(): void {
-    // Timeout just for testing.
-    setTimeout(() => {
-      this.allHairServices$ = this.hairdresserService.getAllHairServices();
-    }, 2000);
+    this.allHairServices$ = this.hairdresserService.getAllHairServices();
   }
 
   deleteHairService(hairServiceId: number) {

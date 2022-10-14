@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -12,13 +13,19 @@ export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'workingDay', 'startTime', 'endTime', 'actions'];
 
-  constructor(private hairdresserService: HairDresserService) { }
+  constructor(
+    private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
   }
 
   getWorkingIntervals(employeeId: number) {
-    this.hairdresserService.getAllEmployeeWorkingIntervalsByEmployeeId(employeeId).subscribe(res => this.employeeWorkingIntervals$ = res);
+    this.hairdresserService.getAllEmployeeWorkingIntervalsByEmployeeId(employeeId)
+    .subscribe({
+      next: (res) =>  this.employeeWorkingIntervals$ = res,
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error"),
+    });
   }
 
   deleteWorkingInterval(workingIntervalId: number) {

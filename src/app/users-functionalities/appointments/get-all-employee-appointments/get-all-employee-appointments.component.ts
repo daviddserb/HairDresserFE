@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -11,17 +12,19 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
   allEmployeeAppointments$: any;
   displayedColumns: string[] = ['id', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
 
-  constructor(private hairdresserService: HairDresserService) { }
+  constructor(
+    private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
   }
 
   getAppointmentsByEmployeeId() {
-    console.log("getAppointmentsByEmployeeId()");
-    
-    console.log("employee id =", this.employeeId);
-
-    this.hairdresserService.getAllAppointmentsByEmployeeId(this.employeeId).subscribe(res => this.allEmployeeAppointments$ = res);
+    this.hairdresserService.getAllAppointmentsByEmployeeId(this.employeeId)
+    .subscribe({
+      next: (res) =>  this.allEmployeeAppointments$ = res,
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error"),
+    });
   }
 
 }
