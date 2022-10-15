@@ -7,6 +7,7 @@ import { NoWhitespaceAllowedDirective } from './directives/no-whitespace-allowed
 import { NotifierComponent } from './notifier/notifier.component';
 
 import { InterceptorService } from './loader/interceptor.service';
+import { LoadingSpinnerComponent } from './loader/loading-spinner/loading-spinner.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -29,7 +30,6 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSelectModule } from '@angular/material/select';
-import { LoadingSpinnerComponent } from './loader/loading-spinner/loading-spinner.component';
 
 const MaterialComponents = [
   MatSnackBarModule,

@@ -1,3 +1,28 @@
+.form-paginator {
+    max-width: 100%;
+    margin: 10rem auto;
+}
+
 table {
     width: 100%;
+    font-size: 30px;
+}
+
+table th {
+    font-size: 15px;
+    background-color: purple;
+    color: rgb(0, 255, 85);
+}
+
+table td {
+    font-size: 15px;
+    color: pink;
+}
+
+.isDeleted {
+    color: red;
+}
+
+.notDeleted {
+    color: yellow;
 }

@@ -79,44 +79,22 @@ export class HairDresserService {
 
     // HAIR SERVICES
     postHairService(hairService: object): Observable<{}> {
-        console.log("postHairService(): Observable");
-
-        console.log("hairService:");
-        console.log(hairService);
-
         return this.httpClient.post(`${this.apiUrl}/hairservice`, hairService);
     }
 
     getAllHairServices(): Observable<{}> {
-        console.log("# timeout");
-        setTimeout(() => {
-            console.log("-> timeout");
-            this.httpClient.get(`${this.apiUrl}/hairservice/all`).pipe(timeout(5000)).subscribe();
-            console.log("timeout ->");
-        }, 2000);
-        console.log("timeout #");
-
         return this.httpClient.get(`${this.apiUrl}/hairservice/all`);
-
-        //return this.httpClient.get(`${this.apiUrl}/hairservice/all`);
     }
 
     getHairServiceById(hairServiceId: number): Observable<{}> {
-        console.log("getHairServiceById(): Observable");
-        console.log("hairServiceId:");
-        console.log(hairServiceId);
         return this.httpClient.get(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
     getHairServicesByEmployeeId(employeeId: number): Observable<{}> {
-        console.log("getHairServicesByEmployeeId(): Observable");
-
         return this.httpClient.get(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
     }
 
     getMissingHairServicesByEmployeeId(employeeId: number): Observable<{}> {
-        console.log("getHairServicesByEmployeeId(): Observable");
-
         return this.httpClient.get(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
     }
 
@@ -175,15 +153,16 @@ export class HairDresserService {
     }
 
     // EMPLOYEE
-    addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
-        console.log("addHairServicesToEmployee");
-        return this.httpClient.post(`${this.apiUrl}/employee/hair-service`, employeeHairService);
+    getAllEmployees(): Observable<{}> {
+        return this.httpClient.get(`${this.apiUrl}/employee/all`);
     }
 
     getEmployeeById(employeeId: number): Observable<{}> {
-        console.log("getEmployeeById(): Observable");
-
         return this.httpClient.get(`${this.apiUrl}/employee/${employeeId}`);
+    }
+
+    addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
+        return this.httpClient.post(`${this.apiUrl}/employee/hair-service`, employeeHairService);
     }
 
     getEmployeesByHairServicesIds(hairServicesIds: any): Observable<{}> {
@@ -241,12 +220,15 @@ export class HairDresserService {
     }
 
     // WORKING INTERVALS
+    getAllWorkingIntervals(): Observable<{}> {
+        return this.httpClient.get(`${this.apiUrl}/workinginterval/all`);
+    }
+
     postWorkingInterval(workingInterval: any): Observable<{}> {
         console.log("postWorkingInterval(): Observable");
         
         return this.httpClient.post(`${this.apiUrl}/workinginterval`, workingInterval);
     }
-
 
     getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: number): Observable<{}> {
         return this.httpClient.get(`${this.apiUrl}/workinginterval/all/${employeeId}`);

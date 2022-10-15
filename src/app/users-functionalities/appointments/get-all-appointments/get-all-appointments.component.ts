@@ -18,7 +18,7 @@ export class GetAllAppointmentsComponent implements OnInit {
   constructor(public hairdresserService: HairDresserService) { }
 
   ngOnInit(): void {
-    // ? hardcoded pageNumber and pageSize.  
+    // ? hardcoded pageNumber and pageSize.
     this.hairdresserService.getAllAppointments(1, 1000)
     .subscribe(res => {
       console.log("res= ", res);

@@ -1,30 +1,38 @@
 <form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()" class="create-working-interval-form">
     <h1>Create Working Interval</h1>
 
-    Day
-    <mat-form-field>
-        <mat-label>Select...</mat-label>
+    <div>
+        <label for="day">Day</label>
 
-        <mat-select [(value)]="selectedDay">
-            <mat-optgroup label="Working Days">
-                <mat-option value="1">Monday</mat-option>
-                <mat-option value="2">Tuesday</mat-option>
-                <mat-option value="3">Wednesday</mat-option>
-                <mat-option value="4">Thursday</mat-option>
-                <mat-option value="5">Friday</mat-option>
-            </mat-optgroup>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select...</mat-label>
+
+            <mat-select formControlName="workingDayId">
+                <mat-optgroup label="Working Days">
+                    <mat-option value="1">Monday</mat-option>
+                    <mat-option value="2">Tuesday</mat-option>
+                    <mat-option value="3">Wednesday</mat-option>
+                    <mat-option value="4">Thursday</mat-option>
+                    <mat-option value="5">Friday</mat-option>
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
     <div>
-        <label for="employeeId">Employee Id</label>
-        <input type="number" class="form-control" formControlName="employeeId" id="employeeId">
-    
-        <div *ngIf="formGetter.employeeId.touched" style="color:red">
-            <div *ngIf="formGetter.employeeId.errors?.['required']">
-                Employee id is required!
-            </div>
-        </div>
+        <label>Employee</label>
+
+        <mat-form-field>
+            <mat-label >Select...</mat-label>
+            
+            <mat-select formControlName="employeeId">
+                <mat-optgroup label="Employees">
+                    <mat-option *ngFor="let employee of allEmployees$" [value]="employee.id">
+                        {{employee.name}}
+                    </mat-option>
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
     </div>
 
     <div>

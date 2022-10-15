@@ -3,8 +3,8 @@ table {
 }
 
 .icon_delete_button {
-    font-size: 20px !important;
-    background:linear-gradient(to right,yellow 0%, white 100%);
+    font-size: 20px;
+    background: white;
     color: red;
     border-radius: 50%;
 }

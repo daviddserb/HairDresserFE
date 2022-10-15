@@ -1,8 +1,8 @@
-<div class="mat-elevation-z8">
+<div class="form-paginator">
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="count">
             <th mat-header-cell *matHeaderCellDef>No.</th>
-            <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+            <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
         </ng-container>
 
         <ng-container matColumnDef="id">
@@ -45,13 +45,15 @@
         </ng-container>
 
         <ng-container matColumnDef="canceled">
-            <th mat-header-cell *matHeaderCellDef>Canceled</th>
+            <th mat-header-cell *matHeaderCellDef>Canceled?</th>
             <td mat-cell *matCellDef="let element;">
-                <div *ngIf="element.isDeleted == null; else isDeleted">
-                    NO
+                <div class="notDeleted" *ngIf="element.isDeleted == null; else isDeleted">
+                    X
                 </div>
                 <ng-template #isDeleted>
-                    {{element.isDeleted | date:'short'}}
+                    <div class="isDeleted">
+                        {{element.isDeleted | date:'short'}}
+                    </div>
                 </ng-template>
             </td>
         </ng-container>
