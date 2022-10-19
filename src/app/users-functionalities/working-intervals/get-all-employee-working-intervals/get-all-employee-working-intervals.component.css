@@ -29,13 +29,7 @@
     font-size: 25px;
 }
 
-.icon_cancel_button {
-    color: red;
-}
-
 .icon_delete_button {
-    font-size: 20px;
-    background-color: white;
+    font-size: 25px;
     color: red;
-    border-radius: 50%;
 }

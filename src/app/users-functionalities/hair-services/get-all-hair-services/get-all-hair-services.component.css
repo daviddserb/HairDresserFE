@@ -20,15 +20,11 @@
 }
 
 .hair-services .icon_edit_button {
-    font-size: 20px;
-    background: white;
+    font-size: 25px;
     color: blue;
-    border-radius: 50%;
 }
 
 .hair-services .icon_delete_button {
-    font-size: 20px;
-    background: white;
+    font-size: 25px;
     color: red;
-    border-radius: 50%;
 }

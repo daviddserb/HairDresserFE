@@ -1,15 +1,15 @@
-<nav>
-    <img src="../../assets/images/HairSalonLogo.jpg">
+<nav class="header">
+    <img class="logo" src="../../assets/images/HairSalonLogo.jpg">
 
-    <ul>
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="hair-service">Add hair service</a></li>
-        <li routerLinkActive="active"><a routerLink="hair-service/all">All hair services</a ></li>
+    <div class="header-right">
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="hair-service">Add hair service</a>
+        <a routerLinkActive="active" routerLink="hair-service/all">All hair services</a>
 
-        <li routerLinkActive="active"><a routerLink="appointment/all">Appointments history</a></li>
+        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
 
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="working-interval">Create working interval</a></li>
-        <li routerLinkActive="active"><a routerLink="working-interval/all">All working intervals</a></li>
-    </ul>
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="working-interval">Create working interval</a>
+        <a routerLinkActive="active" routerLink="working-interval/all">All working intervals</a>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>

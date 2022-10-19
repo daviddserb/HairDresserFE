@@ -1,10 +1,4 @@
-/* element > *:not(nav)
-    '>' - select the element with a specific parent
-    '*' - select all
-    ':not(element)' - don't select specific elements
-*/
-
-nav {
+/* nav {
     background-color: black;
     height: 85px;
     padding: 5px;
@@ -19,15 +13,15 @@ nav ul {
 }
 
 nav ul li {
-    display: inline-block; /*Put the elements on the same line*/
-    padding: 10px; /*Distantierea dintre elemente*/
+    display: inline-block;
+    padding: 10px;
 }
 
 nav li a {
     color: white;
-    text-decoration: none; /* Remove the underline that is comming from anchor tag*/
+    text-decoration: none;
     cursor: pointer;
-    font-size: 18px; /* Dimensiunea caracterelor*/
+    font-size: 18px;
 }
 
 nav li a:hover {
@@ -36,4 +30,50 @@ nav li a:hover {
 
 .active {
     text-decoration: underline;
+} */
+
+.header {
+    overflow: hidden;
+    background-color: black;
+    padding: 20px 10px;
+}
+  
+.header a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+  
+.header img.logo {
+    width: 80px;
+}
+  
+.header a:hover {
+    color: rgba(245, 245, 245, 0.938);
+}
+
+.header a.active {
+    text-decoration: underline;
+}
+
+.header-right {
+    float: right;
+}
+  
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+.header a {
+    float: none;
+    display: block;
+    text-align: left;
+}
+
+.header-right {
+    float: none;
+}
 }

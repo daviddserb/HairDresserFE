@@ -27,7 +27,6 @@ export class HairDresserService {
 
     // APPOINTMENT
     postAppointment(appointment: Appointment): Observable<Appointment> {
-        console.log("postAppointment(): Observable");
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
 
