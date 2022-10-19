@@ -1,3 +1,16 @@
-table {
-    width: 100%;
+.all-employees {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.all-employees th {
+    font-size: 30px;
+    opacity: 0.5;
+}
+
+.all-employees td {
+    font-size: 20px;
 }

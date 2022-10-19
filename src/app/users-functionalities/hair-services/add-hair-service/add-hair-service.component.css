@@ -1,10 +1,57 @@
-table {
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.center input {
+    margin: 10px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    
+    border-left: 1px solid black;
+    text-align: center;
+}
+
+.center table {
     width: 100%;
 }
 
-.icon_save_button {
+.center table th {
+    font-size: 30px;
+    opacity: 0.5;
+}
+
+.center table td {
     font-size: 25px;
-    background: blue;
+}
+
+table .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+table .mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+#submitBtn {
+    display: block;
+    margin: 10px auto;
+
+    background: black;
+    padding: .5rem;
+    cursor: pointer;
     color: white;
-    border-radius: 20%;
+}
+
+#submitBtn:hover {
+    background-color: darkgrey;
+    transition: 0.5s;
+    border-radius: 10px;
+    font-weight: bold;
 }

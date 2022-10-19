@@ -21,7 +21,7 @@ export class GetAllAppointmentsComponent implements OnInit {
     // ? hardcoded pageNumber and pageSize.
     this.hairdresserService.getAllAppointments(1, 1000)
     .subscribe(res => {
-      console.log("res= ", res);
+      console.log("all appointments= ", res);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
     });

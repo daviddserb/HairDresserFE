@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { timeout } from 'rxjs';
-import { LoaderService } from 'src/app/loader/loader.service';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -11,11 +10,11 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class GetAllHairServicesComponent implements OnInit {
   allHairServices$: any;
 
-  displayedColumns: string[] = ['id', 'name', 'duration', 'price', 'actions'];
+  displayedColumns: string[] = ['count', 'id', 'name', 'duration', 'price', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
-    public loaderService: LoaderService
+    private popUpMessagesService: PopUpMessagesService
     ) {}
 
   ngOnInit(): void {
@@ -23,6 +22,13 @@ export class GetAllHairServicesComponent implements OnInit {
   }
 
   deleteHairService(hairServiceId: number) {
-    this.hairdresserService.deleteHairServiceById(hairServiceId).subscribe();
+    this.hairdresserService.deleteHairServiceById(hairServiceId)
+    .subscribe({
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Could not delete the hair service!", "OK", "error"),
+      complete: () => {
+        window.location.reload();
+        this.popUpMessagesService.showPopUpMessage("Hair service deleted!", "OK", "success")
+      }
+    });
   }
 }

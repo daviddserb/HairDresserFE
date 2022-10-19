@@ -1,28 +1,20 @@
-.form-paginator {
-    max-width: 100%;
-    margin: 10rem auto;
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
 }
 
-table {
+.center table {
     width: 100%;
+}
+
+.center table th {
     font-size: 30px;
+    opacity: 0.5;
 }
 
-table th {
-    font-size: 15px;
-    background-color: purple;
-    color: rgb(0, 255, 85);
-}
-
-table td {
-    font-size: 15px;
-    color: pink;
-}
-
-.isDeleted {
-    color: red;
-}
-
-.notDeleted {
-    color: yellow;
+.center table td {
+    font-size: 20px;
 }

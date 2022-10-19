@@ -9,10 +9,10 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./add-hair-service.component.css']
 })
 export class AddHairServiceComponent implements OnInit {
-  employeeId!: number; //??? nu cred ca mai trb.
+  employeeId!: number;
 
   missingHairServices$!: any;
-  displayedColumns: string[] = ['checkBox', 'id', 'name', 'duration', 'price'];
+  displayedColumns: string[] = ['checkBox', 'count', 'name', 'duration', 'price'];
 
   // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
   selection = new SelectionModel<any>(true, []);
@@ -24,14 +24,21 @@ export class AddHairServiceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getMissingHairServices(employeeId: number) {
+  getInputValue(inputValue: string) {
+    // Convert inputValue from string to number with the '+' sign.
+    this.employeeId = +inputValue;
+    this.getMissingHairServices(inputValue);
+  }
+
+  getMissingHairServices(employeeId: any) {
     this.hairdresserService.getMissingHairServicesByEmployeeId(employeeId)
     .subscribe
     ({
       next: (res) =>  {
         this.missingHairServices$ = res;
-        if (Object.keys(res).length === 0) this.popUpMessagesService.showPopUpMessage("You have all the hair services!", "OK", "success");
-      }
+        if (Object.keys(res).length === 0) this.popUpMessagesService.showPopUpMessage("The employee is qualified in all the hair services!", "OK", "success");
+      },
+      error: (e) => this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error"),
     });
   }
 
@@ -48,7 +55,14 @@ export class AddHairServiceComponent implements OnInit {
       hairServicesIds: hairServicesIds
     };
 
-    this.hairdresserService.addHairServicesToEmployee(employeeHairService).subscribe();
+    this.hairdresserService.addHairServicesToEmployee(employeeHairService)
+    .subscribe({
+      next: (res) =>  {
+        console.log("next, res= ", res);
+        this.popUpMessagesService.showPopUpMessage("Successfully added the selected hair services!", "OK", "success");
+      },
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),
+    });
   }
 
 }

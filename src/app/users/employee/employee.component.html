@@ -1,13 +1,15 @@
 <nav>
-    <button mat-raised-button color="primary" routerLink="hair-service">Add hair service</button>
-    <button mat-raised-button color="primary" routerLink="hair-service/all">All hair services</button>
+    <img src="../../assets/images/HairSalonLogo.jpg">
 
-    <br><br>
-    <button mat-raised-button routerLink="appointment/all">All appointments</button>
+    <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="hair-service">Add hair service</a></li>
+        <li routerLinkActive="active"><a routerLink="hair-service/all">All hair services</a ></li>
 
-    <br><br>
-    <button mat-raised-button color="primary" routerLink="working-interval">Create working intervals</button>
-    <button mat-raised-button color="primary" routerLink="working-interval/all">All working intervals</button>
-<nav>
+        <li routerLinkActive="active"><a routerLink="appointment/all">Appointments history</a></li>
+
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="working-interval">Create working interval</a></li>
+        <li routerLinkActive="active"><a routerLink="working-interval/all">All working intervals</a></li>
+    </ul>
+</nav>
 
 <router-outlet></router-outlet>

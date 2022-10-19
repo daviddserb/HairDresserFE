@@ -35,7 +35,7 @@ export class CreateWorkingIntervalComponent implements OnInit {
 
     this.hairdresserService.postWorkingInterval(infoWorkingInterval)
     .subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Interval overlaping with the existing ones OR not 1 hour space between intervals!", "OK", "error"),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Interval overlaping with the existing ones or the pause between the intervals is not 1 hour at least!", "OK", "error"),
       complete: () => this.popUpMessagesService.showPopUpMessage("Interval successfully created!", "OK", "success")
     });
   }

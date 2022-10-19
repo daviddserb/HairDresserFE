@@ -1,48 +1,58 @@
-h1 {
-    text-align: center;
-    border-bottom: 1px solid gold;
-}
-
-.create-hair-service-form {
-    max-width: 500px;
-    margin: 2rem auto;
-    border: 2px solid red;
-    padding: 2rem;
+.hair-service {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
 }
 
-.create-hair-service-form label {
-    display: block;
-    padding: 1rem 0 .25rem;
-    font-size: 14px;
+.hair-service h1 {
+    text-align: center;
+    border-bottom: 1px solid black;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
 }
 
-.create-hair-service-form input {
+.hair-service label {
     display: block;
-    width: 50%;
-    border: 2px solid blue;
+    padding: 1rem 0 .25rem;
+    font-size: 20px;
+    color: white;
+}
+
+.hair-service input {
+    display: block;
+    width: 40%;
+    border: 2px solid white;
     padding: .5rem;
     border-radius: 5px;
 }
 
-.create-hair-service-form input:focus {
-    width: 75%;
-    border: 5px solid darkgoldenrod;
+.hair-service input:focus {
+    width: 50%;
+    border: 5px solid grey;
 }
 
-.create-hair-service-form #submitBtn {
+.hair-service #submitBtn {
     border: 0;
-    background: blue;
+    background: black;
     padding: .5rem;
     cursor: pointer;
     color: white;
     margin: 1rem 0;
-    width: auto;
     text-transform: uppercase;
 }
 
-.create-hair-service-form #submitBtn:hover {
-    background-color: purple;
-    transition: 0.3s;
+.hair-service #submitBtn:hover {
+    background-color: darkgrey;
+    transition: 0.5s;
     border-radius: 10px;
+    font-weight: bold;
 }

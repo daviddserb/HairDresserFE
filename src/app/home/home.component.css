@@ -1,10 +1,9 @@
-body {
-    background: url(../../assets/images/HairSalon.jpg);
+nav {
+    background: url(../../assets/images/HairSalonBackground.jpg);
     background-size: cover;
-    /* background-repeat: no-repeat; */
 
     /*vh = Viewport Height. 
-    When set to 100 means that it will take 100% of the height of the current view port.
+    vh set to 100 => will take 100% of the height of the current view port.
     View port is the user visible area of the web page.*/
     height: 100vh;
 }

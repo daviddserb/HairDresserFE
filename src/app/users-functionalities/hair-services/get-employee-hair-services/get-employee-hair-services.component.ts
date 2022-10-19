@@ -8,20 +8,23 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./get-employee-hair-services.component.css']
 })
 export class GetEmployeeHairServicesComponent implements OnInit {
-  employeeId!: number;
-
   employeeHairServices$: any;
 
-  displayedColumns: string[] = ['name', 'duration', 'price', 'actions'];
+  displayedColumns: string[] = ['count', 'name', 'duration', 'price', 'actions'];
 
-  constructor(private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+  constructor(
+    private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService) {}
 
   ngOnInit(): void {
   }
 
-  getHairServicesByEmployeeId() {
-    this.hairdresserService.getHairServicesByEmployeeId(this.employeeId)
+  getInputValue(inputValue: string) {
+    this.getHairServicesByEmployeeId(inputValue);
+  }
+
+  getHairServicesByEmployeeId(employeeId: any) {
+    this.hairdresserService.getHairServicesByEmployeeId(employeeId)
     .subscribe({
       next: (res) =>  {
         this.employeeHairServices$ = res;
@@ -32,6 +35,10 @@ export class GetEmployeeHairServicesComponent implements OnInit {
   }
 
   deleteHairService(employeeHairServiceId: number) {
-    this.hairdresserService.deleteHairServiceFromEmployee(employeeHairServiceId).subscribe();
+    this.hairdresserService.deleteHairServiceFromEmployee(employeeHairServiceId)
+    .subscribe({
+      next: (res) => this.popUpMessagesService.showPopUpMessage("Successfully deleted the selected hair service!", "OK", "success"),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),
+    });
   }
 }

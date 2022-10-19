@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class CreateHairServiceComponent implements OnInit {
     price: new FormControl('', Validators.required),
   });
 
-  constructor(private hairdresserService: HairDresserService) { }
+  constructor(
+    private hairdresserService: HairDresserService,
+    private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +31,13 @@ export class CreateHairServiceComponent implements OnInit {
     console.log("infoHairService:");
     console.log(infoHairService);
 
-    this.hairdresserService.postHairService(infoHairService).subscribe();
+    this.hairdresserService.postHairService(infoHairService).subscribe({
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Could not create the hair service!", "OK", "error"),
+      complete: () => {
+        this.popUpMessagesService.showPopUpMessage("The hair service was successfully created!", "OK", "success");
+        window.location.reload(); // Refresh the page.
+      },
+    });
   }
 
 }

@@ -1,12 +1,13 @@
 <mat-vertical-stepper>
-  <mat-step label="Customer id">
-    <input type="number" [(ngModel)]="customerId" placeholder="Customer Id">
-    <button *ngIf="customerId != null" mat-button matStepperNext>Next</button>
+  <mat-step label="Insert customer id">
+    <input type="number" [(ngModel)]="customerId" placeholder="...">
+    <br><button *ngIf="customerId != null" mat-button matStepperNext>Next</button>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>
-      <h4>Select the hair service/s</h4>
+      <!-- Can add tags like h1, p, etc... on the label text. -->
+      Select hair services
     </ng-template>
 
     <table mat-table [dataSource]="allHairServices$" class="mat-elevation-z8">
@@ -17,9 +18,9 @@
         </td>
       </ng-container>
     
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef>No</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
       </ng-container>
     
       <ng-container matColumnDef="name">
@@ -44,32 +45,32 @@
     <button *ngIf="selection.selected.length" mat-button matStepperNext (click)="getDataBySelectedHairServices()">Save</button>
   </mat-step>
 
-  <mat-step label="Select the employee">
-    <ul>
-      <li *ngFor="let employee of employeesByHairServices">
-        <button (click)="saveEmployeeId(employee.id)">{{employee.name}}</button>
+  <mat-step label="Select employee">
+    <ol>
+      <li *ngFor="let employee of employeesByHairServices" class="results">
+        <a (click)="saveEmployeeId(employee.id)">{{employee.name}}</a>
       </li>
-    </ul>
+    </ol>
 
     <button mat-button matStepperPrevious>Back</button>
     <button *ngIf="selectedEmployeeId != null" mat-button matStepperNext>Next</button>
   </mat-step>
 
-  <mat-step label="Select the date">
+  <mat-step label="Select date">
     <mat-form-field>
       <!-- [min]="currentDate" makes the calendar to mark the days, before currentDate, as unavailable. -->
       <input matInput [matDatepicker]="picker" [matDatepickerFilter]="weekendFilter" [min]="currentDate" placeholder="Choose a date" (dateChange)="getSelectedDate($event)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    
-    <button mat-button matStepperNext *ngIf="selectedDate != null" (click)="getValidIntervalsForAppointment()">Save</button>
+
+    <br><button mat-button matStepperNext *ngIf="selectedDate != null" (click)="getValidIntervalsForAppointment()">Save</button>
   </mat-step>
 
-  <mat-step label="Select the interval">
+  <mat-step label="Select interval">
     <ol>
-      <li *ngFor="let validInterval of validIntervals">
-          <button (click)="CreateAppointment(validInterval)">{{validInterval.startDate | date:'dd/MM/yyyy h:mm a'}} - {{validInterval.endDate | date:'dd/MM/yyyy h:mm a'}}</button>
+      <li *ngFor="let validInterval of validIntervals" class="results">
+          <a (click)="CreateAppointment(validInterval)">{{validInterval.startDate | date:'dd/MM/yyyy h:mm a'}} - {{validInterval.endDate | date:'dd/MM/yyyy h:mm a'}}</a>
       </li>
     </ol>
   </mat-step>

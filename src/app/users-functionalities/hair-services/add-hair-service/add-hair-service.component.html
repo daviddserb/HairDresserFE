@@ -1,47 +1,38 @@
-<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
-<button *ngIf="employeeId != null" (click)="getMissingHairServices(employeeId)">Missing hair services</button>
+<div class="center">
+  <input type="number" #input (keyup)="getInputValue(input.value)" placeholder="Employee id">
 
-<table mat-table [dataSource]="missingHairServices$" class="mat-elevation-z8">
-    <ng-container matColumnDef="checkBox">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element; let i = index">
-        <mat-checkbox mat-list-icon (change)="selection.toggle(element)" [checked]="selection.isSelected(element)"></mat-checkbox>
-      </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef>Duration</th>
-      <td mat-cell *matCellDef="let element">{{element.duration}}</td>
-    </ng-container>
-  
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let element">{{element.price}} $</td>
-    </ng-container>
-  
-    <!--???-->
-    <tr>dsa</tr>
-    <td>d123</td>
-    <p>#</p>
-    <div *ngIf="selection.selected.length">
-      <p>-</p>
+  <table mat-table [dataSource]="missingHairServices$">
+      <ng-container matColumnDef="checkBox">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <mat-checkbox mat-list-icon (change)="selection.toggle(element)" [checked]="selection.isSelected(element)"></mat-checkbox>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef>No</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef>Duration</th>
+        <td mat-cell *matCellDef="let element">{{element.duration}}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">{{element.price}} $</td>
+      </ng-container>
+    
+      <!--??? How to print the columns of the table based on a condition? -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <p>-</p>
-    </div>
-    <p>#</p>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-<button *ngIf="selection.selected.length" mat-icon-button matTooltip="Save" (click)="saveHairServicesForEmployee()">
-    <mat-icon class="icon_save_button">save</mat-icon>
-</button>
+  <button (click)="saveHairServicesForEmployee()" *ngIf="selection.selected.length" id="submitBtn">Save</button>
+</div>

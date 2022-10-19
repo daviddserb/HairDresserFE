@@ -1,29 +1,33 @@
-table {
-    width: 100%;
-    max-width: 90%;
-    margin: 10rem auto;
+.hair-services {
+    /* The position property specifies the type of positioning method used for an element.
+    It can be: static, relative, fixed, absolute and sticky.
+    Elements are then positioned using the top, bottom, left and right property. */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* The transform property allows you to rotate, scale, move, etc... elements. */
+    transform: translate(-50%, -50%);
+    width: 80%;
 }
 
-table th {
+.hair-services th {
     font-size: 30px;
-    background-color: purple;
-    color: rgb(0, 255, 85);
+    opacity: 0.5;
 }
 
-table td {
+.hair-services td {
     font-size: 20px;
-    color: pink;
 }
 
-.icon_edit_button {
-    font-size: 20px !important;
-    background: blue;
-    color: white;
+.hair-services .icon_edit_button {
+    font-size: 20px;
+    background: white;
+    color: blue;
     border-radius: 50%;
 }
 
-.icon_delete_button {
-    font-size: 20px !important;
+.hair-services .icon_delete_button {
+    font-size: 20px;
     background: white;
     color: red;
     border-radius: 50%;

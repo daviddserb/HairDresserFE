@@ -1,6 +1,6 @@
-<table mat-table [dataSource]="allEmployees$">
+<table mat-table [dataSource]="allEmployees$" class="all-employees">
     <ng-container matColumnDef="count">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <th mat-header-cell *matHeaderCellDef>No</th>
         <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
     </ng-container>
 
@@ -23,12 +23,20 @@
             </span>
         </td>
     </ng-container>
+
     <ng-container matColumnDef="employeeWorkingIntervals">
         <th mat-header-cell *matHeaderCellDef>Working Intervals</th>
         <td mat-cell *matCellDef="let element;">
-            <div *ngFor="let workingInterval of allEmployeesWorkingIntervals$;">
+            <div *ngFor="let workingInterval of allEmployeesWorkingIntervals$; let i = index; first as isFirst; last as isLast">
                 <div *ngIf="workingInterval.employee.id == element.id">
-                    {{workingInterval.workingDay.name}}: {{workingInterval.startTime}} -> {{workingInterval.endTime}}
+                    {{workingInterval.workingDay.name}}: {{workingInterval.startTime}} - {{workingInterval.endTime}}
+                    
+                    <!-- ??? Sau fac noi coloane in tabel (Monday, tuesday, ..., friday)-->
+                    <!-- {{workingInterval.workingDay.name}}:
+                    <div *ngIf="!isFirst && !isLast">
+                        {{workingInterval.workingDay.id}} - '{{allEmployeesWorkingIntervals$[i]}}'
+                    </div> -->
+
                 </div>
             </div>
         </td>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { map, tap } from 'rxjs';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -9,6 +11,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 })
 export class GetAllEmployeesComponent implements OnInit {
   displayedColumns: string[] = ['count', 'employeeId', 'employeeName', 'employeeHairServices', 'employeeWorkingIntervals'];
+  
   allEmployees$: any;
   allEmployeesWorkingIntervals$: any;
 
@@ -20,9 +23,18 @@ export class GetAllEmployeesComponent implements OnInit {
       this.allEmployees$ = res;
     });
 
-    this.hairdresserService.getAllWorkingIntervals().subscribe(res => {
-      console.log("all working intervals= ", res);
-      this.allEmployeesWorkingIntervals$ = res;
-    })
+    //Sorting by working day id, so it will be by the order of the weekly days.
+    this.hairdresserService.getAllWorkingIntervals().pipe(
+      map(result => {
+        result.sort(this.sortByDay);
+        this.allEmployeesWorkingIntervals$ = result;
+        console.log("sorted employees working intervals= ", this.allEmployeesWorkingIntervals$);
+      })
+    ).subscribe();
   }
+
+  sortByDay = (a: any, b: any) => {
+    return (a.workingDay.id < b.workingDay.id) ? -1 : (a.workingDay.id > b.workingDay.id) ? 1 : 0;
+  }
+
 }

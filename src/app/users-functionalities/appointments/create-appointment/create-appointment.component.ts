@@ -22,7 +22,7 @@ export class CreateAppointmentComponent implements OnInit {
   });
   
   allHairServices$!: any;
-  displayedColumns: string[] = ['checkBox', 'id', 'name', 'duration', 'price'];
+  displayedColumns: string[] = ['checkBox', 'count', 'name', 'duration', 'price'];
 
   // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
   selection = new SelectionModel<any>(true, []);

@@ -1,0 +1,39 @@
+/* element > *:not(nav)
+    '>' - select the element with a specific parent
+    '*' - select all
+    ':not(element)' - don't select specific elements
+*/
+
+nav {
+    background-color: black;
+    height: 85px;
+    padding: 5px;
+}
+
+nav img {
+    width: 80px;
+}
+
+nav ul {
+    float: right;
+}
+
+nav ul li {
+    display: inline-block; /*Put the elements on the same line*/
+    padding: 10px; /*Distantierea dintre elemente*/
+}
+
+nav li a {
+    color: white;
+    text-decoration: none; /* Remove the underline that is comming from anchor tag*/
+    cursor: pointer;
+    font-size: 18px; /* Dimensiunea caracterelor*/
+}
+
+nav li a:hover {
+    color: rgba(245, 245, 245, 0.938);
+}
+
+.active {
+    text-decoration: underline;
+}

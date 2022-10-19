@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http"
 import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
-import { BehaviorSubject, Observable, tap, timeout } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -153,8 +153,8 @@ export class HairDresserService {
     }
 
     // EMPLOYEE
-    getAllEmployees(): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/employee/all`);
+    getAllEmployees(): Observable<any> {
+        return this.httpClient.get<any>(`${this.apiUrl}/employee/all`);
     }
 
     getEmployeeById(employeeId: number): Observable<{}> {
@@ -220,8 +220,8 @@ export class HairDresserService {
     }
 
     // WORKING INTERVALS
-    getAllWorkingIntervals(): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/workinginterval/all`);
+    getAllWorkingIntervals(): Observable<any> {
+        return this.httpClient.get<any>(`${this.apiUrl}/workinginterval/all`);
     }
 
     postWorkingInterval(workingInterval: any): Observable<{}> {
@@ -230,7 +230,7 @@ export class HairDresserService {
         return this.httpClient.post(`${this.apiUrl}/workinginterval`, workingInterval);
     }
 
-    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: number): Observable<{}> {
+    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: number): Observable<any> {
         return this.httpClient.get(`${this.apiUrl}/workinginterval/all/${employeeId}`);
     }
 
@@ -241,7 +241,8 @@ export class HairDresserService {
 
     // AUTH USER
     registerUser(user_username: string, user_password: string): Observable<{}> {
-        console.log("registerUser():");
+        console.log("HairDresserService -> registerUser()");
+
         let userObject: User = {
             username: user_username,
             password: user_password,
@@ -251,6 +252,7 @@ export class HairDresserService {
 
     logInUser(user_username: string, user_password: string): Observable<{}> {
         console.log("HairDresserService -> logInUser()");
+
         let userObject: User = {
             username: user_username,
             password: user_password,
@@ -275,6 +277,7 @@ export class HairDresserService {
 
     logOutUser() {
         console.log("HairDresserService -> logOutUser()");
+
         localStorage.removeItem('token');
         localStorage.removeItem('username');
     }

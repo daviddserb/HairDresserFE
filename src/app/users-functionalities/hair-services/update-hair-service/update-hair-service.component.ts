@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
-import {ActivatedRoute} from '@angular/router'
-import { TimeSpan } from 'src/app/models/TimeSpan';
+import { ActivatedRoute } from '@angular/router'
+import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 
 @Component({
   selector: 'app-update',
@@ -10,13 +10,6 @@ import { TimeSpan } from 'src/app/models/TimeSpan';
   styleUrls: ['./update-hair-service.component.css']
 })
 export class UpdateHairServiceComponent implements OnInit {
-  //before:
-  // formHairServiceEdited = new FormGroup({
-  //   name: new FormControl('', Validators.required),
-  //   durationInMinutes: new FormControl('', Validators.required),
-  //   price: new FormControl('', Validators.required),
-  // });
-  //after: 
   formHairServiceEdited = new FormGroup({
     name: new FormControl(),
     durationInMinutes: new FormControl(),
@@ -28,7 +21,8 @@ export class UpdateHairServiceComponent implements OnInit {
   constructor(
     private hairdresserService: HairDresserService,
     private router: ActivatedRoute,
-    ) { }
+    private popUpMessagesService: PopUpMessagesService
+    ) {}
 
   ngOnInit(): void {
     console.log("ngOnInit():");
@@ -72,7 +66,11 @@ export class UpdateHairServiceComponent implements OnInit {
     console.log("hairServiceId:")
     console.log(this.hairServiceId);
 
-    this.hairdresserService.putHairService(this.hairServiceId, infoHairService).subscribe();
+    this.hairdresserService.putHairService(this.hairServiceId, infoHairService)
+    .subscribe({
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to update the hair service!", "OK", "error"),
+      complete: () => this.popUpMessagesService.showPopUpMessage("Hair service updated!", "OK", "success"),
+    });
   }
 
 }

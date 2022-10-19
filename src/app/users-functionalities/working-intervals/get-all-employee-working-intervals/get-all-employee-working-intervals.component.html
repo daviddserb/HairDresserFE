@@ -1,36 +1,37 @@
-<input type="number" [(ngModel)]="employeeId" placeholder="Employee id">
-<button *ngIf="employeeId != null" (click)="getWorkingIntervals(employeeId)">Get the missing hair services</button>
+<div class="center">
+  <input type="number" #input (keyup)="getInputValue(input.value)" placeholder="Employee id">
 
-<table mat-table [dataSource]="employeeWorkingIntervals$" class="mat-elevation-z8">  
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+  <table mat-table [dataSource]="employeeWorkingIntervals$">  
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>No</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
     </ng-container>
-  
+
     <ng-container matColumnDef="workingDay">
       <th mat-header-cell *matHeaderCellDef>Working Day</th>
       <td mat-cell *matCellDef="let element">{{element.workingDay.name}}</td>
     </ng-container>
-  
+
     <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef> Start Time </th>
+      <th mat-header-cell *matHeaderCellDef>Start Time</th>
       <td mat-cell *matCellDef="let element">{{element.startTime}}</td>
     </ng-container>
-  
+
     <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef> End Time </th>
+      <th mat-header-cell *matHeaderCellDef>End Time</th>
       <td mat-cell *matCellDef="let element">{{element.endTime}}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element;">
-            <button mat-icon-button matTooltip="Delete" matTooltipPosition="right" (click)="deleteWorkingInterval(element.id)">
-                <mat-icon class="icon_delete_button">delete</mat-icon>
-            </button>
-        </td>
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element;">
+        <button mat-icon-button matTooltip="Delete" matTooltipPosition="right" (click)="deleteWorkingInterval(element.id)">
+          <mat-icon class="icon_delete_button">delete</mat-icon>
+        </button>
+      </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  </table>
+</div>

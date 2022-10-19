@@ -8,10 +8,9 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./get-all-employee-working-intervals.component.css']
 })
 export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
-  employeeId!: number; //??? nu cred ca mai trb.
   employeeWorkingIntervals$: any;
 
-  displayedColumns: string[] = ['id', 'workingDay', 'startTime', 'endTime', 'actions'];
+  displayedColumns: string[] = ['count', 'workingDay', 'startTime', 'endTime', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
@@ -20,18 +19,41 @@ export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getWorkingIntervals(employeeId: number) {
+  getInputValue(inputValue: string) {
+    this.getWorkingIntervals(inputValue);
+  }
+
+  getWorkingIntervals(employeeId: any) {
     this.hairdresserService.getAllEmployeeWorkingIntervalsByEmployeeId(employeeId)
     .subscribe({
-      next: (res) =>  this.employeeWorkingIntervals$ = res,
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error"),
+      next: (res) =>  {
+        res.sort(this.sortByDay);
+        this.employeeWorkingIntervals$ = res;
+      },
+      error: (e) => {
+        console.log("error, e= ", e);
+        
+        if (typeof e.error == "object") {
+          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+        } else {
+          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+        }
+      },
     });
+  }
+
+  sortByDay = (a: any, b: any) => {
+    return (a.workingDay.id < b.workingDay.id) ? -1 : (a.workingDay.id > b.workingDay.id) ? 1 : 0;
   }
 
   deleteWorkingInterval(workingIntervalId: number) {
     console.log("working interval id =", workingIntervalId);
     
-    this.hairdresserService.deleteWorkingIntervalById(workingIntervalId).subscribe();
+    this.hairdresserService.deleteWorkingIntervalById(workingIntervalId)
+    .subscribe({
+      next: (res) => this.popUpMessagesService.showPopUpMessage("Successfully deleted the selected working interval!", "OK", "success"),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),
+    });;
   }
 
 }

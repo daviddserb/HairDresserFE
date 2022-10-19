@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
@@ -10,8 +10,6 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
   styleUrls: ['./get-all-customer-appointments.component.css']
 })
 export class GetAllCustomerAppointmentsComponent implements OnInit {
-  customerId!: number;
-
   allCustomerAppointmentsNotCanceled$!: any;
 
   displayedColumns: string[] = ['id', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];
@@ -20,11 +18,17 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getInputValue(inputValue: string) {
+    console.log("getInputValue:");
+    console.log("input value= ", inputValue);
+    
+    this.getAppointmentsByCustomerId(inputValue);
   }
 
-  getAppointmentsByCustomerId() {
-    this.allCustomerAppointmentsNotCanceled$ = this.hairdresserService.getAllAppointmentsByCustomerId(this.customerId)
+  getAppointmentsByCustomerId(customerId: any) {
+    this.allCustomerAppointmentsNotCanceled$ = this.hairdresserService.getAllAppointmentsByCustomerId(customerId)
     .pipe(
       map(customerAppointments => {
         console.log("customer appointments=", customerAppointments);
@@ -32,11 +36,11 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
         console.log("customer appointments not canceld=", customerAppointmentsNotCanceled);
         return customerAppointmentsNotCanceled;
       })
-    )
-    //???
+    );
+    // EROARE ??? (Understanding RxJS map, mergeMap, switchMap and concatMap -> probabil ii pt. ca am un observable de observable din cauza lui map)
     // .subscribe({
     //   next: (res) => console.log("next, res = ", res),
-    //   error: (e) => this.popUpMessagesService.showPopUpMessage("Customer id doesn't exists!", "OK", "error"),
+    //   error: (e) => this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error"),
     // });
   }
 

@@ -8,9 +8,8 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./get-all-employee-appointments.component.css']
 })
 export class GetAllEmployeeAppointmentsComponent implements OnInit {
-  employeeId!: number;
   allEmployeeAppointments$: any;
-  displayedColumns: string[] = ['id', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+  displayedColumns: string[] = ['count', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
 
   constructor(
     private hairdresserService: HairDresserService,
@@ -19,11 +18,26 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAppointmentsByEmployeeId() {
-    this.hairdresserService.getAllAppointmentsByEmployeeId(this.employeeId)
+  getInputValue(inputValue: string) {
+    this.getAppointmentsByEmployeeId(inputValue);
+  }
+
+  getAppointmentsByEmployeeId(employeeId: any) {
+    this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
     .subscribe({
-      next: (res) =>  this.allEmployeeAppointments$ = res,
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error"),
+      next: (res) =>  {
+        console.log("next, res= ", res);
+        this.allEmployeeAppointments$ = res;
+      },
+      error: (e) => {
+        console.log("error, e= ", e);
+        
+        if (typeof e.error == "object") {
+          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+        } else {
+          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+        }
+      },
     });
   }
 

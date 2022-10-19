@@ -1,11 +1,10 @@
-<form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()" class="create-working-interval-form">
+<form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()" class="working-interval">
     <h1>Create Working Interval</h1>
 
     <div>
-        <label for="day">Day</label>
-
+        <label>Day</label>
         <mat-form-field>
-            <mat-label>Select...</mat-label>
+            <mat-label>Select the day...</mat-label>
 
             <mat-select formControlName="workingDayId">
                 <mat-optgroup label="Working Days">
@@ -17,14 +16,18 @@
                 </mat-optgroup>
             </mat-select>
         </mat-form-field>
+
+        <div *ngIf="formGetter.workingDayId.touched" style="color:red">
+            <div *ngIf="formGetter.workingDayId.errors?.['required']">
+                Day is required!
+            </div>
+        </div>
     </div>
 
     <div>
         <label>Employee</label>
-
         <mat-form-field>
-            <mat-label >Select...</mat-label>
-            
+            <mat-label >Select the employee...</mat-label>
             <mat-select formControlName="employeeId">
                 <mat-optgroup label="Employees">
                     <mat-option *ngFor="let employee of allEmployees$" [value]="employee.id">
@@ -33,6 +36,12 @@
                 </mat-optgroup>
             </mat-select>
         </mat-form-field>
+
+        <div *ngIf="formGetter.employeeId.touched" style="color:red">
+            <div *ngIf="formGetter.employeeId.errors?.['required']">
+                Employee is required!
+            </div>
+        </div>
     </div>
 
     <div>

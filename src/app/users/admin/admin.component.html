@@ -1,8 +1,20 @@
 <nav>
-    <button mat-raised-button color="primary" routerLink="hair-service">Create hair service</button>
-    <button mat-raised-button color="primary" routerLink="hair-service/all">All hair services</button>
-    <button mat-raised-button color="primary" routerLink="appointment/all">All about appointments</button>
-    <button mat-raised-button color="primary" routerLink="employee/all">All about employees</button>
-<nav>
+    <img src="../../assets/images/HairSalonLogo.jpg">
+
+    <ul>
+        <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink.
+        So, we can toggle active classes for active router links based on the current router state. -->
+        
+        <!-- Because the Create Hair Service has the hair-service route and the All hair services has the hair-service/all route that means we have a Parent Child relationship.
+        So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
+        
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="hair-service">Create hair service</a></li>
+        <li routerLinkActive="active"><a routerLink="hair-service/all">All hair services</a></li>
+
+        <li routerLinkActive="active"><a routerLink="appointment/all">All appointments</a></li>
+
+        <li routerLinkActive="active"><a routerLink="employee/all">All employees</a></li>
+    </ul>
+</nav>
 
 <router-outlet></router-outlet>

@@ -1,38 +1,67 @@
-.create-working-interval-form {
-    max-width: 500px;
-    margin: 2rem auto;
-    border: 2px solid red;
-    padding: 2rem;
+.working-interval {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
 }
 
-.create-working-interval-form h1 {
+.working-interval h1 {
     text-align: center;
-    border-bottom: 1px solid gold;
+    border-bottom: 1px solid black;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
 }
 
-.create-working-interval-form label {
+/* .working-interval mat-form-field {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.working-interval mat-label {
+    color: black;
+} */
+
+.working-interval label {
     display: block;
-    padding: 1rem 0 .5rem;
+    padding: 1rem 0 .25rem;
     font-size: 20px;
+    color: white;
 }
 
-.create-working-interval-form mat-form-field {
-    background-color: lightcoral; 
-}
-
-.create-working-interval-form #submitBtn {
-    cursor: pointer;
-    border: 0;
-    background-color: purple;
+.working-interval input {
+    display: block;
+    width: 40%;
+    border: 2px solid white;
     padding: .5rem;
+    border-radius: 5px;
+}
+
+.working-interval input:focus {
+    width: 50%;
+    border: 5px solid grey;
+}
+
+.working-interval #submitBtn {
+    border: 0;
+    background: black;
+    padding: .5rem;
+    cursor: pointer;
     color: white;
     margin: 1rem 0;
-    width: auto;
     text-transform: uppercase;
 }
 
-.create-working-interval-form #submitBtn:hover {
-    background-color: blue;
-    transition: 0.7s;
+.working-interval #submitBtn:hover {
+    background-color: darkgrey;
+    transition: 0.5s;
     border-radius: 10px;
+    font-weight: bold;
 }

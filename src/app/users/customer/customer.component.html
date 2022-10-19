@@ -1,6 +1,10 @@
 <nav>
-    <button mat-raised-button color="primary" routerLink="/customer/appointment">Create appointment</button>
-    <button mat-raised-button color="primary" routerLink="/customer/appointment/all">Appointments History</button>
-<nav>
+    <img src="../../assets/images/HairSalonLogo.jpg">
+    
+    <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="appointment">Create appointment</a></li>
+        <li routerLinkActive="active"><a routerLink="appointment/all">Appointments history</a></li>
+    </ul>
+</nav>
 
 <router-outlet></router-outlet>
