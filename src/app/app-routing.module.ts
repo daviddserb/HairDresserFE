@@ -5,7 +5,6 @@ import { RegisterComponent } from './account/register/register.component';
 import { LogInComponent } from './account/log-in/log-in.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './users/admin/admin.component';
 import { EmployeeComponent } from './users/employee/employee.component';
 import { CustomerComponent } from './users/customer/customer.component';
@@ -23,18 +22,19 @@ import { GetAllEmployeeWorkingIntervalsComponent } from './users-functionalities
 import { CreateWorkingIntervalComponent } from './users-functionalities/working-intervals/create-working-interval/create-working-interval.component';
 
 const routes: Routes = [
-  //! After adding the path, add it in routingComponents.
+  // ! When add path, add it in routingComponents too.
   {path: '', component: HomeComponent},
   
   {path: 'register', component: RegisterComponent},
   {path: 'log-in', component: LogInComponent},
-  {path: 'profile', component: ProfileComponent},
 
   {path: 'admin', component: AdminComponent, children: [
     {path: 'hair-service', component: CreateHairServiceComponent},
     {path: 'hair-service/all', component: GetAllHairServicesComponent},
     {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
+
     {path: 'appointment/all', component: GetAllAppointmentsComponent},
+    
     {path: 'employee/all', component: GetAllEmployeesComponent},
   ]},
 
@@ -70,7 +70,6 @@ export const routingComponents = [
 
   RegisterComponent,
   LogInComponent,
-  ProfileComponent,
 
   AdminComponent,
   CreateHairServiceComponent,

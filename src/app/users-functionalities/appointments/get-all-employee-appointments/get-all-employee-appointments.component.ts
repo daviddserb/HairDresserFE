@@ -9,21 +9,19 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 })
 export class GetAllEmployeeAppointmentsComponent implements OnInit {
   allEmployeeAppointments$: any;
-  displayedColumns: string[] = ['count', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
 
   constructor(
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
+    this.getAppointmentsByEmployeeId();
   }
 
-  getInputValue(inputValue: string) {
-    this.getAppointmentsByEmployeeId(inputValue);
-  }
-
-  getAppointmentsByEmployeeId(employeeId: any) {
-    this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
+  getAppointmentsByEmployeeId() {
+    let employeeId = String(localStorage.getItem('id'));
+    this.hairdresserService.getAllAppointmentsForEmployee(employeeId)
     .subscribe({
       next: (res) =>  {
         console.log("next, res= ", res);

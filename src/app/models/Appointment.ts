@@ -1,16 +1,11 @@
 export interface Appointment {
-    customerId?: number;
+    customerId?: string;
     customerName?: string;
-
-    employeeId?: number;
+    employeeId?: string;
     employeeName?: string;
-
-    hairServicesIds: number[];
-
     startDate: Date;
     endDate: Date;
-
+    hairServicesIds: number[];
     price: number;
-    
     isDeleted?: string;
 }

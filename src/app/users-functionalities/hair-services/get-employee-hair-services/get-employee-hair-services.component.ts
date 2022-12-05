@@ -10,20 +10,18 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class GetEmployeeHairServicesComponent implements OnInit {
   employeeHairServices$: any;
 
-  displayedColumns: string[] = ['count', 'name', 'duration', 'price', 'actions'];
+  displayedColumns: string[] = ['#', 'name', 'duration', 'price', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService) {}
 
   ngOnInit(): void {
+    this.getHairServicesByEmployeeId();
   }
 
-  getInputValue(inputValue: string) {
-    this.getHairServicesByEmployeeId(inputValue);
-  }
-
-  getHairServicesByEmployeeId(employeeId: any) {
+  getHairServicesByEmployeeId() {
+    let employeeId = String(localStorage.getItem('id'));
     this.hairdresserService.getHairServicesByEmployeeId(employeeId)
     .subscribe({
       next: (res) =>  {

@@ -1,9 +1,7 @@
 <div class="center">
-  <input type="number" #input (keyup)="getInputValue(input.value)" placeholder="Employee id">
-
   <table mat-table [dataSource]="employeeHairServices$" class="mat-elevation-z8">
-      <ng-container matColumnDef="count">
-        <th mat-header-cell *matHeaderCellDef>No</th>
+      <ng-container matColumnDef="#">
+        <th mat-header-cell *matHeaderCellDef>#</th>
         <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
       </ng-container>
     

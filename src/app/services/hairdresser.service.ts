@@ -13,10 +13,9 @@ export class HairDresserService {
 
     // Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-    isLoggedIn$ = this._isLoggedIn$.asObservable(); // Public so we can change it.
+    isLoggedIn$ = this._isLoggedIn$.asObservable(); // Public Observable so we can change it.
 
     loggedInUser_Token = localStorage.getItem('token');
-    loggedInUser_Username = localStorage.getItem('username');
 
     constructor(private httpClient: HttpClient) {
         // Get the value of the token, from the local storage, from the logged in user.
@@ -25,7 +24,7 @@ export class HairDresserService {
         this._isLoggedIn$.next(!!token);
     }
 
-    // APPOINTMENT
+    // APPOINTMENTS:
     postAppointment(appointment: Appointment): Observable<Appointment> {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
@@ -38,15 +37,17 @@ export class HairDresserService {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/${appointmentId}`);
     }
 
-    getAllAppointmentsByCustomerId(customerId: number): Observable<Appointment[]> {
+    getAllAppointmentsForCustomer(customerId: string): Observable<Appointment[]> {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
+    //getAppointmentsInWorkForCustomer
+    //customerId: string
     getAppointmentsInWorkByCustomerId(customerId: number): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
     }
 
-    getAllAppointmentsByEmployeeId(employeeId: number): Observable<Appointment> {
+    getAllAppointmentsForEmployee(employeeId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
     }
 
@@ -54,29 +55,7 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/appointment/${appointmentId}`);
     }
 
-    // CUSTOMER
-    postCustomer(customer: any): Observable<Customer> {
-        return this.httpClient.post<Customer>(`${this.apiUrl}/customer`, customer);
-    }
-    
-    getAllCustomers(): Observable<Customer> {
-        return this.httpClient.get<Customer>(`${this.apiUrl}/customer/all`);
-    }
-
-    getCustomerById(): Observable<Customer> {
-        let customerId = 1;
-        return this.httpClient.get<Customer>(`${this.apiUrl}/customer/${customerId}`);
-    }
-
-    putCustomer(customerId: number, customer: any): Observable<Customer> {
-        return this.httpClient.put<Customer>(`${this.apiUrl}/customer/${customerId}`, customer);
-    }
-
-    deleteCustomerById(customerId: number): Observable<{}> {
-        return this.httpClient.delete(`${this.apiUrl}/customer/${customerId}`);
-    }
-
-    // HAIR SERVICES
+    // HAIR SERVICES:
     postHairService(hairService: object): Observable<{}> {
         return this.httpClient.post(`${this.apiUrl}/hairservice`, hairService);
     }
@@ -89,11 +68,11 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
-    getHairServicesByEmployeeId(employeeId: number): Observable<{}> {
+    getHairServicesByEmployeeId(employeeId: string): Observable<{}> {
         return this.httpClient.get(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
     }
 
-    getMissingHairServicesByEmployeeId(employeeId: number): Observable<{}> {
+    getMissingHairServicesByEmployeeId(employeeId: string): Observable<{}> {
         return this.httpClient.get(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
     }
 
@@ -151,17 +130,40 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
 
-    // EMPLOYEE
-    getAllEmployees(): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/employee/all`);
+    // USERS (ADMIN + CUSTOMER + EMPLOYEE):
+    // CUSTOMERS:
+    // postCustomer(customer: any): Observable<Customer> {
+    //     return this.httpClient.post<Customer>(`${this.apiUrl}/customer`, customer);
+    // }
+    
+    getAllCustomers(): Observable<Customer> {
+        return this.httpClient.get<Customer>(`${this.apiUrl}/user/customer/all`);
     }
 
-    getEmployeeById(employeeId: number): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/employee/${employeeId}`);
+    // getCustomerById(): Observable<Customer> {
+    //     let customerId = 1;
+    //     return this.httpClient.get<Customer>(`${this.apiUrl}/customer/${customerId}`);
+    // }
+
+    // putCustomer(customerId: number, customer: any): Observable<Customer> {
+    //     return this.httpClient.put<Customer>(`${this.apiUrl}/customer/${customerId}`, customer);
+    // }
+
+    // deleteCustomerById(customerId: number): Observable<{}> {
+    //     return this.httpClient.delete(`${this.apiUrl}/customer/${customerId}`);
+    // }
+
+    // EMPLOYEE:
+    getAllEmployees(): Observable<any> {
+        return this.httpClient.get<any>(`${this.apiUrl}/user/employee/all`);
     }
+
+    // getEmployeeById(employeeId: number): Observable<{}> {
+    //     return this.httpClient.get(`${this.apiUrl}/employee/${employeeId}`);
+    // }
 
     addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
-        return this.httpClient.post(`${this.apiUrl}/employee/hair-service`, employeeHairService);
+        return this.httpClient.post(`${this.apiUrl}/user/employee/hair-service`, employeeHairService);
     }
 
     getEmployeesByHairServicesIds(hairServicesIds: any): Observable<{}> {
@@ -180,14 +182,14 @@ export class HairDresserService {
 
         console.log("string for api= ", stringForApi);
 
-        console.log("api url= ", `${this.apiUrl}/employee/all/by-services?${stringForApi}`);
+        console.log("api url= ", `${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`);
 
-        this.httpClient.get(`${this.apiUrl}/employee/all/by-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
+        this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
 
-        return this.httpClient.get(`${this.apiUrl}/employee/all/by-services?${stringForApi}`);
+        return this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`);
     }
 
-    getValidIntervals(employeeId: number, selectedDate: any, appointmentDuration: any, customerId: number): Observable<{}> {
+    getValidIntervals(employeeId: string, selectedDate: any, appointmentDuration: any, customerId: string): Observable<{}> {
         console.log("getValidIntervals(): Observable");
 
         console.log("employee id= ", employeeId);
@@ -205,79 +207,67 @@ export class HairDresserService {
         console.log("appointment duration in minutes= ", appointmentDurationInMinutes);
 
         console.log("api url:");
-        console.log(`${this.apiUrl}/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
+        console.log(`${this.apiUrl}/user/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
 
-        //this.httpClient.get(`${this.apiUrl}/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`).subscribe(response => console.log(response));
-
-        return this.httpClient.get(`${this.apiUrl}/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
+        return this.httpClient.get(`${this.apiUrl}/user/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
     }
 
     deleteHairServiceFromEmployee(employeeHairServiceId: number): Observable<{}> {
-        console.log("deleteHairServiceFromEmployee(): Observable");
-
-        return this.httpClient.delete(`${this.apiUrl}/employee/hair-service/${employeeHairServiceId}`);
+        return this.httpClient.delete(`${this.apiUrl}/user/employee/hair-service/${employeeHairServiceId}`);
     }
 
-    // WORKING INTERVALS
+    // WORKING INTERVALS:
     getAllWorkingIntervals(): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/workinginterval/all`);
+        return this.httpClient.get<any>(`${this.apiUrl}/working-interval/all`);
     }
 
-    postWorkingInterval(workingInterval: any): Observable<{}> {
-        console.log("postWorkingInterval(): Observable");
-        
-        return this.httpClient.post(`${this.apiUrl}/workinginterval`, workingInterval);
+    postWorkingInterval(workingInterval: object): Observable<{}> {
+        return this.httpClient.post(`${this.apiUrl}/working-interval`, workingInterval);
     }
 
-    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: number): Observable<any> {
-        return this.httpClient.get(`${this.apiUrl}/workinginterval/all/${employeeId}`);
+    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: string): Observable<any> {
+        return this.httpClient.get(`${this.apiUrl}/working-interval/all/${employeeId}`);
     }
 
     deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
         console.log("deleteWorkingIntervalById(): Observable");
-        return this.httpClient.delete(`${this.apiUrl}/workinginterval/${workingIntervalId}`);
+        return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
-    // AUTH USER
+    // USER AUTHENTICATION (REGISTER, LOG IN/OUT):
     registerUser(user_username: string, user_password: string): Observable<{}> {
-        console.log("HairDresserService -> registerUser()");
-
-        let userObject: User = {
+        let user: User = {
             username: user_username,
             password: user_password,
         }
-        return this.httpClient.post<User>(`${this.apiUrl}/user/register`, userObject);
+        return this.httpClient.post<User>(`${this.apiUrl}/user/register`, user);
     }
 
     logInUser(user_username: string, user_password: string): Observable<{}> {
-        console.log("HairDresserService -> logInUser()");
-
-        let userObject: User = {
+        let user: User = {
             username: user_username,
-            password: user_password,
+            password: user_password
         }
 
-        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, userObject)
+        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
         .pipe(
-            tap((response: any ) => {
-                // Save information in Local Storage (key - value).
-                // To see it: Inspect on the web page - Application
+            tap((response: any) => {
+                // Save information in Local Storage (key - value). To see it: Inspect page -> Application -> Local Storage.
                 localStorage.setItem('token', response.token);
+                localStorage.setItem('id', response.id);
                 localStorage.setItem('username', response.username);
 
-                // Using method next() we know that every subscriber of the public observable will be notified.
+                // Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
                 this._isLoggedIn$.next(true);
 
-                console.log("response.token:");
-                console.log(response.token);
+                console.log("token= ", response.token);
             })
         );
     }
 
     logOutUser() {
-        console.log("HairDresserService -> logOutUser()");
-
         localStorage.removeItem('token');
+        localStorage.removeItem('id');
         localStorage.removeItem('username');
     }
 }

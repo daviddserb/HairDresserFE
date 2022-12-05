@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div>
+    <!-- <div>
         <label>Employee</label>
         <mat-form-field>
             <mat-label >Select the employee...</mat-label>
@@ -42,7 +42,7 @@
                 Employee is required!
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div>
         <label for="startTime">Start</label>
@@ -56,7 +56,7 @@
     </div>
 
     <div>
-        <label for="endTime">Finish</label>
+        <label for="endTime">End</label>
         <input type="time" class="form-control" formControlName="endTime" id="endTime">
 
         <div *ngIf="formGetter.endTime.touched" style="color:red">

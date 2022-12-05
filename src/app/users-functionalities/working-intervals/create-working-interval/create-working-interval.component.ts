@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WorkingInterval } from 'src/app/models/WorkingInterval';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
@@ -11,7 +12,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class CreateWorkingIntervalComponent implements OnInit {
   formWorkingInterval = new FormGroup({
     workingDayId: new FormControl('', Validators.required),
-    employeeId: new FormControl('', Validators.required),
+    employeeId: new FormControl(), //
     startTime: new FormControl('', Validators.required),
     endTime: new FormControl('', Validators.required),
   });
@@ -20,10 +21,11 @@ export class CreateWorkingIntervalComponent implements OnInit {
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,
+    ) {}
 
   ngOnInit(): void {
-    this.hairdresserService.getAllEmployees().subscribe(res => this.allEmployees$ = res);
+    // this.hairdresserService.getAllEmployees().subscribe(res => this.allEmployees$ = res);
   }
 
   get formGetter() { return this.formWorkingInterval.controls; }
@@ -32,10 +34,11 @@ export class CreateWorkingIntervalComponent implements OnInit {
     console.log("form= ", this.formWorkingInterval.value);
 
     let infoWorkingInterval = this.formWorkingInterval.value;
+    infoWorkingInterval.employeeId = String(localStorage.getItem('id'));
 
     this.hairdresserService.postWorkingInterval(infoWorkingInterval)
     .subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Interval overlaping with the existing ones or the pause between the intervals is not 1 hour at least!", "OK", "error"),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Interval overlaping with the existing ones or the pause between is not 1 hour at least!", "OK", "error"),
       complete: () => this.popUpMessagesService.showPopUpMessage("Interval successfully created!", "OK", "success")
     });
   }

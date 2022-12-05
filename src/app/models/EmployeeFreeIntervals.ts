@@ -1,5 +1,5 @@
 export interface EmployeeFreeIntervals {
-    employeeId: number;
+    employeeId: string;
 
     year: number;
     month: number;
@@ -7,5 +7,5 @@ export interface EmployeeFreeIntervals {
 
     durationInMinutes: number;
     
-    customerId: number;
+    customerId: string;
 }

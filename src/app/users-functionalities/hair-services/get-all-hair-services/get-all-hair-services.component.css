@@ -13,10 +13,12 @@
 .hair-services th {
     font-size: 30px;
     opacity: 0.5;
+    text-align: center;
 }
 
 .hair-services td {
     font-size: 20px;
+    text-align: center;
 }
 
 .hair-services .icon_edit_button {

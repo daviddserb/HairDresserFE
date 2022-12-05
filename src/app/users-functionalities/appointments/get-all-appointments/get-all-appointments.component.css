@@ -13,8 +13,10 @@
 .center table th {
     font-size: 30px;
     opacity: 0.5;
+    text-align: center
 }
 
 .center table td {
     font-size: 20px;
+    text-align: center
 }

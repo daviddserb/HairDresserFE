@@ -10,20 +10,21 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
   employeeWorkingIntervals$: any;
 
-  displayedColumns: string[] = ['count', 'workingDay', 'startTime', 'endTime', 'actions'];
+  displayedColumns: string[] = ['#', 'workingDay', 'startTime', 'endTime', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,
+    ) {}
 
   ngOnInit(): void {
+    this.getWorkingIntervals();
   }
 
-  getInputValue(inputValue: string) {
-    this.getWorkingIntervals(inputValue);
-  }
 
-  getWorkingIntervals(employeeId: any) {
+  getWorkingIntervals() {
+    let employeeId = String(localStorage.getItem('id'));
+
     this.hairdresserService.getAllEmployeeWorkingIntervalsByEmployeeId(employeeId)
     .subscribe({
       next: (res) =>  {

@@ -10,7 +10,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class GetAllHairServicesComponent implements OnInit {
   allHairServices$: any;
 
-  displayedColumns: string[] = ['count', 'id', 'name', 'duration', 'price', 'actions'];
+  displayedColumns: string[] = ['#', 'name', 'duration', 'price', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,

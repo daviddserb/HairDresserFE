@@ -1,24 +1,22 @@
 <div class="center">
-  <input type="number" #input (keyup)="getInputValue(input.value)" placeholder="Employee id">
-
   <table mat-table [dataSource]="employeeWorkingIntervals$">  
-    <ng-container matColumnDef="count">
-      <th mat-header-cell *matHeaderCellDef>No</th>
+    <ng-container matColumnDef="#">
+      <th mat-header-cell *matHeaderCellDef>#</th>
       <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
     </ng-container>
 
     <ng-container matColumnDef="workingDay">
-      <th mat-header-cell *matHeaderCellDef>Working Day</th>
+      <th mat-header-cell *matHeaderCellDef>Day</th>
       <td mat-cell *matCellDef="let element">{{element.workingDay.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="startTime">
-      <th mat-header-cell *matHeaderCellDef>Start Time</th>
+      <th mat-header-cell *matHeaderCellDef>Start</th>
       <td mat-cell *matCellDef="let element">{{element.startTime}}</td>
     </ng-container>
 
     <ng-container matColumnDef="endTime">
-      <th mat-header-cell *matHeaderCellDef>End Time</th>
+      <th mat-header-cell *matHeaderCellDef>End</th>
       <td mat-cell *matCellDef="let element">{{element.endTime}}</td>
     </ng-container>
 

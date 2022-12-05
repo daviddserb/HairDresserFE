@@ -22,7 +22,7 @@ export class CreateAppointmentComponent implements OnInit {
   });
   
   allHairServices$!: any;
-  displayedColumns: string[] = ['checkBox', 'count', 'name', 'duration', 'price'];
+  displayedColumns: string[] = ['checkBox', '#', 'name', 'duration', 'price'];
 
   // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
   selection = new SelectionModel<any>(true, []);
@@ -44,15 +44,15 @@ export class CreateAppointmentComponent implements OnInit {
     return day !== 0 && day !== 6;
   }
 
-  customerId!: any;
-
   validIntervals: any;
+
+  customerId = String(localStorage.getItem('id'));
 
   constructor(
     public hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService,
     private router: Router,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
     ) {}
 
   ngOnInit(): void {
@@ -110,11 +110,6 @@ export class CreateAppointmentComponent implements OnInit {
     console.log(this.selectedDate.getDate()); // nr. zilei a lunii.
   }
 
-  onSubmit() {
-    console.log(this.customerId);
-    return this.customerId;
-  }
-
   getValidIntervalsForAppointment() {
     console.log("getValidIntervalsForAppointment()")
 
@@ -128,8 +123,8 @@ export class CreateAppointmentComponent implements OnInit {
     });
   }
 
-  CreateAppointment(interval: any) {
-    console.log("CreateAppointment()");
+  createAppointment(interval: any) {
+    console.log("createAppointment()");
     
     console.log("interval= ", interval);
 

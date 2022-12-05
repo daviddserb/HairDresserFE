@@ -10,25 +10,24 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
   styleUrls: ['./get-all-customer-appointments.component.css']
 })
 export class GetAllCustomerAppointmentsComponent implements OnInit {
-  allCustomerAppointmentsNotCanceled$!: any;
+  // All the customers appointments (that are NOT canceled)
+  allCustomerAppointments$!: any;
 
-  displayedColumns: string[] = ['id', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];
+  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,
+    ) {}
 
-  ngOnInit(): void {}
-
-  getInputValue(inputValue: string) {
-    console.log("getInputValue:");
-    console.log("input value= ", inputValue);
-    
-    this.getAppointmentsByCustomerId(inputValue);
+  ngOnInit(): void {
+    this.getAllAppointmentsByCustomerId();
   }
 
-  getAppointmentsByCustomerId(customerId: any) {
-    this.allCustomerAppointmentsNotCanceled$ = this.hairdresserService.getAllAppointmentsByCustomerId(customerId)
+  getAllAppointmentsByCustomerId() {
+    let customerId = String(localStorage.getItem('id'));
+
+    this.allCustomerAppointments$ = this.hairdresserService.getAllAppointmentsForCustomer(customerId)
     .pipe(
       map(customerAppointments => {
         console.log("customer appointments=", customerAppointments);
