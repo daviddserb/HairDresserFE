@@ -23,27 +23,23 @@ import { CreateWorkingIntervalComponent } from './users-functionalities/working-
 
 const routes: Routes = [
   // ! When add path, add it in routingComponents too.
-  {path: '', component: HomeComponent},
-  
-  {path: 'register', component: RegisterComponent},
-  {path: 'log-in', component: LogInComponent},
+  {path: '', component: HomeComponent, children: [
+    {path: 'register', component: RegisterComponent},
+    {path: 'log-in', component: LogInComponent},
+  ]},
 
   {path: 'admin', component: AdminComponent, children: [
     {path: 'hair-service', component: CreateHairServiceComponent},
     {path: 'hair-service/all', component: GetAllHairServicesComponent},
     {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
-
     {path: 'appointment/all', component: GetAllAppointmentsComponent},
-    
     {path: 'employee/all', component: GetAllEmployeesComponent},
   ]},
 
   {path: 'employee', component: EmployeeComponent, children: [
     {path: 'hair-service', component: AddHairServiceComponent},
     {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
-
     {path: 'appointment/all', component: GetAllEmployeeAppointmentsComponent},
-
     {path: 'working-interval', component: CreateWorkingIntervalComponent},
     {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
   ]},
@@ -67,7 +63,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   HomeComponent,
-
   RegisterComponent,
   LogInComponent,
 

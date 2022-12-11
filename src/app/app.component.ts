@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { LoaderService } from './loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +6,6 @@ import { LoaderService } from './loader/loader.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   constructor() {}
-
   ngOnInit(): void {}
 }

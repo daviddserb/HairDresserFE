@@ -1,5 +1,28 @@
-<nav>
-    <a routerLink="/register" routerLinkActive="active">REGISTER ACCOUNT</a>
-    <br>
-    <a routerLink="/log-in" routerLinkActive="active">LOG IN</a>
-</nav>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark fs-5">
+        <a class="navbar-brand">
+            <img class="logo" src="../../assets/images/HairSalonLogo.jpg" alt="">
+        </a>
+
+        <!-- HAMBURGER BUTTON (FOR RESPONSIVE): -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- ms-auto = set text to right side -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a routerLink="/register" routerLinkActive="active">REGISTER</a>
+                </li>
+                <li class="nav-item active">
+                    <a routerLink="/log-in" routerLinkActive="active">LOG IN</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- CHILDREN VIEWS GO HERE: -->
+<router-outlet></router-outlet>

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+/* ??? */
+/* html, body {
     height: 100%;
 }
 
@@ -8,8 +9,9 @@ body {
     margin: 0px;
     padding: 0px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+} */
 
+/* POP-UP MESSAGE: */
 .error.mat-snack-bar-container {
     background: red;
     color: white;
@@ -18,4 +20,99 @@ body {
 .success.mat-snack-bar-container {
     background: green;
     color: white;
+}
+
+/* HEADER: */
+header {
+    background-color: black;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.navbar-nav li a {
+    color: white;
+    margin: 10px;
+}
+
+.navbar-nav li a:hover {
+    opacity: 0.5;
+}
+
+/* FOOTER (CSS FLEXBOX LAYOUT SYSTEM): */
+footer {
+    /* Expands items to fill available free space or shrinks them to prevent overflow. */
+    display: flex; /* Set the html sections to be on columns => concact + follow = one column, copyright = another column. */
+    flex-direction: column; /* Change the flex direction back to columns, so all elements will be on a new row.*/
+
+    background-color: black;
+    color: white;
+
+    /* Position it on the bottom of the page */
+    position: absolute; /* absolute/fixed (sticky) */
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    display: flex; /* Set the elements (contact and follow) on columns. */
+    padding: 20px 0;
+    margin: 0 auto; /* Set it in the middle of the page. */
+}
+
+.container h3 {
+    text-transform: capitalize;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.contact {
+    /* background-color: red; */
+    /* border-right: 1px solid white; */
+    flex-grow: 1; /* Equally divided to take full width. */
+    flex-basis: 100%; /* Remain equally divided based on the content. */
+}
+
+.contact ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.follow {
+    /* background-color: orange; */
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.follow .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: black;
+    transition: all 0.5s ease;
+}
+
+.follow .social-links a:hover {
+    opacity: 0.5;
+}
+
+.copyright {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid white;
+}
+
+/* RESPONSIVE: */
+@media(max-width: 575px) {
+    /* FOOTER: */
+    .container {
+        flex-direction: column;
+    }
 }

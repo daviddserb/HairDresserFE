@@ -17,7 +17,8 @@ export class CreateHairServiceComponent implements OnInit {
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,
+    ) {}
 
   ngOnInit(): void {
   }
@@ -32,7 +33,7 @@ export class CreateHairServiceComponent implements OnInit {
     console.log(infoHairService);
 
     this.hairdresserService.postHairService(infoHairService).subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Could not create the hair service!", "OK", "error"),
+      error: (e) => this.popUpMessagesService.showPopUpMessage("Couldn't create the hair service!", "OK", "error"),
       complete: () => {
         this.popUpMessagesService.showPopUpMessage("The hair service was successfully created!", "OK", "success");
         window.location.reload(); // Refresh the page.

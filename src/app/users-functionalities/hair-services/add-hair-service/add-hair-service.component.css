@@ -3,17 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-}
 
-.center input {
-    margin: 10px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    
-    border-left: 1px solid black;
-    text-align: center;
+    width: 80%;
 }
 
 .center table {

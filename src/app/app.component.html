@@ -1,7 +1,33 @@
-<!--All the elements from here (app.component.html) are printed on all the other html pages. So, this is mainly used for: header, side nav bar, footer, etc...-->
+<!-- All the elements from here (app.component.html) are printed on all the other html pages. So, this is mainly used for: header, side nav bar, footer, etc... -->
 
-<!--Loading Spinner-->
+<!-- Loading spinner -->
 <app-loading-spinner></app-loading-spinner>
 
-<!--Routed views go here-->
+<!-- Routed views go here -->
 <router-outlet></router-outlet>
+
+<!-- Footer -->
+<footer>
+    <section class="container">
+        <div class="contact">
+            <h3>contact me</h3>
+            <ul>
+                <li><i class="fa-solid fa-address-card"></i> ROMANIA Timis Timisoara</li>
+                <li><i class="fa-solid fa-phone"></i> +40 742 047 588</li>
+                <li><i class="fa fa-envelope" aria-hidden="true"></i> daviddserb@yahoo.com</li>
+            </ul>
+        </div>
+        <div class="follow">
+            <h3>follow me</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/david.serb.7" target="_blank"><i
+                        class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/david-serb-06393b225/" target="_blank"><i
+                        class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/daviddserb" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="copyright">Copyright &copy; Serb David 2022-2023</section>
+</footer>

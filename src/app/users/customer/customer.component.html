@@ -1,16 +1,28 @@
-<nav class="header">
-    <a routerLink="/customer"><img class="logo" src="../../assets/images/HairSalonLogo.jpg"></a>
-    
-    <div class="header-right">
-        <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink.
-        So, we can toggle active classes for active router links based on the current router state. -->
-        
-        <!-- Because the Create Hair Service has the hair-service route and the All hair services has the hair-service/all route that means we have a Parent Child relationship.
-        So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
-        
-        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
-        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
-    </div>
-</nav>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark fs-5">
+        <a class="navbar-brand">
+            <img class="logo" src="../../assets/images/HairSalonLogo.jpg" alt="">
+        </a>
 
+        <!-- HAMBURGER BUTTON (FOR RESPONSIVE): -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- ms-auto = set text to right side -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
+                </li>
+                <li class="nav-item active">
+                    <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- CHILDREN VIEWS GO HERE: -->
 <router-outlet></router-outlet>

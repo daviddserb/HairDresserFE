@@ -14,10 +14,9 @@ export class LogInComponent implements OnInit {
   constructor(
     private hairdresserService: HairDresserService,
     private router: Router,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginUser(item: any) {
     console.log("user input= ", item.value)

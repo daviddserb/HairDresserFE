@@ -1,32 +1,88 @@
-.hair-services {
-    /* The position property specifies the type of positioning method used for an element.
-    It can be: static, relative, fixed, absolute and sticky.
-    Elements are then positioned using the top, bottom, left and right property. */
+table {
     position: absolute;
     top: 50%;
     left: 50%;
-    /* The transform property allows you to rotate, scale, move, etc... elements. */
     transform: translate(-50%, -50%);
+
     width: 80%;
 }
 
-.hair-services th {
+table th {
     font-size: 30px;
     opacity: 0.5;
     text-align: center;
 }
 
-.hair-services td {
+table td {
     font-size: 20px;
     text-align: center;
 }
 
-.hair-services .icon_edit_button {
+table .icon_edit_button {
     font-size: 25px;
     color: blue;
 }
 
-.hair-services .icon_delete_button {
+table .icon_delete_button {
     font-size: 25px;
     color: red;
+}
+
+@media(max-width: 575px) {
+    table {
+        background-color: black;
+
+        border: 0;
+        vertical-align: middle;
+    }
+
+    table caption {
+        font-size: 1em;
+    }
+
+    table .mat-header-cell {
+        display: none;
+    }
+
+    table .mat-cell {
+        border-bottom: 0px solid #ddd; /* ! 0px in loc de 5px */
+        display: block;
+    }
+
+    table .mat-row {
+        /* border-bottom: 1px solid #ddd; */
+
+        /* display: block; */
+        /* font-size: 1em;
+        text-align: right; */
+
+        /* height: 30px; */
+        /* margin-bottom: 4%; */
+    }
+
+    /* .table .mat-cell:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: normal;
+        
+        font-size: .85em;
+    } */
+    
+
+    /* table th {
+        color: red;
+    }
+
+    table, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+    } */
 }

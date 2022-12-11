@@ -26,11 +26,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatStepperModule} from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -57,6 +59,8 @@ const MaterialComponents = [
     NoWhitespaceAllowedDirective,
     NotifierComponent,
     LoadingSpinnerComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
