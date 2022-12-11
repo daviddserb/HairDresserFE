@@ -1,0 +1,17 @@
+header {
+    background-color: black;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.navbar-nav li a {
+    color: white;
+    margin: 10px;
+}
+
+.navbar-nav li a:hover {
+    opacity: 0.5;
+}

@@ -37,17 +37,16 @@ export class HairDresserService {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/${appointmentId}`);
     }
 
-    getAllAppointmentsForCustomer(customerId: string): Observable<Appointment[]> {
+    getAllAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
-    //getAppointmentsInWorkForCustomer
-    //customerId: string
-    getAppointmentsInWorkByCustomerId(customerId: number): Observable<Appointment> {
+    // ??? asta (cred)ca inca nu o folosesc
+    getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
     }
 
-    getAllAppointmentsForEmployee(employeeId: string): Observable<Appointment> {
+    getAllAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
     }
 
@@ -130,37 +129,38 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
 
-    // USERS (ADMIN + CUSTOMER + EMPLOYEE):
-    // CUSTOMERS:
-    // postCustomer(customer: any): Observable<Customer> {
-    //     return this.httpClient.post<Customer>(`${this.apiUrl}/customer`, customer);
-    // }
+    // WORKING INTERVALS:
+    getAllWorkingIntervals(): Observable<any> {
+        return this.httpClient.get<any>(`${this.apiUrl}/working-interval/all`);
+    }
+
+    postWorkingInterval(workingInterval: object): Observable<{}> {
+        return this.httpClient.post(`${this.apiUrl}/working-interval`, workingInterval);
+    }
+
+    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: string): Observable<any> {
+        return this.httpClient.get(`${this.apiUrl}/working-interval/all/${employeeId}`);
+    }
+
+    deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
+        console.log("deleteWorkingIntervalById(): Observable");
+        return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
+    }
+
+    // USERS (ADMIN, CUSTOMER, EMPLOYEE):
+    getUserById(userId: any): Observable<User> {
+        return this.httpClient.get<User>(`${this.apiUrl}/user/id?id=${userId}`);
+    }
     
+    // CUSTOMER:
     getAllCustomers(): Observable<Customer> {
         return this.httpClient.get<Customer>(`${this.apiUrl}/user/customer/all`);
     }
-
-    // getCustomerById(): Observable<Customer> {
-    //     let customerId = 1;
-    //     return this.httpClient.get<Customer>(`${this.apiUrl}/customer/${customerId}`);
-    // }
-
-    // putCustomer(customerId: number, customer: any): Observable<Customer> {
-    //     return this.httpClient.put<Customer>(`${this.apiUrl}/customer/${customerId}`, customer);
-    // }
-
-    // deleteCustomerById(customerId: number): Observable<{}> {
-    //     return this.httpClient.delete(`${this.apiUrl}/customer/${customerId}`);
-    // }
 
     // EMPLOYEE:
     getAllEmployees(): Observable<any> {
         return this.httpClient.get<any>(`${this.apiUrl}/user/employee/all`);
     }
-
-    // getEmployeeById(employeeId: number): Observable<{}> {
-    //     return this.httpClient.get(`${this.apiUrl}/employee/${employeeId}`);
-    // }
 
     addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
         return this.httpClient.post(`${this.apiUrl}/user/employee/hair-service`, employeeHairService);
@@ -214,24 +214,6 @@ export class HairDresserService {
 
     deleteHairServiceFromEmployee(employeeHairServiceId: number): Observable<{}> {
         return this.httpClient.delete(`${this.apiUrl}/user/employee/hair-service/${employeeHairServiceId}`);
-    }
-
-    // WORKING INTERVALS:
-    getAllWorkingIntervals(): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/working-interval/all`);
-    }
-
-    postWorkingInterval(workingInterval: object): Observable<{}> {
-        return this.httpClient.post(`${this.apiUrl}/working-interval`, workingInterval);
-    }
-
-    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: string): Observable<any> {
-        return this.httpClient.get(`${this.apiUrl}/working-interval/all/${employeeId}`);
-    }
-
-    deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
-        console.log("deleteWorkingIntervalById(): Observable");
-        return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
     // USER AUTHENTICATION (REGISTER, LOG IN/OUT):

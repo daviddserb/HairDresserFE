@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -61,6 +62,7 @@ const MaterialComponents = [
     LoadingSpinnerComponent,
     HeaderComponent,
     FooterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,12 +16,12 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
     private popUpMessagesService: PopUpMessagesService) { }
 
   ngOnInit(): void {
-    this.getAppointmentsByEmployeeId();
+    this.getAllEmployeeAppointments();
   }
 
-  getAppointmentsByEmployeeId() {
+  getAllEmployeeAppointments() {
     let employeeId = String(localStorage.getItem('id'));
-    this.hairdresserService.getAllAppointmentsForEmployee(employeeId)
+    this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
     .subscribe({
       next: (res) =>  {
         console.log("next, res= ", res);

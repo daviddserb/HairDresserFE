@@ -21,13 +21,13 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.getAllAppointmentsByCustomerId();
+    this.getAllCustomerAppointments();
   }
 
-  getAllAppointmentsByCustomerId() {
+  getAllCustomerAppointments() {
     let customerId = String(localStorage.getItem('id'));
 
-    this.allCustomerAppointments$ = this.hairdresserService.getAllAppointmentsForCustomer(customerId)
+    this.allCustomerAppointments$ = this.hairdresserService.getAllAppointmentsByCustomerId(customerId)
     .pipe(
       map(customerAppointments => {
         console.log("customer appointments=", customerAppointments);
@@ -57,7 +57,7 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
     return false;
   }
 
-  cancelAppointmentInWork(appointmentId: number) {
+  cancelInWorkAppointment(appointmentId: number) {
     this.hairdresserService.deleteAppointmentById(appointmentId)
     .subscribe({
       next: (v) => console.log(v),

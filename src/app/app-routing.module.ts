@@ -20,13 +20,17 @@ import { GetEmployeeHairServicesComponent } from './users-functionalities/hair-s
 import { GetAllEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-all-employee-appointments/get-all-employee-appointments.component';
 import { GetAllEmployeeWorkingIntervalsComponent } from './users-functionalities/working-intervals/get-all-employee-working-intervals/get-all-employee-working-intervals.component';
 import { CreateWorkingIntervalComponent } from './users-functionalities/working-intervals/create-working-interval/create-working-interval.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  // ! When add path, add it in routingComponents too.
+  // ! When add path here => go and add it in routingComponents too.
+  
   {path: '', component: HomeComponent, children: [
     {path: 'register', component: RegisterComponent},
     {path: 'log-in', component: LogInComponent},
   ]},
+
+  {path: 'profile', component: ProfileComponent},
 
   {path: 'admin', component: AdminComponent, children: [
     {path: 'hair-service', component: CreateHairServiceComponent},
