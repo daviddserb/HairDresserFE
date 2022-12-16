@@ -1,5 +1,4 @@
-<div class="app-loader-overlay" *ngIf="loader$ | async">
-  <!-- !!! SA FAC ALT LOADING SPINNER, ADICA SA ARATE ALTCUMVA SI SA MODIFIC SI IN CSS -->
+<!-- <div class="app-loader-overlay" *ngIf="loader$ | async">
     <div class="app-loader">
         <div class="plane-loader">
             <div class="cloud cloud1"></div>
@@ -9,4 +8,8 @@
             <div class="cloud cloud2"></div>
       </div>
     </div>
+</div> -->
+
+<div class="app-loader-overlay" *ngIf="loader$ | async">
+  <mat-spinner></mat-spinner>
 </div>
