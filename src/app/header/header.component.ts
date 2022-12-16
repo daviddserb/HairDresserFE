@@ -14,19 +14,17 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("############# ngOnInit header component");
+    console.log("-> header");
 
     let loggedInUserId = localStorage.getItem('id');
-    console.log("loggedInUserId= ", loggedInUserId);
-    console.log("loggedInUserInfo= ", this.loggedInUserInfo);
+    console.log("logged in user id= ", loggedInUserId);
+    console.log("logged in user info= ", this.loggedInUserInfo);
 
-    console.log("inainte if")
     if (loggedInUserId != null) {
-      console.log("se intra")
       this.hairdresserService.getUserById(loggedInUserId)
       .subscribe({
         next: (response) => {
-          console.log("response= ", response);
+          console.log("response (logged in user info)= ", response);
           this.loggedInUserInfo = response;
         },
         error: (e) => console.log("Wrong id!")

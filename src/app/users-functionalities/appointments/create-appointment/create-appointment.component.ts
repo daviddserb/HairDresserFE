@@ -34,15 +34,16 @@ export class CreateAppointmentComponent implements OnInit {
   selectedEmployeeId!: any;
 
   currentDate = new Date();
+
   selectedDate!: any;
-  
-  weekendFilter = (d: Date | any): boolean => {
-    console.log("weekendFilter:");
+
+  weekendFilter = (d: Date | null): boolean => {
+    console.log("-> weekendFilter");
+    const day = (d || new Date()).getDay();
     console.log("d= ", d);
-    const day = d.getDay();
-    // Prevents Saturday and Sunday from being selected.
+    // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
-  }
+  };
 
   validIntervals: any;
 
@@ -56,6 +57,8 @@ export class CreateAppointmentComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.currentDate.setDate(this.currentDate.getDate() + 1);
+
     this.allHairServices$ = this.hairdresserService.getAllHairServices();
   }
 

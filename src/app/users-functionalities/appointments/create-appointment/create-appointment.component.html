@@ -52,7 +52,7 @@
   </mat-step>
 
   <mat-step label="Select date">
-    <mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
       <!-- [min]="currentDate" makes the calendar to mark the days, before currentDate, as unavailable. -->
       <input matInput [matDatepicker]="picker" [matDatepickerFilter]="weekendFilter" [min]="currentDate" placeholder="Choose a date" (dateChange)="getSelectedDate($event)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
