@@ -84,7 +84,7 @@ export class HairDresserService {
     }
 
     getDurationByHairServicesIds(hairServicesIds: any): Observable<{}> {
-        console.log("getDurationByHairServicesIds(): Observable")
+        console.log("getDurationByHairServicesIds(): Observable");
         
         console.log("hair services ids= ", hairServicesIds);
 
@@ -107,7 +107,7 @@ export class HairDresserService {
     }
 
     getPriceByHairServicesIds(hairServicesIds: any): Observable<{}> {
-        console.log("getPriceByHairServicesIds(): Observable")
+        console.log("getPriceByHairServicesIds(): Observable");
         
         console.log("hair services ids= ", hairServicesIds);
 
@@ -169,7 +169,7 @@ export class HairDresserService {
     getEmployeesByHairServicesIds(hairServicesIds: any): Observable<{}> {
         console.log("getEmployeesByHairServicesIds(): Observable");
 
-        console.log("hair services ids= ", hairServicesIds)
+        console.log("hair services ids= ", hairServicesIds);
 
         let stringForApi = "hairServicesIds=";
 
@@ -194,7 +194,7 @@ export class HairDresserService {
 
         console.log("employee id= ", employeeId);
         console.log("selected date= ", selectedDate);
-        console.log("year= ", selectedDate.getFullYear())
+        console.log("year= ", selectedDate.getFullYear());
         console.log("month= ", selectedDate.getMonth() + 1);
         console.log("date= ", selectedDate.getDate());
         console.log("appointment duration= ", appointmentDuration);
@@ -224,7 +224,7 @@ export class HairDresserService {
             email: userInfo.email,
             phone: userInfo.phone,
             address: userInfo.address,
-        }
+        };
         return this.httpClient.post<User>(`${this.apiUrl}/user/register`, user);
     }
 
@@ -232,8 +232,7 @@ export class HairDresserService {
         let user: User = {
             username: user_username,
             password: user_password
-        }
-
+        };
         return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
         .pipe(
             tap((response: any) => {
@@ -254,5 +253,8 @@ export class HairDresserService {
         localStorage.removeItem('token');
         localStorage.removeItem('id');
         localStorage.removeItem('username');
+
+        // Refresh page (so the user can see the changes automatically, without having to self refresh it).
+        window.location.reload();
     }
 }

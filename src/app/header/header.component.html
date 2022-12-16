@@ -11,8 +11,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- User not logged in -->
-            <ng-container *ngIf="loggedInUserInfo==null; else checkIfAdmin">
+            <!-- If user is not logged in: -->
+            <ng-container *ngIf="loggedInUserInfo==null; else isLoggedIn">
                 <!-- ms-auto = set text to right side -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item" routerLinkActive="active">
@@ -24,9 +24,9 @@
                 </ul>
             </ng-container>
 
-            <ng-template #checkIfAdmin>
-                <ng-container *ngIf="loggedInUserInfo.role === 'admin'; else checkIfEmployee">
-                <ul class="navbar-nav ms-auto">
+            <!-- If user is logged in: -->
+            <ng-template #isLoggedIn>
+                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'admin'">
                     <li class="nav-item">
                         <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
                         <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
@@ -43,52 +43,52 @@
                         <a routerLinkActive="active" routerLink="employee/all">Employees</a>
                     </li>
                 </ul>
-                </ng-container>
-            </ng-template>
 
-            <ng-template #checkIfEmployee>
-                <ng-container *ngIf="loggedInUserInfo.role === 'employee'; else checkIfCustomer">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="hair-service">Add hair service</a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="working-interval">Add working interval</a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLinkActive="active" routerLink="working-interval/all">Working intervals</a>
-                        </li>
-                    </ul>
-                </ng-container>
-            </ng-template>
+                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'employee'">
+                    <li class="nav-item">
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="hair-service">Add hair service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="working-interval">Add working interval</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="working-interval/all">Working intervals</a>
+                    </li>
+                </ul>
 
-            <ng-template #checkIfCustomer>
-                <ng-container *ngIf="loggedInUserInfo.role === 'customer'; else checkIfNoRole">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
-                        </li>
-                    </ul>
-                </ng-container>
-            </ng-template>
+                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'customer'">
+                    <li class="nav-item">
+                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
 
-            <ng-template #checkIfNoRole>
-                <ng-container *ngIf="loggedInUserInfo.role === ''">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
-                        </li>
-                    </ul>
-                </ng-container>
+                <!-- Logged in user but with no role: -->
+                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === ''">
+                    <li class="nav-item">
+                        <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
+                    </li>
+                </ul>
+
+                <!-- For every logged in user: -->
+                <!-- !!! Pana acum, textul princial, adica actiunile de la useri (create hair services, working intervals, etc...) erau puse la dreapta de tot in navbar, pt. ca au clasa ms-auto.
+                Acum, chiar daca au tot aceeasi clasa, dupa ce am pus si butonul de log out tot pe ms-auto, actiunile de la useri s-au indreptat cumva spre mijloc. -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
             </ng-template>
         </div>
     </nav>

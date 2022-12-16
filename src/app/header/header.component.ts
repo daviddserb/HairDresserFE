@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("-> header");
+    console.log("-> header()");
 
     let loggedInUserId = localStorage.getItem('id');
     console.log("logged in user id= ", loggedInUserId);
@@ -30,6 +30,11 @@ export class HeaderComponent implements OnInit {
         error: (e) => console.log("Wrong id!")
       });
     }
+  }
+
+  logOutUser() {
+    console.log("-> logOutUser()");
+    this.hairdresserService.logOutUser();
   }
 
 }
