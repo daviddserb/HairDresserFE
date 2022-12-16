@@ -15,9 +15,9 @@ export class RegisterComponent implements OnInit {
     // name: new FormControl('', Validators.required),
     username: new FormControl('', [Validators.required, this.noWhitespaceAllowed]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    // email: new FormControl('', [Validators.required, Validators.email]),
-    // phone: new FormControl('', [Validators.required, this.noLettersAllowed]),
-    // address: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, this.noLettersAllowed]),
+    address: new FormControl('', Validators.required),
   });
 
   apiUrl = "https://localhost:7192/api";
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     console.log(userInfo);
 
     this.hairdresserService
-    .registerUser(userInfo.username!, userInfo.password!)
+    .registerUser(userInfo)
     .subscribe({
       next: (v) => console.log(v),
       error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error"),
@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
 
   // ??? Trebuie sa fac un folder special pt. Custom Validators?
   noWhitespaceAllowed(control: FormControl) {
-    //if(control.value != null && control.value.indexOf(' ') != -1) return {noSpaceAllowed: true} //method 1
     if(/\s/.test(control.value)) return {noSpaceAllowed: true}
     return null;
   }

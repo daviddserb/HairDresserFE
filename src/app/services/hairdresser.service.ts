@@ -217,10 +217,13 @@ export class HairDresserService {
     }
 
     // USER AUTHENTICATION (REGISTER, LOG IN/OUT):
-    registerUser(user_username: string, user_password: string): Observable<{}> {
+    registerUser(userInfo: any): Observable<{}> {
         let user: User = {
-            username: user_username,
-            password: user_password,
+            username: userInfo.username,
+            password: userInfo.password,
+            email: userInfo.email,
+            phone: userInfo.phone,
+            address: userInfo.address,
         }
         return this.httpClient.post<User>(`${this.apiUrl}/user/register`, user);
     }

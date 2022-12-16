@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card form">
     <h4 class="card-header">Register</h4>
 
     <div class="card-body">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="email">Email: </label>
                 <input id="email" type="email" formControlName="email" class="form-control">
             
@@ -78,7 +78,7 @@
                 <div *ngIf="formGetter.address.touched && formGetter.address.invalid" style="color:red">
                     Address is required!
                 </div>
-            </div> -->
+            </div>
 
             <div class="form-group">
                 <button type="submit" [disabled]="!customerRegisterForm.valid">Submit</button>

@@ -1,0 +1,59 @@
+.form {
+    /* Position in the middle */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* The transform property allows you to rotate, scale, move, etc... elements. */
+
+    width: 40%;
+    padding: 40px;
+    
+    background: rgba(0,0,0,.5);
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+}
+
+.form h4 {
+    text-align: center;
+    border-bottom: 1px solid black;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+form label {
+    display: block;
+    padding: 1rem 0 .25rem;
+    font-size: 20px;
+    color: white;
+}
+
+form input {
+    display: block;
+    width: 40%;
+    border: 2px solid white;
+    padding: .5rem;
+    border-radius: 5px;
+}
+
+form input:focus {
+    width: 50%;
+    border: 5px solid grey;
+}
+
+form button {
+    border: 0;
+    background: black;
+    padding: .5rem;
+    cursor: pointer;
+    color: white;
+    margin: 1rem 0;
+    text-transform: uppercase;
+}
+
+form button:hover {
+    background-color: darkgrey;
+    transition: 0.5s;
+    border-radius: 10px;
+    font-weight: bold;
+}

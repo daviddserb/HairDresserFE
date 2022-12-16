@@ -5,9 +5,6 @@ import { RegisterComponent } from './account/register/register.component';
 import { LogInComponent } from './account/log-in/log-in.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AdminComponent } from './users/admin/admin.component';
-import { EmployeeComponent } from './users/employee/employee.component';
-import { CustomerComponent } from './users/customer/customer.component';
 import { CreateAppointmentComponent } from './users-functionalities/appointments/create-appointment/create-appointment.component';
 import { GetAllCustomerAppointmentsComponent } from './users-functionalities/appointments/get-all-customer-appointments/get-all-customer-appointments.component';
 import { CreateHairServiceComponent } from './users-functionalities/hair-services/create-hair-service/create-hair-service.component';
@@ -30,25 +27,22 @@ const routes: Routes = [
     {path: 'log-in', component: LogInComponent},
   ]},
 
-  {path: 'profile', component: ProfileComponent},
-
-  {path: 'admin', component: AdminComponent, children: [
+  {path: 'profile', component: ProfileComponent, children: [
+    // Admin:
     {path: 'hair-service', component: CreateHairServiceComponent},
     {path: 'hair-service/all', component: GetAllHairServicesComponent},
     {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
     {path: 'appointment/all', component: GetAllAppointmentsComponent},
     {path: 'employee/all', component: GetAllEmployeesComponent},
-  ]},
 
-  {path: 'employee', component: EmployeeComponent, children: [
+    // Employee:
     {path: 'hair-service', component: AddHairServiceComponent},
     {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
     {path: 'appointment/all', component: GetAllEmployeeAppointmentsComponent},
     {path: 'working-interval', component: CreateWorkingIntervalComponent},
     {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
-  ]},
 
-  {path: 'customer', component: CustomerComponent, children : [
+    // Customer:
     {path: 'appointment', component: CreateAppointmentComponent},
     {path: 'appointment/all', component: GetAllCustomerAppointmentsComponent},
   ]},
@@ -70,21 +64,20 @@ export const routingComponents = [
   RegisterComponent,
   LogInComponent,
 
-  AdminComponent,
+  ProfileComponent,
+
   CreateHairServiceComponent,
   GetAllHairServicesComponent,
   UpdateHairServiceComponent,
   GetAllAppointmentsComponent,
   GetAllEmployeesComponent,
 
-  EmployeeComponent,
   AddHairServiceComponent,
   GetEmployeeHairServicesComponent,
   GetAllEmployeeAppointmentsComponent,
   CreateWorkingIntervalComponent,
   GetAllEmployeeWorkingIntervalsComponent,
 
-  CustomerComponent,
   CreateAppointmentComponent,
   GetAllCustomerAppointmentsComponent,
 

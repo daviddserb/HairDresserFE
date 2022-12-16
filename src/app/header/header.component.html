@@ -13,33 +13,33 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <!-- User not logged in -->
             <ng-container *ngIf="loggedInUserInfo==null; else checkIfAdmin">
+                <!-- ms-auto = set text to right side -->
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item active">
-                        <a routerLink="/register" routerLinkActive="active">REGISTER</a>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a routerLink="/register">REGISTER</a>
                     </li>
-                    <li class="nav-item active">
-                        <a routerLink="/log-in" routerLinkActive="active">LOG IN</a>
+                    <li class="nav-item" [routerLinkActive]="'active'">
+                        <a routerLink="/log-in">LOG IN</a>
                     </li>
                 </ul>
             </ng-container>
 
             <ng-template #checkIfAdmin>
                 <ng-container *ngIf="loggedInUserInfo.role === 'admin'; else checkIfEmployee">
-                <!-- ms-auto = set text to right side -->
                 <ul class="navbar-nav ms-auto">
-                    <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
-                    <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
-                    <li class="nav-item active">
+                    <li class="nav-item">
+                        <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
+                        <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
                         <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                             routerLink="hair-service">Create hair service</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a routerLinkActive="active" routerLink="appointment/all">Appointments</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a routerLinkActive="active" routerLink="employee/all">Employees</a>
                     </li>
                 </ul>
@@ -49,19 +49,19 @@
             <ng-template #checkIfEmployee>
                 <ng-container *ngIf="loggedInUserInfo.role === 'employee'; else checkIfCustomer">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="hair-service">Add hair service</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="working-interval">Add working interval</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" routerLink="working-interval/all">Working intervals</a>
                         </li>
                     </ul>
@@ -71,10 +71,10 @@
             <ng-template #checkIfCustomer>
                 <ng-container *ngIf="loggedInUserInfo.role === 'customer'; else checkIfNoRole">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
                         </li>
                     </ul>
@@ -84,7 +84,7 @@
             <ng-template #checkIfNoRole>
                 <ng-container *ngIf="loggedInUserInfo.role === ''">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
                         </li>
                     </ul>
