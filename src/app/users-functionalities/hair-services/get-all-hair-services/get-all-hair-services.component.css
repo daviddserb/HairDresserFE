@@ -1,10 +1,23 @@
+.middle {
+    /* The element behaves like a block element and lays out its content according to the flexbox model */
+    display: flex;
+    /* Vertical axes */
+    align-items: center;
+    /* Horizontal axes */
+    justify-content: center;
+
+    /* ??? Ca sa se pozitioneze pe mijloc pe vertical, adica ca sa functioneze align-items: center, trebuie setata o inaltime. Daca o setez, se vede ok. Dar pe responsive, nu se mai vede ok, pt. ca trece peste header si merge sub footer. */
+    /* height: 70vh; */
+}
+
 table {
-    position: absolute;
+    /* Position at the middle of the page (absolute/relative): */
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 80%;
+    transform: translate(-50%, -50%); */
+    
+    /* width: 80%; */
 }
 
 table th {
@@ -29,60 +42,21 @@ table .icon_delete_button {
 }
 
 @media(max-width: 575px) {
-    table {
-        background-color: black;
-
-        border: 0;
-        vertical-align: middle;
-    }
-
-    table caption {
-        font-size: 1em;
-    }
-
-    table .mat-header-cell {
+    table .mat-header-row {
         display: none;
     }
 
-    table .mat-cell {
-        border-bottom: 0px solid #ddd; /* ! 0px in loc de 5px */
-        display: block;
-    }
-
     table .mat-row {
-        /* border-bottom: 1px solid #ddd; */
-
-        /* display: block; */
-        /* font-size: 1em;
-        text-align: right; */
-
-        /* height: 30px; */
-        /* margin-bottom: 4%; */
+        display: grid;
+        height: auto;
     }
 
-    /* .table .mat-cell:before {
+    table .mat-cell {
+        text-align: right;
+    }
+
+    table .mat-cell:before {
         content: attr(data-label);
         float: left;
-        text-transform: uppercase;
-        font-weight: normal;
-        
-        font-size: .85em;
-    } */
-    
-
-    /* table th {
-        color: red;
     }
-
-    table, table td {
-        display: block;
-        width: 100%;
-    }
-
-    table td {
-        text-align: right;
-        padding-left: 50%;
-        text-align: right;
-        position: relative;
-    } */
 }
