@@ -1,16 +1,39 @@
-mat-vertical-stepper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.stepper-wrap {
+    display: flex;
+    justify-content: center;
+}
 
+mat-vertical-stepper {
     width: 80%;
-    padding: 40px;
     
-    background: rgba(0, 0, 0, .5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    background: rgba(0,0,0,.5);
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+table th {
+    font-size: 25px;
+    opacity: 0.5;
+    text-align: center;
+}
+
+table td {
+    font-size: 15px;
+    text-align: center;
+}
+
+table .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+table .mat-row:hover .mat-cell {
+    border-color: currentColor;
 }
 
 mat-vertical-stepper button {
@@ -24,31 +47,6 @@ mat-vertical-stepper button:hover {
     border-radius: 10px;
 }
 
-mat-vertical-stepper table {
-    width: 100%;
-}
-
-mat-vertical-stepper table th {
-    font-size: 25px;
-    opacity: 0.5;
-    text-align: center;
-}
-
-mat-vertical-stepper table td {
-    font-size: 15px;
-    text-align: center;
-}
-
-mat-vertical-stepper .mat-row .mat-cell {
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
-    cursor: pointer;
-}
-
-mat-vertical-stepper .mat-row:hover .mat-cell {
-    border-color: currentColor;
-}
-
 mat-vertical-stepper .results {
     color: white;
     font-size: 20px;
@@ -58,4 +56,24 @@ mat-vertical-stepper .results {
 mat-vertical-stepper .results:hover {
     padding: 5px;
     cursor: pointer;
+}
+
+@media(max-width: 575px) {
+    table .mat-header-row {
+        display: none;
+    }
+
+    table .mat-row {
+        display: grid;
+        height: auto;
+    }
+
+    table .mat-cell {
+        text-align: right;
+    }
+
+    table .mat-cell:before {
+        content: attr(data-label);
+        float: left;
+    }
 }

@@ -1,23 +1,41 @@
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.table-wrap {
+    display: flex;
+    justify-content: center;
 
+    flex-direction: column;
+}
+
+table {
     width: 80%;
 }
 
-.center table {
-    width: 100%;
-}
-
-.center table th {
+table th {
     font-size: 30px;
     opacity: 0.5;
     text-align: center;
 }
 
-.center table td {
+table td {
     font-size: 20px;
     text-align: center;
+}
+
+@media(max-width: 575px) {
+    table .mat-header-row {
+        display: none;
+    }
+
+    table .mat-row {
+        display: grid;
+        height: auto;
+    }
+
+    table .mat-cell {
+        text-align: right;
+    }
+
+    table .mat-cell:before {
+        content: attr(data-label);
+        float: left;
+    }
 }

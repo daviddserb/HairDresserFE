@@ -1,0 +1,15 @@
+.page-wrap {
+    display: flex;
+
+    /* Vertically stack children */
+    flex-direction: column;
+
+    /* Expand to take full height of page */
+    /* min-height overrides both height & max-height */
+    min-height: 100vh; 
+}
+
+main {
+    /* Stretch the element to take as much height as possible */
+    flex-grow: 1;
+}

@@ -19,7 +19,7 @@ export class AddHairServiceComponent implements OnInit {
   
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
+    private popUpMessagesService: PopUpMessagesService
     ) {}
 
   ngOnInit(): void {

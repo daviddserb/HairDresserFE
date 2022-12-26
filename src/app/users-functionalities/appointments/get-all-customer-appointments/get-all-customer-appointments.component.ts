@@ -10,7 +10,6 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
   styleUrls: ['./get-all-customer-appointments.component.css']
 })
 export class GetAllCustomerAppointmentsComponent implements OnInit {
-  // All the customers appointments (that are NOT canceled)
   allCustomerAppointments$!: any;
 
   displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];

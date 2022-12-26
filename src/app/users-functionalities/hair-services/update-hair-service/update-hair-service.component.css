@@ -1,19 +1,19 @@
-.hair-service {
-    font-family: sans-serif;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 500px;
+.form-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+form {
     padding: 40px;
-    transform: translate(-50%, -50%);
     
     background: rgba(0,0,0,.5);
-    box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
 }
 
-.hair-service h1 {
+form h1 {
     text-align: center;
     border-bottom: 1px solid black;
     color: white;
@@ -21,14 +21,14 @@
     font-weight: bold;
 }
 
-.hair-service label {
+form label {
     display: block;
     padding: 1rem 0 .25rem;
     font-size: 20px;
     color: white;
 }
 
-.hair-service input {
+form input {
     display: block;
     width: 40%;
     border: 2px solid white;
@@ -36,12 +36,12 @@
     border-radius: 5px;
 }
 
-.hair-service input:focus {
+form input:focus {
     width: 50%;
     border: 5px solid grey;
 }
 
-.hair-service #submitBtn {
+form #submitBtn {
     border: 0;
     background: black;
     padding: .5rem;
@@ -51,7 +51,7 @@
     text-transform: uppercase;
 }
 
-.hair-service #submitBtn:hover {
+form #submitBtn:hover {
     background-color: darkgrey;
     transition: 0.5s;
     border-radius: 10px;

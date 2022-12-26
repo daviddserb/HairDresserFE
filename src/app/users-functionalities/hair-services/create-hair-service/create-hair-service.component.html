@@ -1,39 +1,34 @@
-<form [formGroup]="formHairService" (ngSubmit)="createHairService()">
-    <h1>Create Hair Service</h1>
-
-    <div>
-        <!-- The connection between 'label for="name"' and 'input id="name"' means that when click on the label text it does activate the input area. -->
-        <label for="name">Name</label>
-        <input type="text" class="form-control" formControlName="name" id="name">
-        
-        <div *ngIf="formGetter.name.touched" style="color:red">
-            <div *ngIf="formGetter.name.errors?.['required']">
-                Name is required!
+<div class="form-wrap">
+    <form [formGroup]="formHairService" (ngSubmit)="createHairService()">
+        <h1>Create Hair Service</h1>
+        <div>
+            <!-- The connection between 'label for="name"' and 'input id="name"' means that when click on the label text it does activate the input area. -->
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name" id="name">
+            <div *ngIf="formGetter.name.touched" style="color:red">
+                <div *ngIf="formGetter.name.errors?.['required']">
+                    Name is required!
+                </div>
             </div>
         </div>
-    </div>
-
-    <div>
-        <label for="duration">Duration in minutes</label>
-        <input type="number" class="form-control" formControlName="durationInMinutes" id="duration">
-    
-        <div *ngIf="formGetter.durationInMinutes.touched" style="color:red">
-            <div *ngIf="formGetter.durationInMinutes.errors?.['required']">
-                Duration is required!
+        <div>
+            <label for="duration">Duration (mins)</label>
+            <input type="number" class="form-control" formControlName="durationInMinutes" id="duration">
+            <div *ngIf="formGetter.durationInMinutes.touched" style="color:red">
+                <div *ngIf="formGetter.durationInMinutes.errors?.['required']">
+                    Duration is required!
+                </div>
             </div>
         </div>
-    </div>
-
-    <div>
-        <label for="price">Price</label>
-        <input type="number" class="form-control" formControlName="price" id="price">
-
-        <div *ngIf="formGetter.price.touched" style="color:red">
-            <div *ngIf="formGetter.price.errors?.['required']">
-                Price is required!
+        <div>
+            <label for="price">Price</label>
+            <input type="number" class="form-control" formControlName="price" id="price">
+            <div *ngIf="formGetter.price.touched" style="color:red">
+                <div *ngIf="formGetter.price.errors?.['required']">
+                    Price is required!
+                </div>
             </div>
         </div>
-    </div>
-
-    <button type="submit" [disabled]="!formHairService.valid" id="submitBtn">Save</button>
-</form>
+        <button type="submit" [disabled]="!formHairService.valid" id="submitBtn">Save</button>
+    </form>
+</div>

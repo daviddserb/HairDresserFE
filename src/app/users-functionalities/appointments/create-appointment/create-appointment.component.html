@@ -1,72 +1,67 @@
-<mat-vertical-stepper>
-  <mat-step>
-    <ng-template matStepLabel>
-      <!-- Can add tags (h1, p, etc...) on the label text. -->
-      Select hair services
-    </ng-template>
+<div class="stepper-wrap">
+  <mat-vertical-stepper>
+    <mat-step>
+      <ng-template matStepLabel>
+        <!-- Can add tags (h1, p, etc...) on the label text. -->
+        Select hair services
+      </ng-template>
 
-    <table mat-table [dataSource]="allHairServices$" class="mat-elevation-z8">
-      <ng-container matColumnDef="checkBox">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element; let i = index">
-          <mat-checkbox mat-list-icon (change)="selection.toggle(element)" [checked]="selection.isSelected(element)"></mat-checkbox>
-        </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="#">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
-      </ng-container>
-    
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="duration">
-        <th mat-header-cell *matHeaderCellDef>Duration</th>
-        <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} $ </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+      <table mat-table [dataSource]="allHairServices$">
+        <ng-container matColumnDef="checkBox">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox mat-list-icon (change)="selection.toggle(element)" [checked]="selection.isSelected(element)"></mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="#">
+          <th mat-header-cell *matHeaderCellDef>#</th>
+          <td mat-cell data-label="#" *matCellDef="let element; let i=index">{{i + 1}}.</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell data-label="Name" *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef>Duration</th>
+          <td mat-cell data-label="Duration" *matCellDef="let element"> {{element.duration}} </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell data-label="Price" *matCellDef="let element"> {{element.price}} $ </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <button *ngIf="selection.selected.length" mat-button matStepperNext (click)="getDataBySelectedHairServices()">Save</button>
+    </mat-step>
 
-    <button *ngIf="selection.selected.length" mat-button matStepperNext (click)="getDataBySelectedHairServices()">Save</button>
-  </mat-step>
+    <mat-step label="Select employee">
+      <ol>
+        <li *ngFor="let employee of employeesByHairServices" class="results">
+          <a (click)="saveEmployeeId(employee.id)">{{employee.username}}</a>
+        </li>
+      </ol>
+      <button mat-button matStepperPrevious>Back</button>
+      <button *ngIf="selectedEmployeeId != null" mat-button matStepperNext>Next</button>
+    </mat-step>
 
-  <mat-step label="Select employee">
-    <ol>
-      <li *ngFor="let employee of employeesByHairServices" class="results">
-        <a (click)="saveEmployeeId(employee.id)">{{employee.username}}</a>
-      </li>
-    </ol>
+    <mat-step label="Select date">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <!-- [min]="currentDate" makes the calendar to mark the days, before currentDate, as unavailable. -->
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="weekendFilter" [min]="currentDate" placeholder="Choose a date" (dateChange)="getSelectedDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br><button mat-button matStepperNext *ngIf="selectedDate != null" (click)="getValidIntervalsForAppointment()">Save</button>
+    </mat-step>
 
-    <button mat-button matStepperPrevious>Back</button>
-    <button *ngIf="selectedEmployeeId != null" mat-button matStepperNext>Next</button>
-  </mat-step>
-
-  <mat-step label="Select date">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <!-- [min]="currentDate" makes the calendar to mark the days, before currentDate, as unavailable. -->
-      <input matInput [matDatepicker]="picker" [matDatepickerFilter]="weekendFilter" [min]="currentDate" placeholder="Choose a date" (dateChange)="getSelectedDate($event)">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <br><button mat-button matStepperNext *ngIf="selectedDate != null" (click)="getValidIntervalsForAppointment()">Save</button>
-  </mat-step>
-
-  <mat-step label="Select interval">
-    <ol>
-      <li *ngFor="let validInterval of validIntervals" class="results">
-          <a (click)="createAppointment(validInterval)">{{validInterval.startDate | date:'dd/MM/yyyy h:mm a'}} - {{validInterval.endDate | date:'dd/MM/yyyy h:mm a'}}</a>
-      </li>
-    </ol>
-  </mat-step>
-</mat-vertical-stepper>
+    <mat-step label="Select interval">
+      <ol>
+        <li *ngFor="let validInterval of validIntervals" class="results">
+            <a (click)="createAppointment(validInterval)">{{validInterval.startDate | date:'dd/MM/yyyy h:mm a'}} - {{validInterval.endDate | date:'dd/MM/yyyy h:mm a'}}</a>
+        </li>
+      </ol>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

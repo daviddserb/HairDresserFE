@@ -1,9 +1,9 @@
-table {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.table-wrap {
+    display: flex;
+    justify-content: center;
+}
 
+table {
     width: 80%;
 }
 
@@ -16,4 +16,24 @@ table th {
 table td {
     font-size: 25px;
     text-align: center;
+}
+
+@media(max-width: 575px) {
+    table .mat-header-row {
+        display: none;
+    }
+
+    table .mat-row {
+        display: grid;
+        height: auto;
+    }
+
+    table .mat-cell {
+        text-align: right;
+    }
+
+    table .mat-cell:before {
+        content: attr(data-label);
+        float: left;
+    }
 }

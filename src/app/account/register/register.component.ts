@@ -11,7 +11,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 })
 export class RegisterComponent implements OnInit {
 
-  customerRegisterForm = new FormGroup({
+  registerForm = new FormGroup({
     // name: new FormControl('', Validators.required),
     username: new FormControl('', [Validators.required, this.noWhitespaceAllowed]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   createAccount() {
     // TODO: Use EventEmitter with form value
-    let userInfo = this.customerRegisterForm.value;
+    let userInfo = this.registerForm.value;
     console.log(userInfo);
 
     this.hairdresserService
@@ -46,9 +46,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get formGetter() { return this.customerRegisterForm.controls; }
+  get formGetter() { return this.registerForm.controls; }
 
-  // ??? Trebuie sa fac un folder special pt. Custom Validators?
   noWhitespaceAllowed(control: FormControl) {
     if(/\s/.test(control.value)) return {noSpaceAllowed: true}
     return null;

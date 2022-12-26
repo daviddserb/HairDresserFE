@@ -1,19 +1,19 @@
-.form {
-    /* Position in the middle */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* The transform property allows you to rotate, scale, move, etc... elements. */
+.form-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
 
-    width: 40%;
-    padding: 40px;
+form {
+    padding: 20px;
     
     background: rgba(0,0,0,.5);
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
 }
 
-.form h4 {
+h1 {
     text-align: center;
     border-bottom: 1px solid black;
     color: white;

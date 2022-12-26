@@ -1,11 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-    margin: 0px;
-    padding: 0px;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 /* POP-UP MESSAGES: */
 .error.mat-snack-bar-container {
     background: red;

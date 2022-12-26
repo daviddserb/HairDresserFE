@@ -1,70 +1,44 @@
-<form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()">
-    <h1>Create Working Interval</h1>
-
-    <div>
-        <label>Day</label>
-        <mat-form-field>
-            <mat-label>Select the day...</mat-label>
-
-            <mat-select formControlName="workingDayId">
-                <mat-optgroup label="Working Days">
-                    <mat-option value="1">Monday</mat-option>
-                    <mat-option value="2">Tuesday</mat-option>
-                    <mat-option value="3">Wednesday</mat-option>
-                    <mat-option value="4">Thursday</mat-option>
-                    <mat-option value="5">Friday</mat-option>
-                </mat-optgroup>
-            </mat-select>
-        </mat-form-field>
-
-        <div *ngIf="formGetter.workingDayId.touched" style="color:red">
-            <div *ngIf="formGetter.workingDayId.errors?.['required']">
-                Day is required!
+<div class="form-wrap">
+    <form [formGroup]="formWorkingInterval" (ngSubmit)="createWorkingInterval()">
+        <h1>Create Working Interval</h1>
+        <div>
+            <label>Day</label>
+            <mat-form-field>
+                <mat-label>Select the day...</mat-label>
+                <mat-select formControlName="workingDayId">
+                    <mat-optgroup label="Working Days">
+                        <mat-option value="1">Monday</mat-option>
+                        <mat-option value="2">Tuesday</mat-option>
+                        <mat-option value="3">Wednesday</mat-option>
+                        <mat-option value="4">Thursday</mat-option>
+                        <mat-option value="5">Friday</mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="formGetter.workingDayId.touched" style="color:red">
+                <div *ngIf="formGetter.workingDayId.errors?.['required']">
+                    Day is required!
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- <div>
-        <label>Employee</label>
-        <mat-form-field>
-            <mat-label >Select the employee...</mat-label>
-            <mat-select formControlName="employeeId">
-                <mat-optgroup label="Employees">
-                    <mat-option *ngFor="let employee of allEmployees$" [value]="employee.id">
-                        {{employee.name}}
-                    </mat-option>
-                </mat-optgroup>
-            </mat-select>
-        </mat-form-field>
-
-        <div *ngIf="formGetter.employeeId.touched" style="color:red">
-            <div *ngIf="formGetter.employeeId.errors?.['required']">
-                Employee is required!
+        <div>
+            <label for="startTime">Start</label>
+            <input type="time" class="form-control" formControlName="startTime" id="startTime">
+            <div *ngIf="formGetter.startTime.touched" style="color:red">
+                <div *ngIf="formGetter.startTime.errors?.['required']">
+                    Start time is required!
+                </div>
             </div>
         </div>
-    </div> -->
-
-    <div>
-        <label for="startTime">Start</label>
-        <input type="time" class="form-control" formControlName="startTime" id="startTime">
-
-        <div *ngIf="formGetter.startTime.touched" style="color:red">
-            <div *ngIf="formGetter.startTime.errors?.['required']">
-                Start time is required!
+        <div>
+            <label for="endTime">End</label>
+            <input type="time" class="form-control" formControlName="endTime" id="endTime">
+            <div *ngIf="formGetter.endTime.touched" style="color:red">
+                <div *ngIf="formGetter.endTime.errors?.['required']">
+                    End time is required!
+                </div>
             </div>
         </div>
-    </div>
-
-    <div>
-        <label for="endTime">End</label>
-        <input type="time" class="form-control" formControlName="endTime" id="endTime">
-
-        <div *ngIf="formGetter.endTime.touched" style="color:red">
-            <div *ngIf="formGetter.endTime.errors?.['required']">
-                End time is required!
-            </div>
-        </div>
-    </div>
-
-    <button type="submit" [disabled]="!formWorkingInterval.valid" id="submitBtn">Save</button>
-</form>
+        <button type="submit" [disabled]="!formWorkingInterval.valid" id="submitBtn">Save</button>
+    </form>
+</div>

@@ -1,28 +1,24 @@
-<div class="middle">
+<div class="table-wrap">
     <table mat-table [dataSource]="allHairServices$">
         <ng-container matColumnDef="#">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell data-label="#" *matCellDef="let element; let i = index">{{i + 1}}.</td>
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell data-label="#" *matCellDef="let element; let i=index">{{i + 1}}.</td>
         </ng-container>
-
         <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell data-label="name" *matCellDef="let element; let i = index">{{element.name}}</td>
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell data-label="Name" *matCellDef="let element">{{element.name}}</td>
         </ng-container>
-
         <ng-container matColumnDef="duration">
-        <th mat-header-cell *matHeaderCellDef>Duration</th>
-        <td mat-cell data-label="duration" *matCellDef="let element; let i = index">{{element.duration}}</td>
+            <th mat-header-cell *matHeaderCellDef>Duration</th>
+            <td mat-cell data-label="Duration" *matCellDef="let element">{{element.duration}}</td>
         </ng-container>
-
         <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell data-label="price" *matCellDef="let element; let i = index ">{{element.price}} $</td>
+            <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
         </ng-container>
-
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
-            <td mat-cell data-label="actions" *matCellDef="let element; let i = index">
+            <td mat-cell data-label="Actions" *matCellDef="let element">
                 <a routerLink="../update/{{element.id}}">
                     <!-- Angular Material Tooltip:
                     matToolTip - provides a text label that is displayed when the user hovers over or longpresses an element.
@@ -39,9 +35,9 @@
             </td>
         </ng-container>
 
-        <!-- PRIMUL RAND AL TABELULUI (TABLE HEADER) -->
+        <!-- TABLE HEADER -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <!-- CONTINUTUL TABELULUI (TABLE DATA CELLS) -->
+        <!-- TABLE DATA CELLS -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>

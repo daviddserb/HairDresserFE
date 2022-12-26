@@ -1,95 +1,90 @@
-<header>
-    <nav class="navbar navbar-expand-sm navbar-dark fs-5">
-        <a class="navbar-brand">
-            <img class="logo" src="../../assets/images/HairSalonLogo.jpg" alt="">
-        </a>
+<nav class="navbar navbar-expand-sm navbar-dark fs-5">
+    <a class="navbar-brand">
+        <img class="logo" src="../../assets/images/HairSalonLogo.jpg" alt="">
+    </a>
 
-        <!-- HAMBURGER BUTTON (FOR RESPONSIVE): -->
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- HAMBURGER BUTTON (FOR RESPONSIVE): -->
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- If user is not logged in: -->
-            <ng-container *ngIf="loggedInUserInfo==null; else isLoggedIn">
-                <!-- ms-auto = set text to right side -->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" routerLinkActive="active">
-                        <a routerLink="/register">REGISTER</a>
-                    </li>
-                    <li class="nav-item" [routerLinkActive]="'active'">
-                        <a routerLink="/log-in">LOG IN</a>
-                    </li>
-                </ul>
-            </ng-container>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- If user is not logged in: -->
+        <ng-container *ngIf="loggedInUserInfo==null; else isLoggedIn">
+            <!-- ms-auto = set text to right side -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" routerLinkActive="active">
+                    <a routerLink="/register">REGISTER</a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="'active'">
+                    <a routerLink="/log-in">LOG IN</a>
+                </li>
+            </ul>
+        </ng-container>
 
-            <!-- If user is logged in: -->
-            <ng-template #isLoggedIn>
-                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'admin'">
-                    <li class="nav-item">
-                        <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
-                        <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                            routerLink="hair-service">Create hair service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="appointment/all">Appointments</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="employee/all">Employees</a>
-                    </li>
-                </ul>
+        <!-- If user is logged in: -->
+        <ng-template #isLoggedIn>
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role==='admin'">
+                <li class="nav-item">
+                    <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
+                    <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        routerLink="admin/hair-service">Create hair service</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="admin/hair-service/all">Hair services</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="admin/appointment/all">Appointments</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="admin/employee/all">Employees</a>
+                </li>
+            </ul>
 
-                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'employee'">
-                    <li class="nav-item">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="hair-service">Add hair service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="working-interval">Add working interval</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="working-interval/all">Working intervals</a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role==='employee'">
+                <li class="nav-item">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="employee/hair-service">Add hair service</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="employee/hair-service/all">Hair services</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="employee/appointment/all">Appointments history</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="employee/working-interval">Add working interval</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="employee/working-interval/all">Working intervals</a>
+                </li>
+            </ul>
 
-                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'customer'">
-                    <li class="nav-item">
-                        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="appointment">Create appointment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="appointment/all">Appointments history</a>
-                    </li>
-                    <li class="nav-item">
-                        <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'customer'">
+                <li class="nav-item">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="customer/appointment">Create appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="customer/appointment/all">Appointments history</a>
+                </li>
+            </ul>
 
-                <!-- Logged in user but with no role: -->
-                <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === ''">
-                    <li class="nav-item">
-                        <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
-                    </li>
-                </ul>
+            <!-- Logged in user but with no role: -->
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === ''">
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
+                </li>
+            </ul>
 
-                <!-- For every logged in user: -->
-                <!-- !!! Pana acum, textul princial, adica actiunile de la useri (create hair services, working intervals, etc...) erau puse la dreapta de tot in navbar, pt. ca au clasa ms-auto.
-                Acum, chiar daca au tot aceeasi clasa, dupa ce am pus si butonul de log out tot pe ms-auto, actiunile de la useri s-au indreptat cumva spre mijloc. -->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
-            </ng-template>
-        </div>
-    </nav>
-</header>
+            <!-- For every logged in user: -->
+            <!-- !!! Pana acum, textul princial, adica actiunile de la useri (create hair services, working intervals, etc...) erau puse la dreapta de tot in navbar, pt. ca au clasa ms-auto.
+            Acum, chiar daca au tot aceeasi clasa, dupa ce am pus si butonul de log out tot pe ms-auto, actiunile de la useri s-au indreptat cumva spre mijloc. -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true" title="Log out"></i></a>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+</nav>

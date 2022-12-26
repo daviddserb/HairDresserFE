@@ -1,40 +1,35 @@
-<table mat-table [dataSource]="allEmployeeAppointments$" class="mat-elevation-z8">
-    <ng-container matColumnDef="#">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}.</td>
-    </ng-container>
+<div class="table-wrap">
+    <table mat-table [dataSource]="allEmployeeAppointments$" class="mat-elevation-z8">
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell data-label="#" *matCellDef="let element let i=index">{{i + 1}}.</td>
+        </ng-container>
+        <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Customer</th>
+            <td mat-cell data-label="Customer" *matCellDef="let element">{{element.customerName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef>Start</th>
+            <td mat-cell data-label="Start" *matCellDef="let element">{{element.startDate | date:'dd/MM/yyyy h:mm a'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef>End</th>
+            <td mat-cell data-label="End" *matCellDef="let element">{{element.endDate | date:'dd/MM/yyyy h:mm a'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="hairServices">
+            <th mat-header-cell *matHeaderCellDef>Services</th>
+            <td mat-cell data-label="Services" *matCellDef="let element">
+                <div *ngFor="let services of element.appointmentHairServices">
+                    {{services.hairService.name}}
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
+        </ng-container>
 
-    <ng-container matColumnDef="customerName">
-        <th mat-header-cell *matHeaderCellDef>Customer</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{element.customerName}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="startDate">
-        <th mat-header-cell *matHeaderCellDef>Start</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{element.startDate | date:'dd/MM/yyyy h:mm a'}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef>End</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{element.endDate | date:'dd/MM/yyyy h:mm a'}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="hairServices">
-        <th mat-header-cell *matHeaderCellDef>Services</th>
-        <td mat-cell *matCellDef="let element; let i = index ">
-            <div *ngFor="let services of element.appointmentHairServices">
-                {{services.hairService.name}}
-            </div>
-        </td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{element.price}} $</td>
-    </ng-container>
-
-    <!-- Prints the table columns. -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- Prints the table rows. -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

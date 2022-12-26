@@ -1,23 +1,16 @@
-.middle {
+.table-wrap {
     /* The element behaves like a block element and lays out its content according to the flexbox model */
     display: flex;
-    /* Vertical axes */
-    align-items: center;
     /* Horizontal axes */
     justify-content: center;
-
-    /* ??? Ca sa se pozitioneze pe mijloc pe vertical, adica ca sa functioneze align-items: center, trebuie setata o inaltime. Daca o setez, se vede ok. Dar pe responsive, nu se mai vede ok, pt. ca trece peste header si merge sub footer. */
+    /* Vertical axes (works only if the height is set) */
+    /* align-items: center; */
+    /* If I set the heigth, to make the table positioned in the middle of vertical axes, then when responsive, the table height grows a lot and it will be a little of it over the header and under the footer => so I  */
     /* height: 70vh; */
 }
 
 table {
-    /* Position at the middle of the page (absolute/relative): */
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    
-    /* width: 80%; */
+    width: 80%;
 }
 
 table th {

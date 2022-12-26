@@ -1,9 +1,9 @@
-table {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.table-wrap {
+    display: flex;
+    justify-content: center;
+}
 
+table {
     width: 80%;
 }
 
@@ -21,4 +21,24 @@ table td {
 .icon_delete_button {
     font-size: 25px;
     color: red;
+}
+
+@media(max-width: 575px) {
+    table .mat-header-row {
+        display: none;
+    }
+
+    table .mat-row {
+        display: grid;
+        height: auto;
+    }
+
+    table .mat-cell {
+        text-align: right;
+    }
+
+    table .mat-cell:before {
+        content: attr(data-label);
+        float: left;
+    }
 }

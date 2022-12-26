@@ -6,16 +6,10 @@ footer {
 
     background-color: black;
     color: white;
-
-    /* Position it on the bottom of the page*/
-    position: fixed;
-    bottom: 0;
-
-    width: 100%;
 }
 
 .container {
-    display: flex; /* Set the elements (contact and follow) on columns. */
+    display: flex; /* Set the elements (contact and follow) on different columns. */
     padding: 5px;
 }
 
@@ -26,9 +20,6 @@ footer {
 }
 
 .contact {
-    /* background-color: red; */
-    /* border-right: 1px solid white; */
-    
     flex-grow: 1; /* Equally divided to take full width. */
     flex-basis: 100%; /* Remain equally divided based on the content. */
 }
@@ -40,7 +31,6 @@ footer {
 }
 
 .follow {
-    /* background-color: orange; */
     flex-grow: 1;
     flex-basis: 100%;
 }
@@ -71,10 +61,6 @@ footer {
 }
 
 @media(max-width: 575px) {
-    footer {
-        position: relative;
-    }
-
     .container {
         flex-direction: column;
     }

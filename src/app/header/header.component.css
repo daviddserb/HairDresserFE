@@ -1,24 +1,21 @@
-header {
+nav {
     background-color: black;
-
-    /* position: fixed;
-    width: 100%; */
 }
 
-.logo {
+nav .logo {
     width: 80px;
     height: 80px;
 }
 
-.navbar-nav li a {
+nav .navbar-nav li a {
     color: white;
     margin: 10px;
 }
 
-.navbar-nav li a:hover {
+nav .navbar-nav li a:hover {
     opacity: 0.5;
 }
 
-.active {
+nav .active {
     opacity: 0.5;
 }
