@@ -1,11 +1,12 @@
 .table-wrap {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 
+    align-items: center;
     flex-direction: column;
 }
 
-table {
+table, mat-paginator {
     width: 80%;
 }
 

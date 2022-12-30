@@ -1,7 +1,10 @@
 .table-wrap {
     display: flex;
-    justify-content: center;
-    /* flex-direction: column; */
+    /* justify-content: center; */
+
+    /* align-items is for Cross Axis (vertical) but because we use flex-direction: column, the align-items will be for Main Axis (horizontal) */
+    align-items: center;
+    flex-direction: column;
 }
 
 table {
@@ -32,18 +35,17 @@ table .mat-row:hover .mat-cell {
 #submitBtn {
     display: block;
     margin: 10px auto;
-
-    background: black;
     padding: .5rem;
-    cursor: pointer;
     color: white;
+    background: black;
+    cursor: pointer;
 }
 
 #submitBtn:hover {
-    background-color: darkgrey;
     transition: 0.5s;
-    border-radius: 10px;
+    background-color: darkgrey;
     font-weight: bold;
+    border-radius: 10px;
 }
 
 @media(max-width: 575px) {

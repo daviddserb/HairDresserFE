@@ -1,5 +1,5 @@
 <!-- mat-elevation-z8 -->
-<div class="mat-elevation-z8 table-wrap">
+<div class="table-wrap">
     <table mat-table matSort [dataSource]="allAppointments$">
         <ng-container matColumnDef="#">
             <th mat-header-cell *matHeaderCellDef>#</th>
@@ -58,5 +58,5 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="select page"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page"></mat-paginator>
 </div>

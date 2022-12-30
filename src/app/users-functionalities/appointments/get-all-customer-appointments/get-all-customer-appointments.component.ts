@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';

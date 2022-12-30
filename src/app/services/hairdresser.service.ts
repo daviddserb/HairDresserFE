@@ -4,6 +4,7 @@ import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
 import { BehaviorSubject, Observable, tap } from "rxjs";
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,9 @@ export class HairDresserService {
 
     loggedInUser_Token = localStorage.getItem('token');
 
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient,
+        private router: Router) {
         // Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');
         // If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
@@ -254,7 +257,6 @@ export class HairDresserService {
         localStorage.removeItem('id');
         localStorage.removeItem('username');
 
-        // Refresh page (so the user can see the changes automatically, without having to self refresh it).
-        window.location.reload();
+        this.router.navigate(['']);
     }
 }
