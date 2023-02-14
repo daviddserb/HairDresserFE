@@ -1,6 +1,8 @@
 export interface HairService {
     id: number;
+
     name: string;
-    duration: Date; //It doesn't exist with only Time (like in C# with TimeSpan), so I will save it as a Date and when I need the duration, I extract the Time.
+    //Time only does NOT exist (like TimeSpan in C#) => save it as Date and when need the duration => extract the Time.
+    duration: Date;
     price: number;
 }

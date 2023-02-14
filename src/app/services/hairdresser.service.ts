@@ -12,22 +12,27 @@ import { Router } from '@angular/router';
 export class HairDresserService {
     apiUrl = "https://localhost:7192/api";
 
-    // Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
+    //Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-    isLoggedIn$ = this._isLoggedIn$.asObservable(); // Public Observable so we can change it.
+
+    //Public Observable so we can change it.
+    isLoggedIn$ = this._isLoggedIn$.asObservable();
 
     loggedInUser_Token = localStorage.getItem('token');
 
     constructor(
         private httpClient: HttpClient,
-        private router: Router) {
-        // Get the value of the token, from the local storage, from the logged in user.
+        private router: Router
+        )
+    {
+        //Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');
-        // If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
+
+        //If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
         this._isLoggedIn$.next(!!token);
     }
 
-    // APPOINTMENTS:
+    //APPOINTMENTS:
     postAppointment(appointment: Appointment): Observable<Appointment> {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
@@ -44,7 +49,7 @@ export class HairDresserService {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
-    // ??? asta (cred)ca inca nu o folosesc
+    //??? Not using it right now, maybe in future.
     getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
     }
@@ -57,7 +62,7 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/appointment/${appointmentId}`);
     }
 
-    // HAIR SERVICES:
+    //HAIR SERVICES:
     postHairService(hairService: object): Observable<{}> {
         return this.httpClient.post(`${this.apiUrl}/hairservice`, hairService);
     }
@@ -132,7 +137,7 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
 
-    // WORKING INTERVALS:
+    //WORKING INTERVALS:
     getAllWorkingIntervals(): Observable<any> {
         return this.httpClient.get<any>(`${this.apiUrl}/working-interval/all`);
     }
@@ -150,17 +155,17 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
-    // USERS (ADMIN, CUSTOMER, EMPLOYEE):
+    //USERS (ADMIN, CUSTOMER, EMPLOYEE):
     getUserById(userId: any): Observable<User> {
         return this.httpClient.get<User>(`${this.apiUrl}/user/id?id=${userId}`);
     }
     
-    // CUSTOMER:
+    //CUSTOMER:
     getAllCustomers(): Observable<Customer> {
         return this.httpClient.get<Customer>(`${this.apiUrl}/user/customer/all`);
     }
 
-    // EMPLOYEE:
+    //EMPLOYEE:
     getAllEmployees(): Observable<any> {
         return this.httpClient.get<any>(`${this.apiUrl}/user/employee/all`);
     }
@@ -205,7 +210,7 @@ export class HairDresserService {
 
         let appointmentDurationSplitted = appointmentDuration.split(':');
         console.log("appointment duration splitted= ", appointmentDurationSplitted);
-        // Convert from TimeSpan value to Int value in minutes (don't add the seconds because there will not be seconds in the appointments).
+        //Convert from TimeSpan value to Int value in minutes (don't add the seconds because there will not be seconds in the appointments).
         let appointmentDurationInMinutes = (+appointmentDurationSplitted[0]) * 60 + (+appointmentDurationSplitted[1]);
         console.log("appointment duration in minutes= ", appointmentDurationInMinutes);
 
@@ -219,7 +224,7 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/user/employee/hair-service/${employeeHairServiceId}`);
     }
 
-    // USER AUTHENTICATION (REGISTER, LOG IN/OUT):
+    //USER AUTHENTICATION (REGISTER, LOG IN/OUT):
     registerUser(userInfo: any): Observable<{}> {
         let user: User = {
             username: userInfo.username,
@@ -239,17 +244,26 @@ export class HairDresserService {
         return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
         .pipe(
             tap((response: any) => {
-                // Save information in Local Storage (key - value). To see it: Inspect page -> Application -> Local Storage.
+                //Save information in Local Storage (key - value). To see it: Inspect page -> Application -> Local Storage.
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('id', response.id);
                 localStorage.setItem('username', response.username);
 
-                // Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
+                //Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
                 this._isLoggedIn$.next(true);
 
                 console.log("token= ", response.token);
             })
         );
+    }
+
+    assignRole(user_username: string, user_role: string): Observable<{}> {
+        console.log("FE Service assignRole: Observable ->");
+        let user: User = {
+            username: user_username,
+            role: user_role
+        };
+        return this.httpClient.post<User>(`${this.apiUrl}/user/assign-role`, user);
     }
 
     logOutUser() {

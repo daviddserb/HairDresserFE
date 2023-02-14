@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HairDresserService } from '../services/hairdresser.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,25 +12,37 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private hairdresserService: HairDresserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    console.log("-> header()");
-
     let loggedInUserId = localStorage.getItem('id');
-    console.log("logged in user id= ", loggedInUserId);
-    console.log("logged in user info= ", this.loggedInUserInfo);
+    console.log("loggedInUserId= ", loggedInUserId);
 
     if (loggedInUserId != null) {
       this.hairdresserService.getUserById(loggedInUserId)
       .subscribe({
         next: (response) => {
-          console.log("response (logged in user info)= ", response);
+          console.log("loggedInUserInfo= ", response);
           this.loggedInUserInfo = response;
         },
         error: (e) => console.log("Wrong id!")
       });
     }
+  }
+
+  assignCustomerRole() {
+    console.log("assignCustomerRole ->");
+    console.log("user name=" + this.loggedInUserInfo.username)
+
+    this.hairdresserService.assignRole(this.loggedInUserInfo.username, "customer")
+    .subscribe({
+      next: (response) => {
+        console.log("response= ", response);
+        window.location.reload();
+      },
+      error: (e) => console.log("error= " + e)
+    });
   }
 
   logOutUser() {

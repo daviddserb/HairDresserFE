@@ -10,7 +10,9 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 export class GetAllHairServicesComponent implements OnInit {
   allHairServices$: any;
 
-  displayedColumns: string[] = ['#', 'name', 'duration', 'price', 'actions'];
+  displayedColumns: string[] = ['#', 'name', 'duration', 'price'];
+
+  loggedInUserInfo!: any;
 
   constructor(
     private hairdresserService: HairDresserService,
@@ -18,6 +20,23 @@ export class GetAllHairServicesComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    let loggedInUserId = localStorage.getItem('id');
+
+    if (loggedInUserId != null) {
+      this.hairdresserService.getUserById(loggedInUserId)
+      .subscribe({
+        next: (response) => {
+          console.log("loggedInUserInfo= ", response);
+          this.loggedInUserInfo = response;
+
+          if (this.loggedInUserInfo.role === "admin") {
+            this.displayedColumns.push('actions');
+          }
+        },
+        error: (e) => console.log("Wrong id!")
+      });
+    }
+
     this.allHairServices$ = this.hairdresserService.getAllHairServices();
   }
 

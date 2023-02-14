@@ -73,7 +73,10 @@
             <!-- Logged in user but with no role: -->
             <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === ''">
                 <li class="nav-item">
-                    <a routerLinkActive="active" routerLink="hair-service/all">Hair services</a>
+                    <a routerLinkActive="active" routerLink="hair-service">Hair services</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLinkActive="active" routerLink="customer" (click)="assignCustomerRole()">Start as customer</a>
                 </li>
             </ul>
 

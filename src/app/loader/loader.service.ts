@@ -6,9 +6,9 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
   providedIn: 'root'
 })
 export class LoaderService {
-  // Subject is an RxJS Observable which can have multiple subscribers.
-  // BehaviorSubject is a Subject which stores the current value.
-  // The material spinner will be displayed based its value. If it is true, loading spinner will be shown.
+  //Subject is an RxJS Observable which can have multiple subscribers.
+  //BehaviorSubject is a Subject which stores the current value.
+  //The material spinner will be displayed based its value. If it is true, loading spinner will be shown.
   //public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   public appLoader = new Subject<boolean>();
@@ -16,12 +16,10 @@ export class LoaderService {
   constructor() {}
 
   showLoader() {
-    console.log("showLoader()");
     this.appLoader.next(true);
   }
 
   hideLoader() {
-    console.log("hideLoader()");
     this.appLoader.next(false);
   }
 }

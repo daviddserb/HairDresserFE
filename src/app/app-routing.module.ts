@@ -28,20 +28,42 @@ const routes: Routes = [
   ]},
 
   {path: 'profile', component: ProfileComponent, children: [
-    {path: 'admin/hair-service', component: CreateHairServiceComponent},
-    {path: 'admin/hair-service/all', component: GetAllHairServicesComponent},
-    {path: 'admin/hair-service/update/:id', component: UpdateHairServiceComponent},
-    {path: 'admin/appointment/all', component: GetAllAppointmentsComponent},
-    {path: 'admin/employee/all', component: GetAllEmployeesComponent},
+    // Before (in case it will be an error)
+    // {path: 'admin/hair-service', component: CreateHairServiceComponent},
+    // {path: 'admin/hair-service/all', component: GetAllHairServicesComponent},
+    // {path: 'admin/hair-service/update/:id', component: UpdateHairServiceComponent},
+    // {path: 'admin/appointment/all', component: GetAllAppointmentsComponent},
+    // {path: 'admin/employee/all', component: GetAllEmployeesComponent},
+    // After:
+    {path: 'admin', children: [
+      {path: 'hair-service', component: CreateHairServiceComponent},
+      {path: 'hair-service/all', component: GetAllHairServicesComponent},
+      {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
+      {path: 'appointment/all', component: GetAllAppointmentsComponent},
+      {path: 'employee/all', component: GetAllEmployeesComponent},
+    ]},
 
-    {path: 'employee/hair-service', component: AddHairServiceComponent},
-    {path: 'employee/hair-service/all', component: GetEmployeeHairServicesComponent},
-    {path: 'employee/appointment/all', component: GetAllEmployeeAppointmentsComponent},
-    {path: 'employee/working-interval', component: CreateWorkingIntervalComponent},
-    {path: 'employee/working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
+    // {path: 'employee/hair-service', component: AddHairServiceComponent},
+    // {path: 'employee/hair-service/all', component: GetEmployeeHairServicesComponent},
+    // {path: 'employee/appointment/all', component: GetAllEmployeeAppointmentsComponent},
+    // {path: 'employee/working-interval', component: CreateWorkingIntervalComponent},
+    // {path: 'employee/working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
+    {path: 'employee', children: [
+      {path: 'hair-service', component: AddHairServiceComponent},
+      {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
+      {path: 'appointment/all', component: GetAllEmployeeAppointmentsComponent},
+      {path: 'working-interval', component: CreateWorkingIntervalComponent},
+      {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
+    ]},
 
-    {path: 'customer/appointment', component: CreateAppointmentComponent},
-    {path: 'customer/appointment/all', component: GetAllCustomerAppointmentsComponent},
+    // {path: 'customer/appointment', component: CreateAppointmentComponent},
+    // {path: 'customer/appointment/all', component: GetAllCustomerAppointmentsComponent},
+    {path: 'customer', children: [
+      {path: 'appointment', component: CreateAppointmentComponent},
+      {path: 'appointment/all', component: GetAllCustomerAppointmentsComponent},
+    ]},
+
+    {path: 'hair-service', component: GetAllHairServicesComponent}
   ]},
   
   {path: '**', component: PageNotFoundComponent}
