@@ -1,1 +1,1 @@
-# HairDresserFrontEnd
+# HairDresser (front-end)
