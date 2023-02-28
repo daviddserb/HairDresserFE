@@ -23,13 +23,13 @@ export class GetAllHairServicesComponent implements OnInit {
     let loggedInUserId = localStorage.getItem('id');
 
     if (loggedInUserId != null) {
-      this.hairdresserService.getUserById(loggedInUserId)
+      this.hairdresserService.getUserWithRoleById(loggedInUserId)
       .subscribe({
         next: (response) => {
           console.log("loggedInUserInfo= ", response);
           this.loggedInUserInfo = response;
 
-          if (this.loggedInUserInfo.role === "admin") {
+          if (this.loggedInUserInfo.role.includes('admin')) {
             this.displayedColumns.push('actions');
           }
         },

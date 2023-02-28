@@ -19,3 +19,8 @@ nav .navbar-nav li a:hover {
 nav .active {
     opacity: 0.5;
 }
+
+/* Profile Icon */
+.fa-user {
+    color: white;
+}

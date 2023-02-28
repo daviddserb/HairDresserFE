@@ -22,7 +22,6 @@ export class LogInComponent implements OnInit {
 
   loginUser(item: any) {
     console.log("user input= ", item.value)
-
     this.hairdresserService.logInUser(item.value.username, item.value.password)
     .subscribe({
       next: (response) => {
@@ -42,14 +41,12 @@ export class LogInComponent implements OnInit {
 
   decodeToken(token: string): MyToken {
     console.log("token= ", token);
-
     const decodedToken = jwt_decode<MyToken>(token);
     console.log("decoded token= ", decodedToken);
     console.log("info from decoded token:");
     console.log("username= (" + decodedToken.username + ")");
     console.log("password= (" + decodedToken.password + ")");
     console.log("role= (" + decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] + ")");
-
     return jwt_decode(token); // return the decoded token
   }
 }

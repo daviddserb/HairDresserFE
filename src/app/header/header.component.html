@@ -25,7 +25,7 @@
 
         <!-- If user is logged in: -->
         <ng-template #isLoggedIn>
-            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role==='admin'">
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role.includes('admin')">
                 <li class="nav-item">
                     <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
                     <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
@@ -43,7 +43,7 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role==='employee'">
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role.includes('employee')">
                 <li class="nav-item">
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="employee/hair-service">Add hair service</a>
                 </li>
@@ -61,7 +61,7 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === 'customer'">
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role.includes('customer')">
                 <li class="nav-item">
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="customer/appointment">Create appointment</a>
                 </li>
@@ -71,7 +71,7 @@
             </ul>
 
             <!-- Logged in user but with no role: -->
-            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role === ''">
+            <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role===''">
                 <li class="nav-item">
                     <a routerLinkActive="active" routerLink="hair-service">Hair services</a>
                 </li>
@@ -85,7 +85,10 @@
             Acum, chiar daca au tot aceeasi clasa, dupa ce am pus si butonul de log out tot pe ms-auto, actiunile de la useri s-au indreptat cumva spre mijloc. -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true" title="Log out"></i></a>
+                    <i class="fa fa-user" aria-hidden="true" [title]="loggedInUserInfo.username" [matMenuTriggerFor]="menu"></i>
+                    <mat-menu #menu="matMenu">
+                        <button><a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true" title="Log out"></i>Log out</a></button>
+                    </mat-menu>
                 </li>
             </ul>
         </ng-template>

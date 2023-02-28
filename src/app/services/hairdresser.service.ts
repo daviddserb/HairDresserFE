@@ -157,7 +157,11 @@ export class HairDresserService {
 
     //USERS (ADMIN, CUSTOMER, EMPLOYEE):
     getUserById(userId: any): Observable<User> {
-        return this.httpClient.get<User>(`${this.apiUrl}/user/id?id=${userId}`);
+        return this.httpClient.get<User>(`${this.apiUrl}/user/id?userId=${userId}`);
+    }
+
+    getUserWithRoleById(userId: any): Observable<User> {
+        return this.httpClient.get<User>(`${this.apiUrl}/user/with-role/id?userId=${userId}`);
     }
     
     //CUSTOMER:
