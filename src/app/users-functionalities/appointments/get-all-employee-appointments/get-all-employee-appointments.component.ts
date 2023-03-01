@@ -13,7 +13,8 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService) { }
+    private popUpMessagesService: PopUpMessagesService,
+    ) {}
 
   ngOnInit(): void {
     this.getAllEmployeeAppointments();
@@ -24,11 +25,11 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
     this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
     .subscribe({
       next: (res) =>  {
-        console.log("next, res= ", res);
+        console.log("res= ", res);
         this.allEmployeeAppointments$ = res;
       },
       error: (e) => {
-        console.log("error, e= ", e);
+        console.log("e= ", e);
         
         if (typeof e.error == "object") {
           this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");

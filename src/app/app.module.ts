@@ -36,6 +36,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-in-work-employee-appointments/get-in-work-employee-appointments.component';
+
+import { DatePipe } from '@angular/common';
+
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -66,6 +70,7 @@ const MaterialComponents = [
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
+    GetInWorkEmployeeAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +84,7 @@ const MaterialComponents = [
   providers: [
     HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

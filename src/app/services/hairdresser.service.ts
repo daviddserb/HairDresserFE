@@ -49,13 +49,16 @@ export class HairDresserService {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
-    //??? Not using it right now, maybe in future.
     getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
     }
 
     getAllAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
+    }
+
+    getInWorkAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
+        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/employee/${employeeId}`);
     }
 
     deleteAppointmentById(appointmentId: number): Observable<{}> {

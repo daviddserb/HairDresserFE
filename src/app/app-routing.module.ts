@@ -18,9 +18,10 @@ import { GetAllEmployeeAppointmentsComponent } from './users-functionalities/app
 import { GetAllEmployeeWorkingIntervalsComponent } from './users-functionalities/working-intervals/get-all-employee-working-intervals/get-all-employee-working-intervals.component';
 import { CreateWorkingIntervalComponent } from './users-functionalities/working-intervals/create-working-interval/create-working-interval.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-in-work-employee-appointments/get-in-work-employee-appointments.component';
 
 const routes: Routes = [
-  // ! When add path here => go and add it in routingComponents too.
+  // When add path here => go and add it in routingComponents too.
   
   {path: '', component: HomeComponent, children: [
     {path: 'register', component: RegisterComponent},
@@ -28,13 +29,6 @@ const routes: Routes = [
   ]},
 
   {path: 'profile', component: ProfileComponent, children: [
-    // Before (in case it will be an error)
-    // {path: 'admin/hair-service', component: CreateHairServiceComponent},
-    // {path: 'admin/hair-service/all', component: GetAllHairServicesComponent},
-    // {path: 'admin/hair-service/update/:id', component: UpdateHairServiceComponent},
-    // {path: 'admin/appointment/all', component: GetAllAppointmentsComponent},
-    // {path: 'admin/employee/all', component: GetAllEmployeesComponent},
-    // After:
     {path: 'admin', children: [
       {path: 'hair-service', component: CreateHairServiceComponent},
       {path: 'hair-service/all', component: GetAllHairServicesComponent},
@@ -43,21 +37,17 @@ const routes: Routes = [
       {path: 'employee/all', component: GetAllEmployeesComponent},
     ]},
 
-    // {path: 'employee/hair-service', component: AddHairServiceComponent},
-    // {path: 'employee/hair-service/all', component: GetEmployeeHairServicesComponent},
-    // {path: 'employee/appointment/all', component: GetAllEmployeeAppointmentsComponent},
-    // {path: 'employee/working-interval', component: CreateWorkingIntervalComponent},
-    // {path: 'employee/working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
     {path: 'employee', children: [
       {path: 'hair-service', component: AddHairServiceComponent},
       {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
-      {path: 'appointment/all', component: GetAllEmployeeAppointmentsComponent},
+      {path: 'appointment', children: [
+        {path: 'all', component: GetAllEmployeeAppointmentsComponent},
+        {path: 'in-work', component: GetInWorkEmployeeAppointmentsComponent},
+      ]},
       {path: 'working-interval', component: CreateWorkingIntervalComponent},
       {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
     ]},
 
-    // {path: 'customer/appointment', component: CreateAppointmentComponent},
-    // {path: 'customer/appointment/all', component: GetAllCustomerAppointmentsComponent},
     {path: 'customer', children: [
       {path: 'appointment', component: CreateAppointmentComponent},
       {path: 'appointment/all', component: GetAllCustomerAppointmentsComponent},
@@ -96,6 +86,7 @@ export const routingComponents = [
   GetAllEmployeeAppointmentsComponent,
   CreateWorkingIntervalComponent,
   GetAllEmployeeWorkingIntervalsComponent,
+  GetInWorkEmployeeAppointmentsComponent,
 
   CreateAppointmentComponent,
   GetAllCustomerAppointmentsComponent,

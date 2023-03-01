@@ -51,7 +51,12 @@
                     <a routerLinkActive="active" routerLink="employee/hair-service/all">Hair services</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLinkActive="active" routerLink="employee/appointment/all">Appointments history</a>
+                    <a routerLinkActive="active" [matMenuTriggerFor]="appointmentsDropDown">Appointments</a>
+                    <mat-menu #appointmentsDropDown="matMenu">
+                        <!-- !!! SA FAC SA ARATE MAI FRUMOS RUTELE -->
+                        <div><a routerLinkActive="active" routerLink="employee/appointment/all">History</a></div>
+                        <div><a routerLinkActive="active" routerLink="employee/appointment/in-work">In Work</a></div>
+                    </mat-menu>
                 </li>
                 <li class="nav-item">
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="employee/working-interval">Add working interval</a>
