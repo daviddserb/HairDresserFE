@@ -39,6 +39,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-in-work-employee-appointments/get-in-work-employee-appointments.component';
 
 import { DatePipe } from '@angular/common';
+import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
 
 
 const MaterialComponents = [
@@ -71,6 +72,7 @@ const MaterialComponents = [
     FooterComponent,
     ProfileComponent,
     GetInWorkEmployeeAppointmentsComponent,
+    GetInWorkCustomerAppointmentsComponent,
   ],
   imports: [
     BrowserModule,

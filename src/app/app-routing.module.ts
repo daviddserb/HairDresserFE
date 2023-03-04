@@ -19,6 +19,7 @@ import { GetAllEmployeeWorkingIntervalsComponent } from './users-functionalities
 import { CreateWorkingIntervalComponent } from './users-functionalities/working-intervals/create-working-interval/create-working-interval.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-in-work-employee-appointments/get-in-work-employee-appointments.component';
+import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
 
 const routes: Routes = [
   // When add path here => go and add it in routingComponents too.
@@ -50,7 +51,10 @@ const routes: Routes = [
 
     {path: 'customer', children: [
       {path: 'appointment', component: CreateAppointmentComponent},
-      {path: 'appointment/all', component: GetAllCustomerAppointmentsComponent},
+      {path: 'appointment', children: [
+        {path: 'all', component: GetAllCustomerAppointmentsComponent},
+        {path: 'in-work', component: GetInWorkCustomerAppointmentsComponent},
+      ]},
     ]},
 
     {path: 'hair-service', component: GetAllHairServicesComponent}

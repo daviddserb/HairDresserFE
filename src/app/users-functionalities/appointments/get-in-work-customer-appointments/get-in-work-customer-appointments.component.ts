@@ -4,34 +4,34 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-get-in-work-employee-appointments',
-  templateUrl: './get-in-work-employee-appointments.component.html',
-  styleUrls: ['./get-in-work-employee-appointments.component.css']
+  selector: 'app-get-in-work-customer-appointments',
+  templateUrl: './get-in-work-customer-appointments.component.html',
+  styleUrls: ['./get-in-work-customer-appointments.component.css']
 })
-export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
-  employeeAppointmentsInWork$: any;
-  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+export class GetInWorkCustomerAppointmentsComponent implements OnInit {
+  customerAppointmentsInWork$: any;
+  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price'];
   currentDate: any; // ??? string
-
+  
   constructor
   (
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService,
     private datePipe: DatePipe
   )
-  {
+  { 
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
     console.log("today= ", this.currentDate);
   }
 
   ngOnInit(): void {
-    let employeeId = String(localStorage.getItem('id'));
+    let customerId = String(localStorage.getItem('id'));
 
-    this.hairdresserService.getInWorkAppointmentsByEmployeeId(employeeId)
+    this.hairdresserService.getInWorkAppointmentsByCustomerId(customerId)
     .subscribe({
       next: (res) =>  {
         console.log("res= ", res);
-        this.employeeAppointmentsInWork$ = res;
+        this.customerAppointmentsInWork$ = res;
       },
       error: (e) => {
         console.log("e= ", e);

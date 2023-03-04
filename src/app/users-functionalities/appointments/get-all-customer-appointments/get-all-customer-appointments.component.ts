@@ -11,13 +11,11 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
 })
 export class GetAllCustomerAppointmentsComponent implements OnInit {
   allCustomerAppointments$!: any;
-
   displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'actions'];
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-    ) {}
+    private popUpMessagesService: PopUpMessagesService,) {}
 
   ngOnInit(): void {
     this.getAllCustomerAppointments();
