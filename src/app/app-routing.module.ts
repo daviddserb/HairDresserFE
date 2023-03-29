@@ -20,6 +20,8 @@ import { CreateWorkingIntervalComponent } from './users-functionalities/working-
 import { ProfileComponent } from './profile/profile.component';
 import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-in-work-employee-appointments/get-in-work-employee-appointments.component';
 import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
+import { GetFinishedEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-finished-employee-appointments/get-finished-employee-appointments.component';
+import { GetFinishedCustomerAppointmentsComponent } from './users-functionalities/appointments/get-finished-customer-appointments/get-finished-customer-appointments.component';
 
 const routes: Routes = [
   // When add path here => go and add it in routingComponents too.
@@ -43,6 +45,7 @@ const routes: Routes = [
       {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
       {path: 'appointment', children: [
         {path: 'all', component: GetAllEmployeeAppointmentsComponent},
+        {path: 'finished', component: GetFinishedEmployeeAppointmentsComponent},
         {path: 'in-work', component: GetInWorkEmployeeAppointmentsComponent},
       ]},
       {path: 'working-interval', component: CreateWorkingIntervalComponent},
@@ -53,6 +56,7 @@ const routes: Routes = [
       {path: 'appointment', component: CreateAppointmentComponent},
       {path: 'appointment', children: [
         {path: 'all', component: GetAllCustomerAppointmentsComponent},
+        {path: 'finished', component: GetFinishedCustomerAppointmentsComponent},
         {path: 'in-work', component: GetInWorkCustomerAppointmentsComponent},
       ]},
     ]},
@@ -90,10 +94,13 @@ export const routingComponents = [
   GetAllEmployeeAppointmentsComponent,
   CreateWorkingIntervalComponent,
   GetAllEmployeeWorkingIntervalsComponent,
+  GetFinishedEmployeeAppointmentsComponent,
   GetInWorkEmployeeAppointmentsComponent,
 
   CreateAppointmentComponent,
   GetAllCustomerAppointmentsComponent,
+  GetFinishedCustomerAppointmentsComponent,
+  GetInWorkCustomerAppointmentsComponent,
 
   PageNotFoundComponent
 ]

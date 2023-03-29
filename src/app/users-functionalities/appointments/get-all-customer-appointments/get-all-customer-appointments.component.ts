@@ -33,7 +33,7 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
         return customerAppointmentsNotCanceled;
       })
     );
-    // EROARE ??? (Understanding RxJS map, mergeMap, switchMap and concatMap -> probabil ii pt. ca am un observable de observable din cauza lui map)
+    //??? EROARE: Understanding RxJS map, mergeMap, switchMap and concatMap -> probabil ii pt. ca am un observable de observable din cauza lui map
     // .subscribe({
     //   next: (res) => console.log("next, res = ", res),
     //   error: (e) => this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error"),

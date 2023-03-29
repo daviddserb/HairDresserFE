@@ -53,9 +53,8 @@
                 <li class="nav-item">
                     <a routerLinkActive="active" [matMenuTriggerFor]="employeeAppointmentsDropDown">Appointments</a>
                     <mat-menu #employeeAppointmentsDropDown="matMenu">
-                        <!-- !!! SA FAC SA ARATE MAI FRUMOS RUTELE -->
-                        <div><a routerLinkActive="active" routerLink="employee/appointment/all">History</a></div>
-                        <div><a routerLinkActive="active" routerLink="employee/appointment/in-work">In Work</a></div>
+                        <a mat-menu-item routerLinkActive="active" routerLink="employee/appointment/finished">Finished</a>
+                        <a mat-menu-item routerLinkActive="active" routerLink="employee/appointment/in-work">In Work</a>
                     </mat-menu>
                 </li>
                 <li class="nav-item">
@@ -73,9 +72,9 @@
                 <li class="nav-item">
                     <a routerLinkActive="active" [matMenuTriggerFor]="customerAppointmentsDropDown">Appointments</a>
                     <mat-menu #customerAppointmentsDropDown="matMenu">
-                        <!-- !!! SA FAC SA ARATE MAI FRUMOS RUTELE -->
-                        <div><a routerLinkActive="active" routerLink="customer/appointment/all">History</a></div>
-                        <div><a routerLinkActive="active" routerLink="customer/appointment/in-work">In Work</a></div>
+                        <!-- !!! -->
+                        <a mat-menu-item routerLinkActive="active" routerLink="customer/appointment/finished">Finished</a>
+                        <a mat-menu-item routerLinkActive="active" routerLink="customer/appointment/in-work">In Work</a>
                     </mat-menu>
                 </li>
             </ul>

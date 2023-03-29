@@ -20,7 +20,11 @@ table td {
 
 .green-text {
     color: green;
-  }
+}
+
+.icon_cancel_button {
+    color: red;
+}
 
 @media(max-width: 575px) {
     table .mat-header-row {

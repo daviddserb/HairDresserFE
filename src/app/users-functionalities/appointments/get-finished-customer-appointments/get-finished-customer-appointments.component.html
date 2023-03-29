@@ -1,22 +1,22 @@
 <div class="table-wrap">
-    <table mat-table [dataSource]="employeeAppointmentsInWork$" class="mat-elevation-z8">
+    <table mat-table [dataSource]="customerAppointmentsFinished$" class="mat-elevation-z8">
         <ng-container matColumnDef="#">
             <th mat-header-cell *matHeaderCellDef>#</th>
             <td mat-cell data-label="#" *matCellDef="let element let i=index">{{i + 1}}.</td>
         </ng-container>
-        <ng-container matColumnDef="customerName">
-            <th mat-header-cell *matHeaderCellDef>Customer</th>
-            <td mat-cell data-label="Customer" *matCellDef="let element">{{element.customerName}}</td>
+        <ng-container matColumnDef="employeeName">
+            <th mat-header-cell *matHeaderCellDef>Employee</th>
+            <td mat-cell data-label="Employee" *matCellDef="let element">{{element.employeeName}}</td>
         </ng-container>
         <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef>Start</th>
-            <td mat-cell data-label="Start" *matCellDef="let element" [ngClass]="checkIfStartDateIsToday(element.startDate)">
+            <td mat-cell data-label="Start" *matCellDef="let element">
                 {{element.startDate | date:'dd/MM/yyyy h:mm a'}}
             </td>
         </ng-container>
         <ng-container matColumnDef="endDate">
             <th mat-header-cell *matHeaderCellDef>End</th>
-            <td mat-cell data-label="End" *matCellDef="let element" [ngClass]="checkIfStartDateIsToday(element.startDate)">
+            <td mat-cell data-label="End" *matCellDef="let element">
                 {{element.endDate | date:'dd/MM/yyyy h:mm a'}}
             </td>
         </ng-container>
@@ -31,14 +31,6 @@
         <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Price</th>
             <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
-        </ng-container>
-        <ng-container matColumnDef="cancel">
-            <th mat-header-cell *matHeaderCellDef>Cancel</th>
-            <td mat-cell data-label="Cancel" *matCellDef="let element">
-                <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" *ngIf="checkIfAppointmentIsInWork(element.startDate)" (click)="cancelInWorkAppointment(element.id)">
-                    <mat-icon class="icon_cancel_button">cancel</mat-icon>
-                </button>
-            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -40,6 +40,8 @@ import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/
 
 import { DatePipe } from '@angular/common';
 import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
+import { GetFinishedCustomerAppointmentsComponent } from './users-functionalities/appointments/get-finished-customer-appointments/get-finished-customer-appointments.component';
+import { GetFinishedEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-finished-employee-appointments/get-finished-employee-appointments.component';
 
 
 const MaterialComponents = [
@@ -73,6 +75,8 @@ const MaterialComponents = [
     ProfileComponent,
     GetInWorkEmployeeAppointmentsComponent,
     GetInWorkCustomerAppointmentsComponent,
+    GetFinishedCustomerAppointmentsComponent,
+    GetFinishedEmployeeAppointmentsComponent,
   ],
   imports: [
     BrowserModule,

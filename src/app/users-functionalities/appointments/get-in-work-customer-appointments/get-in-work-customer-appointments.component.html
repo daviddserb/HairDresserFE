@@ -5,8 +5,8 @@
             <td mat-cell data-label="#" *matCellDef="let element let i=index">{{i + 1}}.</td>
         </ng-container>
         <ng-container matColumnDef="employeeName">
-            <th mat-header-cell *matHeaderCellDef>Customer</th>
-            <td mat-cell data-label="Customer" *matCellDef="let element">{{element.employeeName}}</td>
+            <th mat-header-cell *matHeaderCellDef>Employee</th>
+            <td mat-cell data-label="Employee" *matCellDef="let element">{{element.employeeName}}</td>
         </ng-container>
         <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef>Start</th>
@@ -31,6 +31,14 @@
         <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Price</th>
             <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
+        </ng-container>
+        <ng-container matColumnDef="cancel">
+            <th mat-header-cell *matHeaderCellDef>Cancel</th>
+            <td mat-cell data-label="Cancel" *matCellDef="let element">
+                <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" *ngIf="checkIfAppointmentIsInWork(element.startDate)" (click)="cancelInWorkAppointment(element.id)">
+                    <mat-icon class="icon_cancel_button">cancel</mat-icon>
+                </button>
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
