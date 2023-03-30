@@ -9,7 +9,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 })
 export class GetFinishedCustomerAppointmentsComponent implements OnInit {
   customerAppointmentsFinished$: any;
-  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price']; // !!! To add 'review'
+  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'review'];
 
   constructor(
     private hairdresserService: HairDresserService,
