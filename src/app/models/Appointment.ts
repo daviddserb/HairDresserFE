@@ -13,4 +13,7 @@ export interface Appointment {
     price: number;
     
     isDeleted?: string;
+
+    // ???
+    review?: object;
 }

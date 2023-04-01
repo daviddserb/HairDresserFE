@@ -25,8 +25,6 @@ export class UpdateHairServiceComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    console.log("ngOnInit():");
-
     // Get the id, from the route, of the selected hair service.
     console.log("this.router.snapshot.params['id']");
     console.log(this.router.snapshot.params['id']);

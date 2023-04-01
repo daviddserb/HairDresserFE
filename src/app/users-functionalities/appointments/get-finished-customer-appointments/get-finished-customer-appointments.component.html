@@ -40,18 +40,20 @@
                     <div matTooltip="{{element.review.comments}}" matTooltipPosition="above">
                         <!-- [].constructor() it's a reference to the constructor function for arrays = so it's just an array with the given elements -->
                         <span *ngFor="let star of [].constructor(element.review.rating)" class="gold-star">
-                            <!-- Unicode character for a solid star -->
-                            &#9733;
+                            &#9733; <!-- Unicode character for a solid star -->
                         </span>
-                        <span *ngFor="let star of [].constructor(5 - element.review.rating)">
-                            <!-- Unicode character for an outlined star -->
-                            &#9734;
+                        <span *ngFor="let star of [].constructor(totalRatingStars - element.review.rating)">
+                            &#9734; <!-- Unicode character for an outlined star -->
                         </span>
                     </div>
                 </div>
                 <!-- If appointment has no review -->
                 <div *ngIf="!element.review">
-                    Add review
+                    <a routerLink="../{{element.id}}/review">
+                        <button mat-icon-button matTooltip="Add Review" matTooltipPosition="above">
+                            <span class="material-icons blue-color">reviews</span>
+                        </button>
+                    </a>
                 </div>
             </td>
         </ng-container>

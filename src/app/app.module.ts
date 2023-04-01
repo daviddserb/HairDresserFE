@@ -42,6 +42,7 @@ import { DatePipe } from '@angular/common';
 import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
 import { GetFinishedCustomerAppointmentsComponent } from './users-functionalities/appointments/get-finished-customer-appointments/get-finished-customer-appointments.component';
 import { GetFinishedEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-finished-employee-appointments/get-finished-employee-appointments.component';
+import { ReviewAppointmentComponent } from './users-functionalities/appointments/review-appointment/review-appointment.component';
 
 
 const MaterialComponents = [
@@ -77,6 +78,7 @@ const MaterialComponents = [
     GetInWorkCustomerAppointmentsComponent,
     GetFinishedCustomerAppointmentsComponent,
     GetFinishedEmployeeAppointmentsComponent,
+    ReviewAppointmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="form-wrap">
+    <form [formGroup]="formAppointmentReview" (ngSubmit)="createAppointmentReview()">
+        <h1>Create Appointment Review</h1>
+        <div>
+            <label>Rating</label>
+            <mat-form-field>
+                <mat-label>Select the rating...</mat-label>
+                <mat-select formControlName="rating">
+                    <mat-optgroup label="Rate from 1 to 5, where 1 is the worst and 5 is the best!">
+                        <mat-option title="poor" value="1">1</mat-option>
+                        <mat-option title="below" value="2">2</mat-option>
+                        <mat-option title="average" value="3">3</mat-option>
+                        <mat-option title="nice" value="4">4</mat-option>
+                        <mat-option title="excellent" value="5">5</mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="formAppointmentReviewGetter.rating.touched" style="color:red">
+                <div *ngIf="formAppointmentReviewGetter.rating.errors?.['required']">
+                    Rating is required!
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="comments">Comments</label>
+            <input type="text" class="form-control" formControlName="comments" id="comments">
+            <div *ngIf="formAppointmentReviewGetter.comments.touched" style="color:red">
+                <div *ngIf="formAppointmentReviewGetter.comments.errors?.['required']">
+                    Comments are required!
+                </div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!formAppointmentReview.valid" id="submitBtn">Save</button>
+    </form>
+</div>

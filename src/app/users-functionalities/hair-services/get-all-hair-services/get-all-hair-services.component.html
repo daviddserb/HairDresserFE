@@ -20,10 +20,7 @@
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell data-label="Actions" *matCellDef="let element">
                 <a routerLink="../update/{{element.id}}">
-                    <!-- Angular Material Tooltip:
-                    matToolTip - provides a text label that is displayed when the user hovers over or longpresses an element.
-                    matTooltipPosition - where the text to be displayed.
-                    -->
+                    <!-- Angular Material Tooltip (matTooltip) is the same for title property, so it prints text when hovered, but title is more specific to HTML and Tooltip is more specific to Angular and is more advanced (you can bring changes) -->
                     <button mat-icon-button matTooltip="Edit" matTooltipPosition="left">
                         <mat-icon class="icon_edit_button">edit</mat-icon>
                     </button>

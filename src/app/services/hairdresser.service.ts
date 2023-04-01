@@ -68,6 +68,10 @@ export class HairDresserService {
     getInWorkAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/employee/${employeeId}`);
     }
+    
+    reviewAppointment(appointmentId: number, review: object): Observable<{}> {
+        return this.httpClient.post(`${this.apiUrl}/appointment/${appointmentId}/review`, review);
+    }
 
     deleteAppointmentById(appointmentId: number): Observable<{}> {
         return this.httpClient.delete(`${this.apiUrl}/appointment/${appointmentId}`);

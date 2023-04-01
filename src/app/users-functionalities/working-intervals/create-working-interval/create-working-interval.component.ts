@@ -17,15 +17,12 @@ export class CreateWorkingIntervalComponent implements OnInit {
     endTime: new FormControl('', Validators.required),
   });
 
-  allEmployees$: any;
-
   constructor(
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService,
     ) {}
 
   ngOnInit(): void {
-    // this.hairdresserService.getAllEmployees().subscribe(res => this.allEmployees$ = res);
   }
 
   get formGetter() { return this.formWorkingInterval.controls; }

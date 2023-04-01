@@ -22,6 +22,7 @@ import { GetInWorkEmployeeAppointmentsComponent } from './users-functionalities/
 import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/appointments/get-in-work-customer-appointments/get-in-work-customer-appointments.component';
 import { GetFinishedEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-finished-employee-appointments/get-finished-employee-appointments.component';
 import { GetFinishedCustomerAppointmentsComponent } from './users-functionalities/appointments/get-finished-customer-appointments/get-finished-customer-appointments.component';
+import { ReviewAppointmentComponent } from './users-functionalities/appointments/review-appointment/review-appointment.component';
 
 const routes: Routes = [
   // When add path here => go and add it in routingComponents too.
@@ -58,6 +59,7 @@ const routes: Routes = [
         {path: 'all', component: GetAllCustomerAppointmentsComponent},
         {path: 'finished', component: GetFinishedCustomerAppointmentsComponent},
         {path: 'in-work', component: GetInWorkCustomerAppointmentsComponent},
+        {path: ':appointmentId/review', component: ReviewAppointmentComponent},
       ]},
     ]},
 
@@ -101,6 +103,7 @@ export const routingComponents = [
   GetAllCustomerAppointmentsComponent,
   GetFinishedCustomerAppointmentsComponent,
   GetInWorkCustomerAppointmentsComponent,
+  ReviewAppointmentComponent,
 
   PageNotFoundComponent
 ]
