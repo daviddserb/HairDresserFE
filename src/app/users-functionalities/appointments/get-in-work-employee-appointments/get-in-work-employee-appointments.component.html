@@ -35,7 +35,7 @@
         <ng-container matColumnDef="cancel">
             <th mat-header-cell *matHeaderCellDef>Cancel</th>
             <td mat-cell data-label="Cancel" *matCellDef="let element">
-                <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" *ngIf="checkIfAppointmentIsInWork(element.startDate)" (click)="cancelInWorkAppointment(element.id)">
+                <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" (click)="cancelInWorkAppointment(element.id)">
                     <mat-icon class="icon_cancel_button">cancel</mat-icon>
                 </button>
             </td>

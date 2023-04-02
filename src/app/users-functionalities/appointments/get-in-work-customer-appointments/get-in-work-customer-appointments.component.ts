@@ -47,26 +47,14 @@ export class GetInWorkCustomerAppointmentsComponent implements OnInit {
 
   // If start date of the appointment is today => change it's color.
   checkIfStartDateIsToday(appointmentStartDate: Date): string {
-    console.log("appointmentStartDate= ", appointmentStartDate);
+    // console.log("appointmentStartDate= ", appointmentStartDate);
     const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
-    console.log("appointmentStartDateFormatted= ", appointmentStartDateFormatted);
+    // console.log("appointmentStartDateFormatted= ", appointmentStartDateFormatted);
     if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
     return '';
   }
 
-  checkIfAppointmentIsInWork(appointmentStartDate: Date) {
-    let currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    /* Example:
-    current date: 3/10/2022 10:00:00
-    appointment start date 1: 4/10/2022 07:00:00 => CAN'T CANCEL
-    appointment start date 2: 4/10/2022 10:30:00 => CAN CANCEL
-    */
-    if (moment(appointmentStartDate).isAfter(currentDate)) return true;
-    return false;
-  }
-
-  cancelInWorkAppointment(appointmentId: number) {
+  cancelAppointment(appointmentId: number) {
     this.hairdresserService.deleteAppointmentById(appointmentId)
     .subscribe({
       next: (v) => console.log(v),

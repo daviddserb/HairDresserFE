@@ -53,18 +53,6 @@ export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
     return '';
   }
 
-  checkIfAppointmentIsInWork(appointmentStartDate: Date) {
-    let currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    /* Example:
-    current date: 3/10/2022 10:00:00
-    appointment start date 1: 4/10/2022 07:00:00 => CAN'T CANCEL
-    appointment start date 2: 4/10/2022 10:30:00 => CAN CANCEL
-    */
-    if (moment(appointmentStartDate).isAfter(currentDate)) return true;
-    return false;
-  }
-
   cancelInWorkAppointment(appointmentId: number) {
     this.hairdresserService.deleteAppointmentById(appointmentId)
     .subscribe({
