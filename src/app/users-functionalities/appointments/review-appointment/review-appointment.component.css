@@ -57,3 +57,11 @@ form #submitBtn:hover {
     border-radius: 10px;
     font-weight: bold;
 }
+
+.star {
+    font-size: 30px;
+}
+
+.gold-star {
+    color: gold;
+}

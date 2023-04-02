@@ -3,18 +3,18 @@
         <h1>Create Appointment Review</h1>
         <div>
             <label>Rating</label>
-            <mat-form-field>
-                <mat-label>Select the rating...</mat-label>
-                <mat-select formControlName="rating">
-                    <mat-optgroup label="Rate from 1 to 5, where 1 is the worst and 5 is the best!">
-                        <mat-option title="poor" value="1">1</mat-option>
-                        <mat-option title="below" value="2">2</mat-option>
-                        <mat-option title="average" value="3">3</mat-option>
-                        <mat-option title="nice" value="4">4</mat-option>
-                        <mat-option title="excellent" value="5">5</mat-option>
-                    </mat-optgroup>
-                </mat-select>
-            </mat-form-field>
+            <!--
+                Each star will be a span with the value of 1, 2, 3, 4 and 5.
+                When we hover the stars, for example the 3rd star => hoveredStars = 3 => 'gold-star' class will be applied to the first 3 stars (because star <= hoveredStars).
+                When we click on a star and take mouse off, for example the 4th star => selectedStars = 4 => 'gold-star' class will remain to the first 4 stars (because star <= selectedStars).
+            -->
+            <span *ngFor="let star of [1, 2, 3, 4, 5]"
+                    (mouseenter)="hoveredStars = star"
+                    (mouseleave)="hoveredStars = 0"
+                    [ngClass]="{'gold-star': star <= hoveredStars || star <= selectedStars}"
+                    (click)="onStarClicked(star)">
+                <span class="star">&#9733;</span>
+            </span>
             <div *ngIf="formAppointmentReviewGetter.rating.touched" style="color:red">
                 <div *ngIf="formAppointmentReviewGetter.rating.errors?.['required']">
                     Rating is required!

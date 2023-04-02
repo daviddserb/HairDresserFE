@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 export class ReviewAppointmentComponent implements OnInit {
   public appointmentId!: number;
   public formAppointmentReview = new FormGroup({
-    rating: new FormControl('', Validators.required),
+    rating: new FormControl(0, Validators.required),
     comments: new FormControl('', Validators.required),
   });
-  // public hoveredStars: number = 0;
+  public hoveredStars: number = 0;
+  public selectedStars: number = 0;
 
   constructor(
     private hairdresserService: HairDresserService,
@@ -48,4 +49,12 @@ export class ReviewAppointmentComponent implements OnInit {
     });
   }
 
+  onStarClicked(star: number) {
+    console.log('Clicked star number:', star);
+    // Save the value of the star so when the user clicks on a star and takes the mouse off, the gold-stars will remain.
+    this.selectedStars = star;
+
+    // Save the value in the form because I couldn't save it dirrectly from HTML.
+    this.formAppointmentReview.patchValue({ rating: star });
+  }
 }
