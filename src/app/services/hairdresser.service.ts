@@ -20,10 +20,11 @@ export class HairDresserService {
 
     loggedInUser_Token = localStorage.getItem('token');
 
-    constructor(
+    constructor
+    (
         private httpClient: HttpClient,
         private router: Router
-        )
+    )
     {
         //Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');

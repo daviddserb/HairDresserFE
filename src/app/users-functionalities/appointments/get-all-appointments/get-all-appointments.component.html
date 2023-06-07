@@ -5,27 +5,22 @@
             <th mat-header-cell *matHeaderCellDef>#</th>
             <td mat-cell data-label="#" *matCellDef="let element; let i=index">{{i + 1}}.</td>
         </ng-container>
-
         <ng-container matColumnDef="employeeName">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Employee</th>
             <td mat-cell data-label="Employee" *matCellDef="let element">{{element.employeeName}}</td>
         </ng-container>
-
         <ng-container matColumnDef="customerName">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Customer</th>
             <td mat-cell data-label="Customer" *matCellDef="let element">{{element.customerName}}</td>
         </ng-container>
-
         <ng-container matColumnDef="startDate">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Start</th>
             <td mat-cell data-label="Start" *matCellDef="let element">{{element.startDate | date:'dd/MM/yyyy h:mm a'}}</td>
         </ng-container>
-
         <ng-container matColumnDef="endDate">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>End</th>
             <td mat-cell data-label="End" *matCellDef="let element">{{element.endDate | date:'dd/MM/yyyy h:mm a'}}</td>
         </ng-container>
-
         <ng-container matColumnDef="hairServices">
             <th mat-header-cell *matHeaderCellDef>Services</th>
             <td mat-cell data-label="Services" *matCellDef="let element">
@@ -34,12 +29,27 @@
                 </div>
             </td>
         </ng-container>
-
         <ng-container matColumnDef="price">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>Price</th>
             <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
         </ng-container>
-
+        <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef>Review</th>
+            <td mat-cell data-label="Review" *matCellDef="let element">
+                <!-- If appointment has review -->
+                <div *ngIf="element.review">
+                    <div matTooltip="{{element.review.comments}}" matTooltipPosition="above">
+                        <!-- [].constructor() it's a reference to the constructor function for arrays = so it's just an array with the given elements -->
+                        <span *ngFor="let star of [].constructor(element.review.rating)" class="gold-star">
+                            &#9733; <!-- Unicode character for a solid star -->
+                        </span>
+                        <span *ngFor="let star of [].constructor(totalRatingStars - element.review.rating)">
+                            &#9734; <!-- Unicode character for an outlined star -->
+                        </span>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
         <ng-container matColumnDef="canceled">
             <th mat-header-cell *matHeaderCellDef>Canceled</th>
             <td mat-cell data-label="Canceled" *matCellDef="let element">
@@ -51,7 +61,6 @@
                 </ng-template>
             </td>
         </ng-container>
-
         <!-- Prints table columns. -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <!-- Prints table rows. -->

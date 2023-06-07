@@ -4,12 +4,10 @@
             <th mat-header-cell *matHeaderCellDef>#</th>
             <td mat-cell data-label="#" *matCellDef="let element; let i=index">{{i + 1}}.</td>
         </ng-container>
-
         <ng-container matColumnDef="employeeName">
             <th mat-header-cell *matHeaderCellDef>Employee</th>
             <td mat-cell data-label="Employee" *matCellDef="let element">{{element.username}}</td>
         </ng-container>
-
         <ng-container matColumnDef="employeeHairServices">
             <th mat-header-cell *matHeaderCellDef>Services</th>
             <td mat-cell data-label="Services" *matCellDef="let element">
@@ -22,7 +20,6 @@
                 </div>
             </td>
         </ng-container>
-
         <ng-container matColumnDef="employeeWorkingIntervals">
             <th mat-header-cell *matHeaderCellDef>Working Intervals</th>
             <td mat-cell data-label="Working Intervals" *matCellDef="let element">
@@ -31,7 +28,6 @@
                 </div>
             </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

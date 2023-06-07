@@ -32,7 +32,23 @@
             <th mat-header-cell *matHeaderCellDef>Price</th>
             <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
         </ng-container>
-
+        <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef>Review</th>
+            <td mat-cell data-label="Review" *matCellDef="let element">
+                <!-- If appointment has review -->
+                <div *ngIf="element.review">
+                    <div matTooltip="{{element.review.comments}}" matTooltipPosition="above">
+                        <!-- [].constructor() it's a reference to the constructor function for arrays = so it's just an array with the given elements -->
+                        <span *ngFor="let star of [].constructor(element.review.rating)" class="gold-star">
+                            &#9733; <!-- Unicode character for a solid star -->
+                        </span>
+                        <span *ngFor="let star of [].constructor(totalRatingStars - element.review.rating)">
+                            &#9734; <!-- Unicode character for an outlined star -->
+                        </span>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

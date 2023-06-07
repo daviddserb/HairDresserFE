@@ -150,7 +150,7 @@ export class CreateAppointmentComponent implements OnInit {
     this.hairdresserService.postAppointment(appointment)
     .subscribe(res => {
       this.popUpMessagesService.showPopUpMessage("Appointment successfully created!", "OK", "success");
-      this.router.navigate(['profile/customer/appointment/all']);
+      this.router.navigate(['profile/customer/appointment/in-work']);
     });
   }
 }

@@ -12,7 +12,8 @@ export class GetFinishedCustomerAppointmentsComponent implements OnInit {
   displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'review'];
   totalRatingStars: number = 5;
 
-  constructor(
+  constructor
+  (
     private hairdresserService: HairDresserService,
     private popUpMessagesService: PopUpMessagesService,
   ) { }

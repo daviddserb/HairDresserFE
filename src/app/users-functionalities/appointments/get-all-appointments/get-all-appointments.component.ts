@@ -10,7 +10,8 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./get-all-appointments.component.css']
 })
 export class GetAllAppointmentsComponent implements OnInit {
-  displayedColumns: string[] = ['#', 'employeeName', 'customerName','startDate', 'endDate', 'hairServices', 'price', 'canceled'];
+  displayedColumns: string[] = ['#', 'employeeName', 'customerName','startDate', 'endDate', 'hairServices', 'price', 'review', 'canceled'];
+  totalRatingStars: number = 5;
 
   allAppointments$: any;
   

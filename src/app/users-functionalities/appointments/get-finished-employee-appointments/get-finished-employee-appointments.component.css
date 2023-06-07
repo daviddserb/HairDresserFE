@@ -18,6 +18,10 @@ table td {
     text-align: center;
 }
 
+.gold-star {
+    color: gold;
+}
+
 @media(max-width: 575px) {
     table .mat-header-row {
         display: none;
