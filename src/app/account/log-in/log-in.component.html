@@ -1,35 +1,33 @@
+<!-- Template-driven Form -->
 <div class="form-wrap">
-    <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+    <!--To send the form to component, we need to: create a template reference variable with ngForm and use ngSubmit with the referecen variable-->
+    <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm.value)">
         <h1>Log in</h1>
         <div>
+            <!--for in label binds to the input id, so when we click on Username text, it will access the Username input field-->
             <label for="username">Username</label>
-            <!-- name="..." is for binding, it's a must! -->
-            <!-- ngModel is for taking the value in the component! -->
+            <!--name="..." is for binding (must)-->
+            <!--ngModel is to bind the value to the ngForm so we get the data in the TS component (must)-->
             <input type="text" name="username" ngModel #username="ngModel" class="form-control" id="username" required appNoWhitespaceAllowed>
+            <!--#username="ngModel" is access the input value for applying validations, create a reference variable (must)-->
             <div *ngIf="username.touched" style="color:red">
-                <div *ngIf="username.errors?.['required']">
-                    Username is required!
-                </div>
-                <div *ngIf="username.errors?.['noSpaceAllowed']">
-                    No whitespace allowed!
-                </div>
+                <div *ngIf="username.errors?.['required']">Username is required!</div>
+                <div *ngIf="username.errors?.['noSpaceAllowed']">No whitespace allowed!</div>
             </div>
         </div>
         <div>
             <label for="password">Password</label>
             <input type="password" name="password" ngModel #password="ngModel" class="form-control" id="password" required minlength="6">
             <div *ngIf="password.touched" style="color:red">
-                <div *ngIf="password.errors?.['required']"> 
-                    Password is required!
-                </div>
-                <div *ngIf="password.errors?.['minlength']"> 
-                    Password needs a length of at least 6!
-                </div>
+                <div *ngIf="password.errors?.['required']">Password is required!</div>
+                <div *ngIf="password.errors?.['minlength']">Password needs a length of at least 6 characters!</div>
             </div>
         </div>
-        <div>
+        <div [ngClass]="{'invalid-button-wrapper': loginForm.invalid, 'valid-hover-button-wrapper': loginForm.valid}">
+            <!--type="submit" => at user click, the form (ngSubmit) will be triggered (must)-->
             <button type="submit" [disabled]="!loginForm.valid">Submit</button>
             <a routerLink="../register" class="btn btn-link">Don't have an account? Register here.</a>
         </div>
     </form>
 </div>
+

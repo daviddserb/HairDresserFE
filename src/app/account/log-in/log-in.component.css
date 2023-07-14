@@ -50,9 +50,15 @@ form button {
     text-transform: uppercase;
 }
 
-form button:hover {
+form .valid-hover-button-wrapper button:hover {
     background-color: darkgrey;
     transition: 0.5s;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.invalid-button-wrapper button {
+    background-color: red;
+    color: white;
+    cursor: none;
 }

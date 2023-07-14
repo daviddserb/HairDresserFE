@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Hair } from 'src/app/models/Hair';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
+import { Observable, of } from "rxjs";
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./get-all-hair-services.component.css']
 })
 export class GetAllHairServicesComponent implements OnInit {
-  allHairServices$: any;
+  public hairServices$!: Observable<Hair[]>;
 
   displayedColumns: string[] = ['#', 'name', 'duration', 'price'];
 
@@ -36,8 +38,18 @@ export class GetAllHairServicesComponent implements OnInit {
         error: (e) => console.log("Wrong id!")
       });
     }
-
-    this.allHairServices$ = this.hairdresserService.getAllHairServices();
+    
+    this.hairServices$ = this.hairdresserService.getAllHairServices();
+    // ??? Se randeaza pe pagina, dar am eroare in consola de pe pagina: get-all-hair-services.component.ts:29  ERROR TypeError: Cannot read properties of undefined (reading 'length')
+    // this.hairdresserService.getAllHairServices().subscribe
+    // ({
+    //   next: (data) => {
+    //     console.log("data=", data);
+    //     // Convert the array (data) to an Observable using the `of` operator
+    //     this.hairServices$ = of(data);
+    //   },
+    //   error: (error) => console.error(error),
+    // });
   }
 
   deleteHairService(hairServiceId: number) {

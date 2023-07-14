@@ -1,62 +1,48 @@
+<!-- Reactive Form -->
 <div class="form-wrap">
+    <!--directive [formGroup]="formNameFromTS" to bind the HTML form with the TS form (must)-->
     <form [formGroup]="registerForm" (ngSubmit)="createAccount()">
         <h1>Register</h1>
         <div>
             <label for="username">Username</label>
+            <!--directive formControlName="" to bind the username field from HTML form with the username property from TS form-->
             <input type="text" formControlName="username" class="form-control" id="username">
             <div *ngIf="formGetter.username.touched" style="color:red">
-                <div *ngIf="formGetter.username.errors?.['required']">
-                    Username is required!
-                </div>
-                <div *ngIf="formGetter.username.errors?.['noSpaceAllowed']">
-                    No whitespace allowed!
-                </div>
+                <div *ngIf="formGetter.username.errors?.['required']">Username is required!</div>
+                <div *ngIf="formGetter.username.errors?.['noSpaceAllowed']">No whitespace allowed!</div>
+                <div *ngIf="formGetter.username.errors?.['uniqueUsername']">This email is already used by another user.</div>
             </div>
         </div>
         <div>
             <label for="password">Password</label>
             <input type="password" formControlName="password" class="form-control" id="password">
             <div *ngIf="formGetter.password.touched" style="color:red">
-                <div *ngIf="formGetter.password.errors?.['required']">
-                    Password is required!
-                </div>
-                <div *ngIf="formGetter.password.errors?.['minlength']">
-                    Password needs a length of at least 6!
-                </div>
+                <div *ngIf="formGetter.password.errors?.['required']">Password is required!</div>
+                <div *ngIf="formGetter.password.errors?.['minlength']">Password needs a length of at least 6 characters!</div>
             </div>
         </div>
         <div>
             <label for="email">Email</label>
             <input type="email" formControlName="email" class="form-control" id="email">
             <div *ngIf="formGetter.email.touched" style="color:red">
-                <div *ngIf="formGetter.email.errors?.['required']">
-                    Email is required!
-                </div>
-                <div *ngIf="formGetter.email.errors?.['email']">
-                    Email needs to be valid!
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="number" formControlName="phone" class="form-control" id="phone">
-            <div *ngIf="formGetter.phone.touched" style="color:red">
-                <div *ngIf="formGetter.phone.errors?.['required']">
-                    Phone is required!
-                </div>
-                <div *ngIf="formGetter.phone.errors?.['noLetterAllowed']">
-                    No letters allowed!
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" formControlName="address" class="form-control" id="address">
-            <div *ngIf="formGetter.address.touched && formGetter.address.invalid" style="color:red">
-                Address is required!
+                <div *ngIf="formGetter.email.errors?.['required']">Email is required!</div>
+                <div *ngIf="formGetter.email.errors?.['email']">Email needs to be valid!</div>
             </div>
         </div>
         <div>
+            <label for="phone">Phone</label>
+            <input type="number" formControlName="phone" class="form-control" id="phone">
+            <div *ngIf="formGetter.phone.touched" style="color:red">
+                <div *ngIf="formGetter.phone.errors?.['required']">Phone is required!</div>
+            </div>
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <input type="text" formControlName="address" class="form-control" id="address">
+            <div *ngIf="formGetter.address.touched && formGetter.address.invalid" style="color:red">Address is required!</div>
+        </div>
+        <div [ngClass]="{'invalid-button-wrapper': registerForm.invalid, 'valid-hover-button-wrapper': registerForm.valid}">
+            <!--type="submit" => at user click, the form (ngSubmit) will be triggered (must)-->
             <button type="submit" [disabled]="!registerForm.valid">Submit</button>
             <a routerLink="../log-in" class="btn btn-link">Already have an account? Log in here.</a>
         </div>

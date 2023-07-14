@@ -5,19 +5,18 @@ import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Router } from '@angular/router';
+import { Hair } from "../models/Hair";
 
 @Injectable({
     providedIn: 'root'
 })
 export class HairDresserService {
-    apiUrl = "https://localhost:7192/api";
+    private readonly apiUrl = "https://localhost:7192/api";
 
     //Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-
     //Public Observable so we can change it.
     isLoggedIn$ = this._isLoggedIn$.asObservable();
-
     loggedInUser_Token = localStorage.getItem('token');
 
     constructor
@@ -28,7 +27,6 @@ export class HairDresserService {
     {
         //Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');
-
         //If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
         this._isLoggedIn$.next(!!token);
     }
@@ -79,39 +77,35 @@ export class HairDresserService {
     }
 
     //HAIR SERVICES:
-    postHairService(hairService: object): Observable<{}> {
-        return this.httpClient.post(`${this.apiUrl}/hairservice`, hairService);
+    postHairService(hair: object): Observable<Hair> {
+        return this.httpClient.post<Hair>(`${this.apiUrl}/hairservice`, hair);
     }
 
-    getAllHairServices(): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/hairservice/all`);
+    getAllHairServices(): Observable<Hair[]> {
+        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all`);
     }
 
-    getHairServiceById(hairServiceId: number): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/hairservice/${hairServiceId}`);
+    getHairServiceById(hairServiceId: number): Observable<Hair[]> {
+        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
-    getHairServicesByEmployeeId(employeeId: string): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
+    getHairServicesByEmployeeId(employeeId: string): Observable<Hair[]> {
+        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
     }
 
     getMissingHairServicesByEmployeeId(employeeId: string): Observable<{}> {
         return this.httpClient.get(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
     }
 
-    putHairService(hairServiceId: number, hairService: object): Observable<{}> {
-        return this.httpClient.put(`${this.apiUrl}/hairservice/${hairServiceId}`, hairService);
+    putHairService(hairId: number, hair: object): Observable<Hair> {
+        return this.httpClient.put<Hair>(`${this.apiUrl}/hairservice/${hairId}`, hair);
     }
 
-    deleteHairServiceById(hairServiceId: number): Observable<{}> {
-        return this.httpClient.delete(`${this.apiUrl}/hairservice/${hairServiceId}`);
+    deleteHairServiceById(hairId: number): Observable<Hair> {
+        return this.httpClient.delete<Hair>(`${this.apiUrl}/hairservice/${hairId}`);
     }
 
     getDurationByHairServicesIds(hairServicesIds: any): Observable<{}> {
-        console.log("getDurationByHairServicesIds(): Observable");
-        
-        console.log("hair services ids= ", hairServicesIds);
-
         let stringForApi = "hairServicesIds=";
 
         hairServicesIds.forEach((element : any, index: any, array: any) => {
@@ -121,20 +115,13 @@ export class HairDresserService {
             }
         });
 
-        console.log("string for api= ", stringForApi);
-
-        console.log("api url= ", `${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`);
-
-        this.httpClient.get(`${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`).subscribe(res => console.log("duration= ", res));
+        // ???
+        //this.httpClient.get(`${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`).subscribe(res => console.log("duration= ", res));
         
         return this.httpClient.get(`${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`);
     }
 
     getPriceByHairServicesIds(hairServicesIds: any): Observable<{}> {
-        console.log("getPriceByHairServicesIds(): Observable");
-        
-        console.log("hair services ids= ", hairServicesIds);
-
         let stringForApi = "hairServicesIds=";
 
         hairServicesIds.forEach((element : any, index: any, array: any) => {
@@ -144,11 +131,8 @@ export class HairDresserService {
             }
         });
 
-        console.log("string for api= ", stringForApi);
-
-        console.log("api url= ", `${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
-
-        this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`).subscribe(res => console.log("price= ", res));
+        // ???
+        //this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`).subscribe(res => console.log("price= ", res));
         
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
@@ -195,10 +179,6 @@ export class HairDresserService {
     }
 
     getEmployeesByHairServicesIds(hairServicesIds: any): Observable<{}> {
-        console.log("getEmployeesByHairServicesIds(): Observable");
-
-        console.log("hair services ids= ", hairServicesIds);
-
         let stringForApi = "hairServicesIds=";
 
         hairServicesIds.forEach((element : any, index: any, array: any) => {
@@ -208,34 +188,17 @@ export class HairDresserService {
             }
         });
 
-        console.log("string for api= ", stringForApi);
-
-        console.log("api url= ", `${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`);
-
-        this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
+        // ???
+        //this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
 
         return this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`);
     }
 
     getValidIntervals(employeeId: string, selectedDate: any, appointmentDuration: any, customerId: string): Observable<{}> {
-        console.log("getValidIntervals(): Observable");
-
-        console.log("employee id= ", employeeId);
-        console.log("selected date= ", selectedDate);
-        console.log("year= ", selectedDate.getFullYear());
-        console.log("month= ", selectedDate.getMonth() + 1);
-        console.log("date= ", selectedDate.getDate());
-        console.log("appointment duration= ", appointmentDuration);
-        console.log("customer id= ", customerId);
-
         let appointmentDurationSplitted = appointmentDuration.split(':');
-        console.log("appointment duration splitted= ", appointmentDurationSplitted);
+        
         //Convert from TimeSpan value to Int value in minutes (don't add the seconds because there will not be seconds in the appointments).
         let appointmentDurationInMinutes = (+appointmentDurationSplitted[0]) * 60 + (+appointmentDurationSplitted[1]);
-        console.log("appointment duration in minutes= ", appointmentDurationInMinutes);
-
-        console.log("api url:");
-        console.log(`${this.apiUrl}/user/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
 
         return this.httpClient.get(`${this.apiUrl}/user/employee/free-intervals?EmployeeId=${employeeId}&Year=${selectedDate.getFullYear()}&Month=${selectedDate.getMonth() + 1}&Date=${selectedDate.getDate()}&DurationInMinutes=${appointmentDurationInMinutes}&CustomerId=${customerId}`);
     }
@@ -277,8 +240,15 @@ export class HairDresserService {
         );
     }
 
+    logOutUser() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        localStorage.removeItem('username');
+
+        this.router.navigate(['']);
+    }
+
     assignRole(user_username: string, user_role: string): Observable<{}> {
-        console.log("FE Service assignRole: Observable ->");
         let user: User = {
             username: user_username,
             role: user_role
@@ -286,11 +256,7 @@ export class HairDresserService {
         return this.httpClient.post<User>(`${this.apiUrl}/user/assign-role`, user);
     }
 
-    logOutUser() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('id');
-        localStorage.removeItem('username');
-
-        this.router.navigate(['']);
+    getAllUsers(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${this.apiUrl}/user/all`);
     }
 }

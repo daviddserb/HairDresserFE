@@ -10,7 +10,6 @@ export class LoaderService {
   //BehaviorSubject is a Subject which stores the current value.
   //The material spinner will be displayed based its value. If it is true, loading spinner will be shown.
   //public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
   public appLoader = new Subject<boolean>();
 
   constructor() {}

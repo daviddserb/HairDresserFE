@@ -9,9 +9,6 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
   }]
 })
 export class NoWhitespaceAllowedDirective implements Validator {
-
-  constructor() { }
-
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
     if(/\s/.test(control.value)) return {noSpaceAllowed: true}
     return null; // if there is no error (errors) you have to return null, it is compulsory

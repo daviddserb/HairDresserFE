@@ -1,10 +1,10 @@
 mat-spinner {
-    /* Position it in the middle. */
+    /* Position it in the middle of the page */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* To be on top of everything else (something more than 1). */
+    
+    /* St it to be on top of everything else (something more than 1). */
     z-index: 10;
 }

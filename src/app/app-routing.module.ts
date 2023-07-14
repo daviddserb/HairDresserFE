@@ -26,7 +26,6 @@ import { ReviewAppointmentComponent } from './users-functionalities/appointments
 
 const routes: Routes = [
   // When add path here => go and add it in routingComponents too.
-  
   {path: '', component: HomeComponent, children: [
     {path: 'register', component: RegisterComponent},
     {path: 'log-in', component: LogInComponent},

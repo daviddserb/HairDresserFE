@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
@@ -10,19 +10,19 @@ import jwt_decode from 'jwt-decode';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
-export class LogInComponent implements OnInit {
+export class LogInComponent {
 
-  constructor(
+  constructor
+  (
     private hairdresserService: HairDresserService,
     private router: Router,
     private popUpMessagesService: PopUpMessagesService
     ) {}
 
-  ngOnInit(): void {}
-
   loginUser(item: any) {
-    console.log("user input= ", item.value)
-    this.hairdresserService.logInUser(item.value.username, item.value.password)
+    console.log("item= ", item);
+    
+    this.hairdresserService.logInUser(item.username, item.password)
     .subscribe({
       next: (response) => {
         console.log("token from back-end= ", response);
@@ -47,6 +47,6 @@ export class LogInComponent implements OnInit {
     console.log("username= (" + decodedToken.username + ")");
     console.log("password= (" + decodedToken.password + ")");
     console.log("role= (" + decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] + ")");
-    return jwt_decode(token); // return the decoded token
+    return jwt_decode(token);
   }
 }
