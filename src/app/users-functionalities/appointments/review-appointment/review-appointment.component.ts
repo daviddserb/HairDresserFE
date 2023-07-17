@@ -12,14 +12,17 @@ import { Router } from '@angular/router';
 })
 export class ReviewAppointmentComponent implements OnInit {
   public appointmentId!: number;
+
   public formAppointmentReview = new FormGroup({
     rating: new FormControl(0, Validators.required),
     comments: new FormControl('', Validators.required),
   });
+
   public hoveredStars: number = 0;
   public selectedStars: number = 0;
 
-  constructor(
+  constructor
+  (
     private hairdresserService: HairDresserService,
     private route: ActivatedRoute,
     private popUpMessagesService: PopUpMessagesService,
@@ -28,10 +31,13 @@ export class ReviewAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     // Get the id of the appointment from the route
+    // Method 1:
     this.route.paramMap.subscribe(params => {
       this.appointmentId = Number(params.get('appointmentId'));
-      console.log("appointmentId= ", this.appointmentId);
     });
+
+    // Method 2:
+    //console.log(Number(this.route.snapshot.paramMap.get('appointmentId')));
   }
 
   get formAppointmentReviewGetter () { return this.formAppointmentReview.controls; }

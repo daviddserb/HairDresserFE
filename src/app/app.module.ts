@@ -43,6 +43,8 @@ import { GetInWorkCustomerAppointmentsComponent } from './users-functionalities/
 import { GetFinishedCustomerAppointmentsComponent } from './users-functionalities/appointments/get-finished-customer-appointments/get-finished-customer-appointments.component';
 import { GetFinishedEmployeeAppointmentsComponent } from './users-functionalities/appointments/get-finished-employee-appointments/get-finished-employee-appointments.component';
 import { ReviewAppointmentComponent } from './users-functionalities/appointments/review-appointment/review-appointment.component';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 
 const MaterialComponents = [
@@ -93,6 +95,8 @@ const MaterialComponents = [
     HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     DatePipe,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

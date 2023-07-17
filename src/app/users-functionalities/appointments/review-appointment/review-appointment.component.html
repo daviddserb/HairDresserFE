@@ -5,8 +5,8 @@
             <label>Rating</label>
             <!--
                 Each star will be a span with the value of 1, 2, 3, 4 and 5.
-                When we hover the stars, for example the 3rd star => hoveredStars = 3 => 'gold-star' class will be applied to the first 3 stars (because star <= hoveredStars).
-                When we click on a star and take mouse off, for example the 4th star => selectedStars = 4 => 'gold-star' class will remain to the first 4 stars (because star <= selectedStars).
+                When hover the stars, for example the 3rd star => hoveredStars = 3 => 'gold-star' class will be applied to the first 3 stars (because star <= hoveredStars).
+                When click on a star and take mouse off, for example the 4th star => selectedStars = 4 => 'gold-star' class will only remain to the first 4 stars (because star <= selectedStars).
             -->
             <span *ngFor="let star of [1, 2, 3, 4, 5]"
                     (mouseenter)="hoveredStars = star"
@@ -16,18 +16,14 @@
                 <span class="star">&#9733;</span>
             </span>
             <div *ngIf="formAppointmentReviewGetter.rating.touched" style="color:red">
-                <div *ngIf="formAppointmentReviewGetter.rating.errors?.['required']">
-                    Rating is required!
-                </div>
+                <div *ngIf="formAppointmentReviewGetter.rating.errors?.['required']">Rating is required!</div>
             </div>
         </div>
         <div>
             <label for="comments">Comments</label>
             <input type="text" class="form-control" formControlName="comments" id="comments">
             <div *ngIf="formAppointmentReviewGetter.comments.touched" style="color:red">
-                <div *ngIf="formAppointmentReviewGetter.comments.errors?.['required']">
-                    Comments are required!
-                </div>
+                <div *ngIf="formAppointmentReviewGetter.comments.errors?.['required']">Comments are required!</div>
             </div>
         </div>
         <button type="submit" [disabled]="!formAppointmentReview.valid" id="submitBtn">Save</button>
