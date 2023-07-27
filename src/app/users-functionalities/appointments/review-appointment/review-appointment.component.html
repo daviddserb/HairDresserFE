@@ -5,7 +5,7 @@
             <label>Rating</label>
             <!--
                 Each star will be a span with the value of 1, 2, 3, 4 and 5.
-                When hover the stars, for example the 3rd star => hoveredStars = 3 => 'gold-star' class will be applied to the first 3 stars (because star <= hoveredStars).
+                When hover the stars, for example the 3rd star => hoveredStars = 3 => 'gold-star' class will be applied to only the first 3 stars (because star <= hoveredStars).
                 When click on a star and take mouse off, for example the 4th star => selectedStars = 4 => 'gold-star' class will only remain to the first 4 stars (because star <= selectedStars).
             -->
             <span *ngFor="let star of [1, 2, 3, 4, 5]"

@@ -27,7 +27,7 @@ export class ReviewAppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private popUpMessagesService: PopUpMessagesService,
     private router: Router,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     // Get the id of the appointment from the route
@@ -35,7 +35,6 @@ export class ReviewAppointmentComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.appointmentId = Number(params.get('appointmentId'));
     });
-
     // Method 2:
     //console.log(Number(this.route.snapshot.paramMap.get('appointmentId')));
   }
@@ -43,9 +42,8 @@ export class ReviewAppointmentComponent implements OnInit {
   get formAppointmentReviewGetter () { return this.formAppointmentReview.controls; }
 
   createAppointmentReview() {
-    console.log("createAppointmentReview:");
-    console.log("form= ", this.formAppointmentReview.value);
     let userInputReview = this.formAppointmentReview.value;
+    console.log("userInputReview= ", userInputReview);
 
     this.hairdresserService.reviewAppointment(this.appointmentId, userInputReview)
     .subscribe({
@@ -59,7 +57,6 @@ export class ReviewAppointmentComponent implements OnInit {
     console.log('Clicked star number:', star);
     // Save the value of the star so when the user clicks on a star and takes the mouse off, the gold-stars will remain.
     this.selectedStars = star;
-
     // Save the value in the form because I couldn't save it dirrectly from HTML.
     this.formAppointmentReview.patchValue({ rating: star });
   }

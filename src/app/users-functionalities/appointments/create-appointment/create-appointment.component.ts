@@ -148,9 +148,13 @@ export class CreateAppointmentComponent implements OnInit {
     console.log("appointment= ", appointment);
 
     this.hairdresserService.postAppointment(appointment)
-    .subscribe(res => {
-      this.popUpMessagesService.showPopUpMessage("Appointment successfully created!", "OK", "success");
-      this.router.navigate(['profile/customer/appointment/in-work']);
-    });
+    .subscribe({
+      next: (res) => {
+        this.popUpMessagesService.showPopUpMessage("Appointment successfully created!", "OK", "success");
+        this.router.navigate(['profile/customer/appointment/in-work']);
+      },
+      // ??? e.message
+      error: (e) => this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error"),
+    })
   }
 }

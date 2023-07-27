@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
@@ -17,7 +17,9 @@ export class HairDresserService {
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
     //Public Observable so we can change it.
     isLoggedIn$ = this._isLoggedIn$.asObservable();
-    loggedInUser_Token = localStorage.getItem('token');
+    
+    // For Back-end Authorization, to send the token, in the Header of the HTTP Request.
+    headers: HttpHeaders;
 
     constructor
     (
@@ -27,8 +29,13 @@ export class HairDresserService {
     {
         //Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');
+        
         //If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
         this._isLoggedIn$.next(!!token);
+
+        this.headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
     }
 
     //APPOINTMENTS:
@@ -36,8 +43,8 @@ export class HairDresserService {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
     }
 
-    getAllAppointments(pageNumber: number, pageSize: number): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumber}&PageSize=${pageSize}`);
+    getAllAppointments(pageNumber: number, pageSize: number): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all?PageNumber=${pageNumber}&PageSize=${pageSize}`, { headers: this.headers });
     }
 
     getAppointmentById(appointmentId: number): Observable<Appointment> { 
@@ -61,7 +68,7 @@ export class HairDresserService {
     }
 
     getFinishedAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/finished/employee/${employeeId}`);
+        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/finished/employee/${employeeId}`, { headers: this.headers });
     }
 
     getInWorkAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
@@ -115,9 +122,6 @@ export class HairDresserService {
             }
         });
 
-        // ???
-        //this.httpClient.get(`${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`).subscribe(res => console.log("duration= ", res));
-        
         return this.httpClient.get(`${this.apiUrl}/hairservice/duration/by-ids?${stringForApi}`);
     }
 
@@ -130,9 +134,6 @@ export class HairDresserService {
                 stringForApi += "&hairServicesIds=";
             }
         });
-
-        // ???
-        //this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`).subscribe(res => console.log("price= ", res));
         
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
@@ -188,9 +189,6 @@ export class HairDresserService {
             }
         });
 
-        // ???
-        //this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`).subscribe(res => console.log("selected employees= ", res));
-
         return this.httpClient.get(`${this.apiUrl}/user/employee/all/by-hair-services?${stringForApi}`);
     }
 
@@ -227,7 +225,7 @@ export class HairDresserService {
         return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
         .pipe(
             tap((response: any) => {
-                //Save information in Local Storage (key - value). To see it: Inspect page -> Application -> Local Storage.
+                //Save information in Local Storage as key - value (to see it: Inspect page -> Application -> Local Storage).
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('id', response.id);
                 localStorage.setItem('username', response.username);
@@ -235,7 +233,7 @@ export class HairDresserService {
                 //Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
                 this._isLoggedIn$.next(true);
 
-                console.log("token= ", response.token);
+                console.log("token from back-end: ", response.token);
             })
         );
     }

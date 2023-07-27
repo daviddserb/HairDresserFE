@@ -10,7 +10,7 @@
             <div *ngIf="formGetter.username.touched" style="color:red">
                 <div *ngIf="formGetter.username.errors?.['required']">Username is required!</div>
                 <div *ngIf="formGetter.username.errors?.['noSpaceAllowed']">No whitespace allowed!</div>
-                <div *ngIf="formGetter.username.errors?.['uniqueUsername']">This email is already used by another user.</div>
+                <div *ngIf="formGetter.username.errors?.['uniqueUsername']">This username is already in the database.</div>
             </div>
         </div>
         <div>
