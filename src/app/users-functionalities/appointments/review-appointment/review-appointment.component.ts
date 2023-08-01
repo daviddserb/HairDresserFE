@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { Router } from '@angular/router';
+import { Review } from 'src/app/models/Review';
 
 @Component({
   selector: 'app-review-appointment',
@@ -18,6 +19,8 @@ export class ReviewAppointmentComponent implements OnInit {
     comments: new FormControl('', Validators.required),
   });
 
+  //private review: Review;
+
   public hoveredStars: number = 0;
   public selectedStars: number = 0;
 
@@ -27,7 +30,7 @@ export class ReviewAppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private popUpMessagesService: PopUpMessagesService,
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Get the id of the appointment from the route
@@ -42,10 +45,12 @@ export class ReviewAppointmentComponent implements OnInit {
   get formAppointmentReviewGetter () { return this.formAppointmentReview.controls; }
 
   createAppointmentReview() {
-    let userInputReview = this.formAppointmentReview.value;
-    console.log("userInputReview= ", userInputReview);
-
-    this.hairdresserService.reviewAppointment(this.appointmentId, userInputReview)
+    let review: Review = {
+      CustomerId: localStorage.getItem('id'),
+      Rating: this.formAppointmentReview.value.rating,
+      Comments: this.formAppointmentReview.value.comments
+    }
+    this.hairdresserService.reviewAppointment(this.appointmentId, review)
     .subscribe({
       next: (result) => this.popUpMessagesService.showPopUpMessage("Appointment successfully reviewed!", "OK", "success"),
       error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to review the appointment!", "OK", "error"),

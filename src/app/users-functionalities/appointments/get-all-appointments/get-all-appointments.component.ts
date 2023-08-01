@@ -3,6 +3,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Appointment } from 'src/app/models/Appointment';
 
 @Component({
   selector: 'app-get-all-appointments',
@@ -21,7 +22,7 @@ export class GetAllAppointmentsComponent implements OnInit {
   constructor(public hairdresserService: HairDresserService) { }
 
   ngOnInit(): void {
-    //??? hardcoded pageNumber and pageSize in getAllAppointments
+    //??? hard-coded pageNumber and pageSize in getAllAppointments
     this.hairdresserService.getAllAppointments(1, 1000)
     .subscribe(res => {
       console.log("all appointments= ", res);

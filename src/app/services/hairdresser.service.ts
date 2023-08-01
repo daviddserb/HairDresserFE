@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http"
-import { Customer } from "../models/Customer";
 import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Router } from '@angular/router';
 import { Hair } from "../models/Hair";
+import { WorkingInterval } from "../models/WorkingInterval";
+import { Review } from "../models/Review";
 
 @Injectable({
     providedIn: 'root'
@@ -40,7 +41,7 @@ export class HairDresserService {
 
     //APPOINTMENTS:
     postAppointment(appointment: Appointment): Observable<Appointment> {
-        return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment);
+        return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment, { headers: this.headers });
     }
 
     getAllAppointments(pageNumber: number, pageSize: number): Observable<Appointment[]> {
@@ -55,32 +56,33 @@ export class HairDresserService {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
     }
 
-    getFinishedAppointmentsByCustomerId(customerId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/finished/customer/${customerId}`);
+    getFinishedAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/finished/customer/${customerId}`, { headers: this.headers });
     }
 
-    getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`);
+    getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`, { headers: this.headers });
     }
 
-    getAllAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
+    getAllAppointmentsByEmployeeId(employeeId: string): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
     }
 
-    getFinishedAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/finished/employee/${employeeId}`, { headers: this.headers });
+    getFinishedAppointmentsByEmployeeId(employeeId: string): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/finished/employee/${employeeId}`, { headers: this.headers });
     }
 
-    getInWorkAppointmentsByEmployeeId(employeeId: string): Observable<Appointment> {
-        return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/in-work/employee/${employeeId}`);
+    getInWorkAppointmentsByEmployeeId(employeeId: string): Observable<Appointment[]> {
+        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/in-work/employee/${employeeId}`, { headers: this.headers });
     }
     
-    reviewAppointment(appointmentId: number, review: object): Observable<{}> {
-        return this.httpClient.post(`${this.apiUrl}/appointment/${appointmentId}/review`, review);
+    reviewAppointment(appointmentId: number, review: Review): Observable<Appointment> {
+        return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment/${appointmentId}/review`, review, { headers: this.headers });
     }
 
     deleteAppointmentById(appointmentId: number): Observable<{}> {
-        return this.httpClient.delete(`${this.apiUrl}/appointment/${appointmentId}`);
+        const customerId = localStorage.getItem('id'); // logged-in user id
+        return this.httpClient.delete(`${this.apiUrl}/appointment/${customerId}/${appointmentId}`, { headers: this.headers });
     }
 
     //HAIR SERVICES:
@@ -92,16 +94,16 @@ export class HairDresserService {
         return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all`);
     }
 
-    getHairServiceById(hairServiceId: number): Observable<Hair[]> {
-        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/${hairServiceId}`);
+    getHairServiceById(hairServiceId: number): Observable<Hair> {
+        return this.httpClient.get<Hair>(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
     getHairServicesByEmployeeId(employeeId: string): Observable<Hair[]> {
         return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
     }
 
-    getMissingHairServicesByEmployeeId(employeeId: string): Observable<{}> {
-        return this.httpClient.get(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
+    getMissingHairServicesByEmployeeId(employeeId: string): Observable<Hair[]> {
+        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
     }
 
     putHairService(hairId: number, hair: object): Observable<Hair> {
@@ -139,16 +141,16 @@ export class HairDresserService {
     }
 
     //WORKING INTERVALS:
-    getAllWorkingIntervals(): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/working-interval/all`);
+    postWorkingInterval(workingInterval: object): Observable<WorkingInterval> {
+        return this.httpClient.post<WorkingInterval>(`${this.apiUrl}/working-interval`, workingInterval);
     }
 
-    postWorkingInterval(workingInterval: object): Observable<{}> {
-        return this.httpClient.post(`${this.apiUrl}/working-interval`, workingInterval);
+    getAllWorkingIntervals(): Observable<WorkingInterval[]> {
+        return this.httpClient.get<WorkingInterval[]>(`${this.apiUrl}/working-interval/all`);
     }
 
-    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: string): Observable<any> {
-        return this.httpClient.get(`${this.apiUrl}/working-interval/all/${employeeId}`);
+    getAllEmployeeWorkingIntervalsByEmployeeId(employeeId: string): Observable<WorkingInterval[]> {
+        return this.httpClient.get<WorkingInterval[]>(`${this.apiUrl}/working-interval/all/${employeeId}`);
     }
 
     deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
@@ -156,7 +158,11 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
-    //USERS (ADMIN, CUSTOMER, EMPLOYEE):
+    //USERS:
+    getAllUsers(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${this.apiUrl}/user/all`);
+    }
+
     getUserById(userId: any): Observable<User> {
         return this.httpClient.get<User>(`${this.apiUrl}/user/id?userId=${userId}`);
     }
@@ -166,13 +172,13 @@ export class HairDresserService {
     }
     
     //CUSTOMER:
-    getAllCustomers(): Observable<Customer> {
-        return this.httpClient.get<Customer>(`${this.apiUrl}/user/customer/all`);
+    getAllCustomers(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${this.apiUrl}/user/customer/all`);
     }
 
     //EMPLOYEE:
-    getAllEmployees(): Observable<any> {
-        return this.httpClient.get<any>(`${this.apiUrl}/user/employee/all`);
+    getAllEmployees(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${this.apiUrl}/user/employee/all`);
     }
 
     addHairServicesToEmployee(employeeHairService: any): Observable<{}> {
@@ -252,9 +258,5 @@ export class HairDresserService {
             role: user_role
         };
         return this.httpClient.post<User>(`${this.apiUrl}/user/assign-role`, user);
-    }
-
-    getAllUsers(): Observable<User[]> {
-        return this.httpClient.get<User[]>(`${this.apiUrl}/user/all`);
     }
 }

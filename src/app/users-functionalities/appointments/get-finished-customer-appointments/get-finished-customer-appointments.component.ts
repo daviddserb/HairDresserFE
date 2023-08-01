@@ -30,7 +30,7 @@ export class GetFinishedCustomerAppointmentsComponent implements OnInit {
       error: (e) => {
         console.log("e= ", e);
         if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+          this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error");
         } else {
           this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
         }
