@@ -153,7 +153,6 @@ export class CreateAppointmentComponent implements OnInit {
         this.popUpMessagesService.showPopUpMessage("Appointment successfully created!", "OK", "success");
         this.router.navigate(['profile/customer/appointment/in-work']);
       },
-      // ??? e.message
       error: (e) => this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error"),
     })
   }

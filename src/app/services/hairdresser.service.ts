@@ -4,7 +4,7 @@ import { Appointment } from "../models/Appointment";
 import { User } from "../models/User";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Router } from '@angular/router';
-import { Hair } from "../models/Hair";
+import { HairService } from "../models/HairService";
 import { WorkingInterval } from "../models/WorkingInterval";
 import { Review } from "../models/Review";
 
@@ -86,32 +86,32 @@ export class HairDresserService {
     }
 
     //HAIR SERVICES:
-    postHairService(hair: object): Observable<Hair> {
-        return this.httpClient.post<Hair>(`${this.apiUrl}/hairservice`, hair);
+    postHairService(hair: object): Observable<HairService> {
+        return this.httpClient.post<HairService>(`${this.apiUrl}/hairservice`, hair);
     }
 
-    getAllHairServices(): Observable<Hair[]> {
-        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all`);
+    getAllHairServices(): Observable<HairService[]> {
+        return this.httpClient.get<HairService[]>(`${this.apiUrl}/hairservice/all`);
     }
 
-    getHairServiceById(hairServiceId: number): Observable<Hair> {
-        return this.httpClient.get<Hair>(`${this.apiUrl}/hairservice/${hairServiceId}`);
+    getHairServiceById(hairServiceId: number): Observable<HairService> {
+        return this.httpClient.get<HairService>(`${this.apiUrl}/hairservice/${hairServiceId}`);
     }
 
-    getHairServicesByEmployeeId(employeeId: string): Observable<Hair[]> {
-        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
+    getHairServicesByEmployeeId(employeeId: string): Observable<HairService[]> {
+        return this.httpClient.get<HairService[]>(`${this.apiUrl}/hairservice/all/employee/${employeeId}`);
     }
 
-    getMissingHairServicesByEmployeeId(employeeId: string): Observable<Hair[]> {
-        return this.httpClient.get<Hair[]>(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
+    getMissingHairServicesByEmployeeId(employeeId: string): Observable<HairService[]> {
+        return this.httpClient.get<HairService[]>(`${this.apiUrl}/hairservice/missing/employee/${employeeId}`);
     }
 
-    putHairService(hairId: number, hair: object): Observable<Hair> {
-        return this.httpClient.put<Hair>(`${this.apiUrl}/hairservice/${hairId}`, hair);
+    putHairService(hairId: number, hair: object): Observable<HairService> {
+        return this.httpClient.put<HairService>(`${this.apiUrl}/hairservice/${hairId}`, hair);
     }
 
-    deleteHairServiceById(hairId: number): Observable<Hair> {
-        return this.httpClient.delete<Hair>(`${this.apiUrl}/hairservice/${hairId}`);
+    deleteHairServiceById(hairId: number): Observable<HairService> {
+        return this.httpClient.delete<HairService>(`${this.apiUrl}/hairservice/${hairId}`);
     }
 
     getDurationByHairServicesIds(hairServicesIds: any): Observable<{}> {
@@ -154,7 +154,6 @@ export class HairDresserService {
     }
 
     deleteWorkingIntervalById(workingIntervalId: number): Observable<{}> { 
-        console.log("deleteWorkingIntervalById(): Observable");
         return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
@@ -229,8 +228,7 @@ export class HairDresserService {
             password: user_password
         };
         return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
-        .pipe(
-            tap((response: any) => {
+        .pipe(tap((response: any) => {
                 //Save information in Local Storage as key - value (to see it: Inspect page -> Application -> Local Storage).
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('id', response.id);

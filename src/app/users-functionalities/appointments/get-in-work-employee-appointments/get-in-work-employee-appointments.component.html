@@ -32,15 +32,6 @@
             <th mat-header-cell *matHeaderCellDef>Price</th>
             <td mat-cell data-label="Price" *matCellDef="let element">{{element.price}} $</td>
         </ng-container>
-        <ng-container matColumnDef="cancel">
-            <th mat-header-cell *matHeaderCellDef>Cancel</th>
-            <td mat-cell data-label="Cancel" *matCellDef="let element">
-                <button mat-icon-button matTooltip="Cancel" matTooltipPosition="right" (click)="cancelInWorkAppointment(element.id)">
-                    <mat-icon class="icon_cancel_button">cancel</mat-icon>
-                </button>
-            </td>
-        </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

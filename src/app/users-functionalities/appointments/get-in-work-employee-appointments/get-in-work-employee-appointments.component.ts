@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-get-in-work-employee-appointments',
@@ -11,8 +10,8 @@ import * as moment from 'moment';
 })
 export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
   employeeAppointmentsInWork$: any;
-  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price', 'cancel'];
-  currentDate: any; // ??? string
+  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+  currentDate: any;
 
   constructor
   (
@@ -51,14 +50,5 @@ export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
     console.log("appointmentStartDateFormatted= ", appointmentStartDateFormatted);
     if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
     return '';
-  }
-
-  cancelInWorkAppointment(appointmentId: number) {
-    this.hairdresserService.deleteAppointmentById(appointmentId)
-    .subscribe({
-      next: (v) => console.log(v),
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
-      complete: () => this.popUpMessagesService.showPopUpMessage("Appointments successfully canceled!", "OK", "success"),
-    });
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-get-in-work-customer-appointments',

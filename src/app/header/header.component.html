@@ -96,7 +96,9 @@
                 <li class="nav-item">
                     <i class="fa fa-user" aria-hidden="true" [title]="loggedInUserInfo.username" [matMenuTriggerFor]="menu"></i>
                     <mat-menu #menu="matMenu">
-                        <button><a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true" title="Log out"></i>Log out</a></button>
+                        <button>
+                            <a (click)="logOutUser()"><i class="fa fa-sign-out" aria-hidden="true" title="Log out"></i>Log out</a>
+                        </button>
                     </mat-menu>
                 </li>
             </ul>

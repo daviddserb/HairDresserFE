@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hair } from 'src/app/models/Hair';
+import { HairService } from 'src/app/models/HairService';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { Observable, of } from "rxjs";
 import { HairDresserService } from 'src/app/services/hairdresser.service';
@@ -10,7 +10,7 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
   styleUrls: ['./get-all-hair-services.component.css']
 })
 export class GetAllHairServicesComponent implements OnInit {
-  public hairServices$!: Observable<Hair[]>;
+  public hairServices$!: Observable<HairService[]>;
 
   displayedColumns: string[] = ['#', 'name', 'duration', 'price'];
 
