@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hair Dresser Appointment (User Interface)
 
-## Getting Started
+- It's the interface for the Hair Dresser Appointment Web API (https://github.com/daviddserb/HairDresserBE).
+---
+- The code is structured with a focus on modularity and maintainability. This enables future enhancements, updates, and the addition of new features with minimal impact on existing functionality.
+---
+- Skills: Angular (TypeScript) with Material UI.
+---
+Home page (+ Register):
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/35eff56a-4c95-4b4e-9069-48ce70dd135e)
+Customer - appointment history page:
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/8bb8c84b-ab63-4a59-8f16-870de84e2d65)
+Customer - create appointment page (step 1 - choose the hair services):
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/82ad66b6-127e-4a92-b962-0a1bc711251c)
 
-First, run the development server:
+Customer - create appointment page (step 2 - select an employee):
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/46199589-bc43-4f8d-9764-2513da19d886)
+Customer - create appointment page (step 3 - pick a date):
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/303af3f6-f803-433c-a4c5-8895c21f943e)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Customer - create appointment page (step 4 - select the interval):
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![image](https://github.com/daviddserb/HairDresserFE/assets/83017887/be0b89e4-cd9c-4e2e-bff7-02e8af0b840e)
