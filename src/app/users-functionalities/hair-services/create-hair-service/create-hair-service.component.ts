@@ -26,11 +26,11 @@ export class CreateHairServiceComponent implements OnInit {
   get formGetter() { return this.formHairService.controls; }
 
   createHairService() {
-    console.log("createHairService():");
+    
 
     let infoHairService = this.formHairService.value;
-    console.log("infoHairService:");
-    console.log(infoHairService);
+    
+    
 
     this.hairdresserService.postHairService(infoHairService).subscribe({
       error: (e) => this.popUpMessagesService.showPopUpMessage("Couldn't create the hair service!", "OK", "error"),

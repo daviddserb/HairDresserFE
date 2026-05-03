@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.hairdresserService.getAllUsers().subscribe((data) => {
       this.allUsers = data;
-      console.log("all users= ", this.allUsers)
+      
     });
   }
 
@@ -43,12 +43,12 @@ export class RegisterComponent implements OnInit {
   createAccount() {
     // To get the input values in the TS
     let userInfo = this.registerForm.value;
-    console.log(userInfo);
+    
 
     this.hairdresserService.registerUser(userInfo).subscribe
     ({
-      next: (next) => console.log("next= ", next),
-      error: (error) => this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error"),
+      next: (response) => {},
+      error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to save account!", "OK", "error"),
       complete: () =>  {
         this.popUpMessagesService.showPopUpMessage("Account successfully created!", "OK", "success");
         this.router.navigate(['log-in']);
@@ -64,10 +64,10 @@ export class RegisterComponent implements OnInit {
 
   // Custom Async Validation
   uniqueUsername(control: FormControl): Promise<any> | Observable<any> {
-    console.log("####### uniqueUsername:");
+    
     const response = new Promise((resolve, reject) => {
       const usernameExists = this.allUsers.some((user) => user.username === control.value);
-      console.log("usernameExists=", usernameExists);
+      
       if (usernameExists === true) {
         resolve({uniqueUsername: true});
       } else {

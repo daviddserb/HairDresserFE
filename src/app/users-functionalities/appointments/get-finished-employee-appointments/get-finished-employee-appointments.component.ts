@@ -21,12 +21,8 @@ export class GetFinishedEmployeeAppointmentsComponent implements OnInit {
     let employeeId = String(localStorage.getItem('id'));
     this.hairdresserService.getFinishedAppointmentsByEmployeeId(employeeId)
     .subscribe({
-      next: (res) =>  {
-        console.log("res= ", res);
-        this.employeeAppointmentsFinished$ = res;
-      },
+      next: (res) =>  { this.employeeAppointmentsFinished$ = res; },
       error: (e) => {
-        console.log("e= ", e);
         if (typeof e.error == "object") {
           this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error");
         } else {

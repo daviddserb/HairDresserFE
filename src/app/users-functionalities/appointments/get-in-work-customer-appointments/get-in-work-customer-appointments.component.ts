@@ -21,7 +21,7 @@ export class GetInWorkCustomerAppointmentsComponent implements OnInit {
   )
   { 
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    console.log("today= ", this.currentDate);
+    
   }
 
   ngOnInit(): void {
@@ -29,12 +29,8 @@ export class GetInWorkCustomerAppointmentsComponent implements OnInit {
 
     this.hairdresserService.getInWorkAppointmentsByCustomerId(customerId)
     .subscribe({
-      next: (res) =>  {
-        console.log("res= ", res);
-        this.customerAppointmentsInWork$ = res;
-      },
+      next: (res) =>  { this.customerAppointmentsInWork$ = res; },
       error: (e) => {
-        console.log("e= ", e);
         if (typeof e.error == "object") {
           this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
         } else {
@@ -46,9 +42,9 @@ export class GetInWorkCustomerAppointmentsComponent implements OnInit {
 
   // If start date of the appointment is today => change it's color.
   checkIfStartDateIsToday(appointmentStartDate: Date): string {
-    // console.log("appointmentStartDate= ", appointmentStartDate);
+    // 
     const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
-    // console.log("appointmentStartDateFormatted= ", appointmentStartDateFormatted);
+    // 
     if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
     return '';
   }
@@ -56,8 +52,8 @@ export class GetInWorkCustomerAppointmentsComponent implements OnInit {
   cancelAppointment(appointmentId: number) {
     this.hairdresserService.deleteAppointmentById(appointmentId)
     .subscribe({
-      next: (v) => console.log(v),
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
+      next: (res) => {},
+      error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
       complete: () => this.popUpMessagesService.showPopUpMessage("Appointments successfully canceled!", "OK", "success"),
     });
   }

@@ -23,12 +23,8 @@ export class GetFinishedCustomerAppointmentsComponent implements OnInit {
 
     this.hairdresserService.getFinishedAppointmentsByCustomerId(customerId)
     .subscribe({
-      next: (res) =>  {
-        console.log("res= ", res);
-        this.customerAppointmentsFinished$ = res;
-      },
+      next: (res) =>  { this.customerAppointmentsFinished$ = res; },
       error: (e) => {
-        console.log("e= ", e);
         if (typeof e.error == "object") {
           this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error");
         } else {

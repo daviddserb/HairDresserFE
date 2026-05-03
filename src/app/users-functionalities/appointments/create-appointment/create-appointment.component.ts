@@ -38,9 +38,9 @@ export class CreateAppointmentComponent implements OnInit {
   selectedDate!: any;
 
   weekendFilter = (d: Date | null): boolean => {
-    console.log("-> weekendFilter");
+    
     const day = (d || new Date()).getDay();
-    console.log("d= ", d);
+    
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
@@ -63,10 +63,10 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   getDataBySelectedHairServices() {
-    console.log("getDataBySelectedHairServices()");
+    
 
-    console.log("selected hair services= ", this.selection.selected);
-    console.log("selected hair services ids= ", this.selection.selected.map(hairServices => hairServices.id));
+    
+    
 
     this.getEmployeesForAppointment();
     this.getDurationForAppointment();
@@ -74,7 +74,7 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   getEmployeesForAppointment() {
-    console.log("-> getEmployeesForAppointment");
+    
     
     this.hairdresserService.getEmployeesByHairServicesIds(this.selection.selected.map(hairServices => hairServices.id))
     .subscribe({
@@ -94,32 +94,32 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   saveEmployeeId(employeeId: number) {
-    console.log("saveEmployeeId():");
+    
 
     this.selectedEmployeeId = employeeId;
-    console.log("selected employee id= ", this.selectedEmployeeId);
+    
 
     this.popUpMessagesService.showPopUpMessage("Employee saved", "OK", "success");
   }
 
   getSelectedDate(date: any) {
-    console.log("getSelectedDate():");
-    console.log(date.value);
+    
+    
 
     this.selectedDate = date.value;
-    console.log(this.selectedDate.getFullYear()); // nr. an
-    console.log(this.selectedDate.getMonth()); // nr. lunii dar numaratoarea incepe de la 0.
-    console.log(this.selectedDate.getDay()); // nr. zilei a saptamanii.
-    console.log(this.selectedDate.getDate()); // nr. zilei a lunii.
+    
+    
+    
+    
   }
 
   getValidIntervalsForAppointment() {
-    console.log("getValidIntervalsForAppointment()")
+    
 
     this.hairdresserService.getValidIntervals(this.selectedEmployeeId, this.selectedDate, this.appointmentDuration, this.customerId)
     .subscribe({
       next: (res) => {
-        console.log("next - valid intervals (res)= ", res);
+        
         this.validIntervals = res;
       },
       error: (e) => this.popUpMessagesService.showPopUpMessage("The employee has no working intervals in this day", "OK", "error"),
@@ -127,15 +127,15 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   createAppointment(interval: any) {
-    console.log("createAppointment()");
     
-    console.log("interval= ", interval);
+    
+    
 
     type ObjectKey = keyof typeof interval;
     const startDateProp = 'startDate' as ObjectKey;
     const endDateProp = 'endDate' as ObjectKey;
-    console.log("start date= ", interval[startDateProp]);
-    console.log("end date= ", interval[endDateProp]);
+    
+    
 
     let appointment: Appointment = {
       customerId: this.customerId,
@@ -145,7 +145,7 @@ export class CreateAppointmentComponent implements OnInit {
       endDate: interval[endDateProp],
       price: this.appointmentPrice
     }
-    console.log("appointment= ", appointment);
+    
 
     this.hairdresserService.postAppointment(appointment)
     .subscribe({

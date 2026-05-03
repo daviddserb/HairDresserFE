@@ -45,12 +45,12 @@ export class AddHairServiceComponent implements OnInit {
   }
 
   saveHairServicesForEmployee() {
-    console.log("saveHairServicesForEmployee()");
-    console.log("employee id = ", this.employeeId);
+    
+    
 
-    console.log("selected hair services= ", this.selection.selected);
+    
     let hairServicesIds = this.selection.selected.map(hairServices => hairServices.id);
-    console.log("selected hair services ids= ", hairServicesIds)
+    
 
     let employeeHairService = {
       employeeId: this.employeeId,
@@ -60,7 +60,7 @@ export class AddHairServiceComponent implements OnInit {
     this.hairdresserService.addHairServicesToEmployee(employeeHairService)
     .subscribe({
       next: (res) =>  {
-        console.log("next, res= ", res);
+        
         this.popUpMessagesService.showPopUpMessage("Successfully added the selected hair services!", "OK", "success");
       },
       error: (e) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),

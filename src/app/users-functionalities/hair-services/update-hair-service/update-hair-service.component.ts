@@ -26,13 +26,13 @@ export class UpdateHairServiceComponent implements OnInit {
 
   ngOnInit(): void {
     // Get the id, from the route, of the selected hair service.
-    console.log("this.router.snapshot.params['id']");
-    console.log(this.router.snapshot.params['id']);
+    
+    
     this.hairServiceId = this.router.snapshot.params['id'];
 
     this.hairdresserService.getHairServiceById(this.router.snapshot.params['id'])
     .subscribe((result) => {
-      console.log("result:", result);
+      
 
       // Extract the value from the object's properties.
       const name = Object(result)["name"];
@@ -55,14 +55,14 @@ export class UpdateHairServiceComponent implements OnInit {
   get formGetter() { return this.formHairServiceEdited.controls; }
 
   updateHairService() {
-    console.log("updateHairService():");
+    
 
     let infoHairService = this.formHairServiceEdited.value;
-    console.log("infoHairService:");
-    console.log(infoHairService);
+    
+    
 
-    console.log("hairServiceId:")
-    console.log(this.hairServiceId);
+    
+    
 
     this.hairdresserService.putHairService(this.hairServiceId, infoHairService)
     .subscribe({

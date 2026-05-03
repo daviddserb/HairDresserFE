@@ -21,7 +21,7 @@ export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
   )
   {
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    console.log("today= ", this.currentDate);
+    
   }
 
   ngOnInit(): void {
@@ -29,25 +29,21 @@ export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
 
     this.hairdresserService.getInWorkAppointmentsByEmployeeId(employeeId)
     .subscribe({
-      next: (res) =>  {
-        console.log("res= ", res);
-        this.employeeAppointmentsInWork$ = res;
-      },
-      error: (e) => {
-        console.log("e= ", e);
-        if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+      next: (res) =>  { this.employeeAppointmentsInWork$ = res; },
+      error: (err) => {
+        if (typeof err.error == "object") {
+          this.popUpMessagesService.showPopUpMessage(err.error.Message, "OK", "error");
         } else {
-          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+          this.popUpMessagesService.showPopUpMessage(err.error, "OK", "error");
         }
       },
     });
   }
 
   checkIfStartDateIsToday(appointmentStartDate: Date): string {
-    console.log("appointmentStartDate= ", appointmentStartDate);
+    
     const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
-    console.log("appointmentStartDateFormatted= ", appointmentStartDateFormatted);
+    
     if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
     return '';
   }

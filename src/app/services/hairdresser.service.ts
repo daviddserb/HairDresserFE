@@ -237,7 +237,7 @@ export class HairDresserService {
                 //Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
                 this._isLoggedIn$.next(true);
 
-                console.log("token from back-end: ", response.token);
+                
             })
         );
     }

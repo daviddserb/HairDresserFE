@@ -28,23 +28,23 @@ export class GetAllHairServicesComponent implements OnInit {
       this.hairdresserService.getUserWithRoleById(loggedInUserId)
       .subscribe({
         next: (response) => {
-          console.log("loggedInUserInfo= ", response);
           this.loggedInUserInfo = response;
 
           if (this.loggedInUserInfo.role.includes('admin')) {
             this.displayedColumns.push('actions');
           }
         },
-        error: (e) => console.log("Wrong id!")
+        error: (err) => {},
       });
     }
     
     this.hairServices$ = this.hairdresserService.getAllHairServices();
+    // ???TODO
     // ??? Se randeaza pe pagina, dar am eroare in consola de pe pagina: get-all-hair-services.component.ts:29  ERROR TypeError: Cannot read properties of undefined (reading 'length')
     // this.hairdresserService.getAllHairServices().subscribe
     // ({
     //   next: (data) => {
-    //     console.log("data=", data);
+    //     
     //     // Convert the array (data) to an Observable using the `of` operator
     //     this.hairServices$ = of(data);
     //   },
@@ -55,7 +55,7 @@ export class GetAllHairServicesComponent implements OnInit {
   deleteHairService(hairServiceId: number) {
     this.hairdresserService.deleteHairServiceById(hairServiceId)
     .subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Could not delete the hair service!", "OK", "error"),
+      error: (err) => this.popUpMessagesService.showPopUpMessage("Could not delete the hair service!", "OK", "error"),
       complete: () => {
         window.location.reload();
         this.popUpMessagesService.showPopUpMessage("Hair service deleted!", "OK", "success")

@@ -21,7 +21,6 @@ export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
     this.getWorkingIntervals();
   }
 
-
   getWorkingIntervals() {
     let employeeId = String(localStorage.getItem('id'));
 
@@ -31,13 +30,11 @@ export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
         res.sort(this.sortByDay);
         this.employeeWorkingIntervals$ = res;
       },
-      error: (e) => {
-        console.log("error, e= ", e);
-        
-        if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+      error: (err) => {
+        if (typeof err.error == "object") {
+          this.popUpMessagesService.showPopUpMessage(err.error.Message, "OK", "error");
         } else {
-          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+          this.popUpMessagesService.showPopUpMessage(err.error, "OK", "error");
         }
       },
     });
@@ -48,13 +45,10 @@ export class GetAllEmployeeWorkingIntervalsComponent implements OnInit {
   }
 
   deleteWorkingInterval(workingIntervalId: number) {
-    console.log("working interval id =", workingIntervalId);
-    
     this.hairdresserService.deleteWorkingIntervalById(workingIntervalId)
     .subscribe({
       next: (res) => this.popUpMessagesService.showPopUpMessage("Successfully deleted the selected working interval!", "OK", "success"),
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),
-    });;
+      error: (err) => this.popUpMessagesService.showPopUpMessage("Error!", "OK", "error"),
+    });
   }
-
 }

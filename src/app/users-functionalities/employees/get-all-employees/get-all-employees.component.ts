@@ -15,7 +15,7 @@ export class GetAllEmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.hairdresserService.getAllEmployees().subscribe(res => {
-      console.log("all employees= ", res);
+      
       this.allEmployees$ = res;
     });
   }

@@ -20,7 +20,7 @@ export class LogInComponent {
     ) {}
 
   loginUser(item: any) {
-    console.log("item:", item);
+    
     
     this.hairdresserService.logInUser(item.username, item.password)
     .subscribe({
@@ -39,8 +39,8 @@ export class LogInComponent {
 
   decodeToken(token: string): MyToken {
     const decodedToken = jwt_decode<MyToken>(token);
-    console.log("decoded token:", decodedToken);
-    //console.log("role= (" + decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] + ")");
+    
+    //
     return jwt_decode(token);
   }
 }

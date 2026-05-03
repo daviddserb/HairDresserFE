@@ -28,7 +28,7 @@ export class CreateWorkingIntervalComponent implements OnInit {
   get formGetter() { return this.formWorkingInterval.controls; }
 
   createWorkingInterval() {
-    console.log("form= ", this.formWorkingInterval.value);
+    
 
     let infoWorkingInterval = this.formWorkingInterval.value;
     infoWorkingInterval.employeeId = String(localStorage.getItem('id'));

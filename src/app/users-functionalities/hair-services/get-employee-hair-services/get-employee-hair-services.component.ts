@@ -26,7 +26,6 @@ export class GetEmployeeHairServicesComponent implements OnInit {
     .subscribe({
       next: (res) =>  {
         this.employeeHairServices$ = res;
-
         if (Object.keys(res).length === 0) this.popUpMessagesService.showPopUpMessage("Employee id doesn't exist!", "OK", "error");
       }
     });

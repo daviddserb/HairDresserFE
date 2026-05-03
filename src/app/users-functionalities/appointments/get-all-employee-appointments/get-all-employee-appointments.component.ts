@@ -24,13 +24,8 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
     let employeeId = String(localStorage.getItem('id'));
     this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
     .subscribe({
-      next: (res) =>  {
-        console.log("res= ", res);
-        this.allEmployeeAppointments$ = res;
-      },
+      next: (res) => { this.allEmployeeAppointments$ = res; },
       error: (e) => {
-        console.log("e= ", e);
-        
         if (typeof e.error == "object") {
           this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
         } else {
@@ -39,5 +34,4 @@ export class GetAllEmployeeAppointmentsComponent implements OnInit {
       },
     });
   }
-
 }

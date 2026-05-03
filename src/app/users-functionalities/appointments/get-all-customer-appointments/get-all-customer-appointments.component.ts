@@ -27,15 +27,15 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
     this.allCustomerAppointments$ = this.hairdresserService.getAllAppointmentsByCustomerId(customerId)
     .pipe(
       map(customerAppointments => {
-        console.log("customer appointments=", customerAppointments);
+        
         let customerAppointmentsNotCanceled = customerAppointments.filter(customerAppointment => customerAppointment.isDeleted === null);
-        console.log("customer appointments not canceld=", customerAppointmentsNotCanceled);
+        
         return customerAppointmentsNotCanceled;
       })
     );
     //??? EROARE: Understanding RxJS map, mergeMap, switchMap and concatMap -> probabil ii pt. ca am un observable de observable din cauza lui map
     // .subscribe({
-    //   next: (res) => console.log("next, res = ", res),
+    //   next: (res) => 
     //   error: (e) => this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error"),
     // });
   }
@@ -57,8 +57,8 @@ export class GetAllCustomerAppointmentsComponent implements OnInit {
   cancelInWorkAppointment(appointmentId: number) {
     this.hairdresserService.deleteAppointmentById(appointmentId)
     .subscribe({
-      next: (v) => console.log(v),
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
+      next: (response) => {},
+      error: (error) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
       complete: () => this.popUpMessagesService.showPopUpMessage("Appointments successfully canceled!", "OK", "success"),
     });
   }
