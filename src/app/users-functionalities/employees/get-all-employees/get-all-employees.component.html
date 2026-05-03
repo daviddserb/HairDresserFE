@@ -24,7 +24,7 @@
             <th mat-header-cell *matHeaderCellDef>Working Intervals</th>
             <td mat-cell data-label="Working Intervals" *matCellDef="let element">
                 <div *ngFor="let workingInterval of element.employeeWorkingIntervals">
-                    {{workingInterval.workingDay.name}}: {{workingInterval.startTime}} - {{workingInterval.endTime}}
+                    {{ WorkingDay[workingInterval.workingDay] }}: {{workingInterval.startTime}} - {{workingInterval.endTime}}
                 </div>
             </td>
         </ng-container>
