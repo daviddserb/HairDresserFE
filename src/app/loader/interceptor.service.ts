@@ -15,7 +15,7 @@ export class InterceptorService implements HttpInterceptor {
     //First set the loader to true so the spinner will be visible.
     this.loaderService.showLoader();
 
-    //Return the next handle to complete the api cal.
+    //Return the next handle to complete the api call.
     return next.handle(req).pipe(
       //When the api call is completed => set off the spinner.
       finalize(

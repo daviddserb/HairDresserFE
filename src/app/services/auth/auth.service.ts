@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   isAuthenticated() {
-    
     if (localStorage.getItem('token')) return true;
     return false;
   }

@@ -91,7 +91,7 @@ export class HairDresserService {
     }
 
     getAllHairServices(): Observable<HairService[]> {
-        return this.httpClient.get<HairService[]>(`${this.apiUrl}/hairservice/all`);
+        return this.httpClient.get<HairService[]>(`${this.apiUrl}/hairservice/all`, { headers: this.headers });
     }
 
     getHairServiceById(hairServiceId: number): Observable<HairService> {

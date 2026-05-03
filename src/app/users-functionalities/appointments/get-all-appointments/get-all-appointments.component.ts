@@ -3,7 +3,6 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Appointment } from 'src/app/models/Appointment';
 
 @Component({
   selector: 'app-get-all-appointments',
@@ -13,7 +12,6 @@ import { Appointment } from 'src/app/models/Appointment';
 export class GetAllAppointmentsComponent implements OnInit {
   displayedColumns: string[] = ['#', 'employeeName', 'customerName','startDate', 'endDate', 'hairServices', 'price', 'review', 'canceled'];
   totalRatingStars: number = 5;
-
   allAppointments$: any;
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -22,10 +20,9 @@ export class GetAllAppointmentsComponent implements OnInit {
   constructor(public hairdresserService: HairDresserService) { }
 
   ngOnInit(): void {
-    //??? hard-coded pageNumber and pageSize in getAllAppointments
+    //hard-coded pageNumber and pageSize
     this.hairdresserService.getAllAppointments(1, 1000)
     .subscribe(res => {
-      
       this.allAppointments$ = new MatTableDataSource(res);
       this.allAppointments$.paginator = this.paginator;
       this.allAppointments$.sort = this.sort;

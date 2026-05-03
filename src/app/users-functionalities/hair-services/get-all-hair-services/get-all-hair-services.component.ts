@@ -13,7 +13,6 @@ export class GetAllHairServicesComponent implements OnInit {
   public hairServices$!: Observable<HairService[]>;
 
   displayedColumns: string[] = ['#', 'name', 'duration', 'price'];
-
   loggedInUserInfo!: any;
 
   constructor(
@@ -38,18 +37,11 @@ export class GetAllHairServicesComponent implements OnInit {
       });
     }
     
-    this.hairServices$ = this.hairdresserService.getAllHairServices();
-    // ???TODO
-    // ??? Se randeaza pe pagina, dar am eroare in consola de pe pagina: get-all-hair-services.component.ts:29  ERROR TypeError: Cannot read properties of undefined (reading 'length')
-    // this.hairdresserService.getAllHairServices().subscribe
-    // ({
-    //   next: (data) => {
-    //     
-    //     // Convert the array (data) to an Observable using the `of` operator
-    //     this.hairServices$ = of(data);
-    //   },
-    //   error: (error) => console.error(error),
-    // });
+    this.hairdresserService.getAllHairServices().subscribe
+    ({
+      next: (response) => this.hairServices$ = of(response),
+      error: (error) => console.error(error),
+    });
   }
 
   deleteHairService(hairServiceId: number) {

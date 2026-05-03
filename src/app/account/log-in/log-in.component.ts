@@ -29,7 +29,7 @@ export class LogInComponent {
         const token = 'token' as ObjectKey;
         this.decodeToken(response[token]);
       },
-      error: (e) => this.popUpMessagesService.showPopUpMessage("This account doesn't exist!", "OK", "error"),
+      error: (err) => this.popUpMessagesService.showPopUpMessage("This account doesn't exist!", "OK", "error"),
       complete: () =>  {
         this.popUpMessagesService.showPopUpMessage("Successfully logged in your account!", "OK", "success");
         this.router.navigate(['/profile']);
@@ -38,9 +38,8 @@ export class LogInComponent {
   }
 
   decodeToken(token: string): MyToken {
+    //keep for debugging purposes
     const decodedToken = jwt_decode<MyToken>(token);
-    
-    //
     return jwt_decode(token);
   }
 }
