@@ -5,70 +5,52 @@ import { ActivatedRoute } from '@angular/router'
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 
 @Component({
-  selector: 'app-update',
-  templateUrl: './update-hair-service.component.html',
-  styleUrls: ['./update-hair-service.component.css']
+    selector: 'app-update',
+    templateUrl: './update-hair-service.component.html',
+    styleUrls: ['./update-hair-service.component.css']
 })
 export class UpdateHairServiceComponent implements OnInit {
-  formHairServiceEdited = new FormGroup({
-    name: new FormControl(),
-    durationInMinutes: new FormControl(),
-    price: new FormControl(),
-  });
+    formHairServiceEdited = new FormGroup({
+        name: new FormControl(),
+        durationInMinutes: new FormControl(),
+        price: new FormControl(),
+    });
 
   hairServiceId!: number;
 
-  constructor(
-    private hairdresserService: HairDresserService,
-    private router: ActivatedRoute,
-    private popUpMessagesService: PopUpMessagesService
-    ) {}
+    constructor(
+        private hairdresserService: HairDresserService,
+        private router: ActivatedRoute,
+        private popUpMessagesService: PopUpMessagesService) {}
 
-  ngOnInit(): void {
-    // Get the id, from the route, of the selected hair service.
-    
-    
-    this.hairServiceId = this.router.snapshot.params['id'];
+    get formGetter() { return this.formHairServiceEdited.controls; }
 
-    this.hairdresserService.getHairServiceById(this.router.snapshot.params['id'])
-    .subscribe((result) => {
-      
+    ngOnInit(): void {
+        // Get the id, from the route, of the selected hair service.
+        this.hairServiceId = this.router.snapshot.params['id'];
 
-      // Extract the value from the object's properties.
-      const name = Object(result)["name"];
-      const duration = Object(result)["duration"];
-      const price = Object(result)["price"];
+        this.hairdresserService.getHairServiceById(this.router.snapshot.params['id'])
+        .subscribe((result) => {
+            const name = Object(result)["name"];
+            const duration = Object(result)["duration"];
+            const durationSplit = duration.split(':');
+            const durationInMinutes = (+durationSplit[0]) * 60 + (+durationSplit[1]);
+            const price = Object(result)["price"];
 
-      const durationSplit = duration.split(':'); // split it at the colons
-      const durationInMinutes = (+durationSplit[0]) * 60 + (+durationSplit[1]);
+            this.formHairServiceEdited = new FormGroup({
+                name: new FormControl(name, Validators.required),
+                durationInMinutes: new FormControl(durationInMinutes, Validators.required),
+                price: new FormControl(price, Validators.required),
+            });
+        });
+    }
 
-      //Add the values from the selected hair service.
-      this.formHairServiceEdited = new FormGroup({
-        name: new FormControl(name, Validators.required),
-        durationInMinutes: new FormControl(durationInMinutes, Validators.required),
-        price: new FormControl(price, Validators.required),
-      });
-    });
-
-  }
-
-  get formGetter() { return this.formHairServiceEdited.controls; }
-
-  updateHairService() {
-    
-
-    let infoHairService = this.formHairServiceEdited.value;
-    
-    
-
-    
-    
-
-    this.hairdresserService.putHairService(this.hairServiceId, infoHairService)
-    .subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to update the hair service!", "OK", "error"),
-      complete: () => this.popUpMessagesService.showPopUpMessage("Hair service updated!", "OK", "success"),
-    });
-  }
-
+    updateHairService() {
+        let infoHairService = this.formHairServiceEdited.value;
+        this.hairdresserService.putHairService(this.hairServiceId, infoHairService)
+        .subscribe({
+            error: (e) => this.popUpMessagesService.showPopUpMessage("Failed to update the hair service!", "OK", "error"),
+            complete: () => this.popUpMessagesService.showPopUpMessage("Hair service updated!", "OK", "success"),
+        });
+    }
 }

@@ -4,47 +4,42 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-get-in-work-employee-appointments',
-  templateUrl: './get-in-work-employee-appointments.component.html',
-  styleUrls: ['./get-in-work-employee-appointments.component.css']
+    selector: 'app-get-in-work-employee-appointments',
+    templateUrl: './get-in-work-employee-appointments.component.html',
+    styleUrls: ['./get-in-work-employee-appointments.component.css']
 })
 export class GetInWorkEmployeeAppointmentsComponent implements OnInit {
-  employeeAppointmentsInWork$: any;
-  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
-  currentDate: any;
+    employeeAppointmentsInWork$: any;
+    displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+    currentDate: any;
 
-  constructor
-  (
-    private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-    private datePipe: DatePipe
-  )
-  {
-    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    
-  }
+    constructor(
+        private hairdresserService: HairDresserService,
+        private popUpMessagesService: PopUpMessagesService,
+        private datePipe: DatePipe)
+    {
+        this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+    }
 
-  ngOnInit(): void {
-    let employeeId = String(localStorage.getItem('id'));
+    ngOnInit(): void {
+        let employeeId = String(localStorage.getItem('id'));
 
-    this.hairdresserService.getInWorkAppointmentsByEmployeeId(employeeId)
-    .subscribe({
-      next: (res) =>  { this.employeeAppointmentsInWork$ = res; },
-      error: (err) => {
-        if (typeof err.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(err.error.Message, "OK", "error");
-        } else {
-          this.popUpMessagesService.showPopUpMessage(err.error, "OK", "error");
-        }
-      },
-    });
-  }
+        this.hairdresserService.getInWorkAppointmentsByEmployeeId(employeeId)
+        .subscribe({
+            next: (res) =>  { this.employeeAppointmentsInWork$ = res; },
+            error: (err) => {
+                if (typeof err.error == "object") {
+                this.popUpMessagesService.showPopUpMessage(err.error.Message, "OK", "error");
+                } else {
+                this.popUpMessagesService.showPopUpMessage(err.error, "OK", "error");
+                }
+            },
+        });
+    }
 
-  checkIfStartDateIsToday(appointmentStartDate: Date): string {
-    
-    const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
-    
-    if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
-    return '';
-  }
+    checkIfStartDateIsToday(appointmentStartDate: Date): string {
+        const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
+        if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
+        return '';
+    }
 }

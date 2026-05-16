@@ -6,7 +6,7 @@
         </ng-container>
         <ng-container matColumnDef="workingDay">
             <th mat-header-cell *matHeaderCellDef>Day</th>
-            <td mat-cell data-label="Day" *matCellDef="let element">{{element.workingDay.name}}</td>
+            <td mat-cell data-label="Day" *matCellDef="let element">{{WorkingDay[element.workingDay]}}</td>
         </ng-container>
         <ng-container matColumnDef="startTime">
             <th mat-header-cell *matHeaderCellDef>Start</th>

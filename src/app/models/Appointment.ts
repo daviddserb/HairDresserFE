@@ -14,6 +14,5 @@ export interface Appointment {
     
     isDeleted?: string;
 
-    // ???
     review?: object;
 }

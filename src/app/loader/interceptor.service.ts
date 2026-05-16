@@ -4,23 +4,24 @@ import { finalize, Observable, timeout } from 'rxjs';
 import { LoaderService } from './loader.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(public loaderService: LoaderService) { }
-  
-  //This method will be invoked every time http call is detected.
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //First set the loader to true so the spinner will be visible.
-    this.loaderService.showLoader();
+    constructor(public loaderService: LoaderService) {}
+    
+    //This method will be invoked every time http call is detected.
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        //First set the loader to true so the spinner will be visible.
+        this.loaderService.showLoader();
 
-    //Return the next handle to complete the api call.
-    return next.handle(req).pipe(
-      //When the api call is completed => set off the spinner.
-      finalize(
-        () => this.loaderService.hideLoader()
-      ));
-  }
-
+        //Return the next handle to complete the API call.
+        return next.handle(req)
+        .pipe(
+            finalize(
+                //When the API call is completed => set off the spinner.
+                () => this.loaderService.hideLoader()
+            )
+        );
+    }
 }

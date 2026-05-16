@@ -4,57 +4,51 @@ import { HairDresserService } from 'src/app/services/hairdresser.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-get-in-work-customer-appointments',
-  templateUrl: './get-in-work-customer-appointments.component.html',
-  styleUrls: ['./get-in-work-customer-appointments.component.css']
+    selector: 'app-get-in-work-customer-appointments',
+    templateUrl: './get-in-work-customer-appointments.component.html',
+    styleUrls: ['./get-in-work-customer-appointments.component.css']
 })
 export class GetInWorkCustomerAppointmentsComponent implements OnInit {
-  customerAppointmentsInWork$: any;
-  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'cancel'];
-  currentDate: any; // ??? string
+    customerAppointmentsInWork$: any;
+    displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'cancel'];
+    currentDate: any;
   
-  constructor
-  (
-    private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-    private datePipe: DatePipe
-  )
-  { 
-    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    
-  }
-
-  ngOnInit(): void {
-    let customerId = String(localStorage.getItem('id'));
-
-    this.hairdresserService.getInWorkAppointmentsByCustomerId(customerId)
-    .subscribe({
-      next: (res) =>  { this.customerAppointmentsInWork$ = res; },
-      error: (e) => {
-        if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
-        } else {
-          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+    constructor(
+        private hairdresserService: HairDresserService,
+        private popUpMessagesService: PopUpMessagesService,
+        private datePipe: DatePipe)
+        { 
+            this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
         }
-      },
-    });
-  }
 
-  // If start date of the appointment is today => change it's color.
-  checkIfStartDateIsToday(appointmentStartDate: Date): string {
-    // 
-    const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
-    // 
-    if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
-    return '';
-  }
+    ngOnInit(): void {
+        let customerId = String(localStorage.getItem('id'));
 
-  cancelAppointment(appointmentId: number) {
-    this.hairdresserService.deleteAppointmentById(appointmentId)
-    .subscribe({
-      next: (res) => {},
-      error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
-      complete: () => this.popUpMessagesService.showPopUpMessage("Appointments successfully canceled!", "OK", "success"),
-    });
-  }
+        this.hairdresserService.getInWorkAppointmentsByCustomerId(customerId)
+        .subscribe({
+            next: (res) =>  { this.customerAppointmentsInWork$ = res; },
+            error: (e) => {
+                if (typeof e.error == "object") {
+                this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+                } else {
+                this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+                }
+            },
+        });
+    }
+
+    checkIfStartDateIsToday(appointmentStartDate: Date): string {
+        const appointmentStartDateFormatted = this.datePipe.transform(appointmentStartDate, 'dd/MM/yyyy');
+        if (appointmentStartDateFormatted === this.currentDate) return 'green-text';
+        return '';
+    }
+
+    cancelAppointment(appointmentId: number) {
+        this.hairdresserService.deleteAppointmentById(appointmentId)
+        .subscribe({
+            next: (res) => {},
+            error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to cancel appointment!", "OK", "error"),
+            complete: () => this.popUpMessagesService.showPopUpMessage("Appointments successfully canceled!", "OK", "success"),
+        });
+    }
 }

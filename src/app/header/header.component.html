@@ -12,7 +12,6 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <!-- If user is not logged in: -->
         <ng-container *ngIf="loggedInUserInfo==null; else isLoggedIn">
-            <!-- ms-auto = set text to right side -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" routerLinkActive="active">
                     <a routerLink="/register">REGISTER</a>
@@ -27,8 +26,6 @@
         <ng-template #isLoggedIn>
             <ul class="navbar-nav ms-auto" *ngIf="loggedInUserInfo.role.includes('admin')">
                 <li class="nav-item">
-                    <!-- routerLinkActive is a directive for adding or removing classes from html element that is bound to routerLink. So, we can toggle active classes for active router links based on the current router state. -->
-                    <!-- Because the 'Create hair service' has the 'hair-service' route and the 'Hair services' has the 'hair-service/all' route that means we have a Parent Child relationship. So, the parent will be active whenever one of it's child will be active (because of routerLinkActive). To change that, we use routerLinkActiveOptions directive. -->
                     <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                         routerLink="admin/hair-service">Create hair service</a>
                 </li>
@@ -72,7 +69,6 @@
                 <li class="nav-item">
                     <a routerLinkActive="active" [matMenuTriggerFor]="customerAppointmentsDropDown">Appointments</a>
                     <mat-menu #customerAppointmentsDropDown="matMenu">
-                        <!-- !!! -->
                         <a mat-menu-item routerLinkActive="active" routerLink="customer/appointment/finished">Finished</a>
                         <a mat-menu-item routerLinkActive="active" routerLink="customer/appointment/in-work">In Work</a>
                     </mat-menu>
@@ -90,8 +86,6 @@
             </ul>
 
             <!-- For every logged in user: -->
-            <!-- !!! Pana acum, textul princial, adica actiunile de la useri (create hair services, working intervals, etc...) erau puse la dreapta de tot in navbar, pt. ca au clasa ms-auto.
-            Acum, chiar daca au tot aceeasi clasa, dupa ce am pus si butonul de log out tot pe ms-auto, actiunile de la useri s-au indreptat cumva spre mijloc. -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <i class="fa fa-user" aria-hidden="true" [title]="loggedInUserInfo.username" [matMenuTriggerFor]="menu"></i>

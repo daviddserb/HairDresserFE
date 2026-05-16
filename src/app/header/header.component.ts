@@ -2,44 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { HairDresserService } from '../services/hairdresser.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loggedInUserInfo!: any;
+    loggedInUserInfo!: any;
 
-  constructor(private hairdresserService: HairDresserService) {}
+    constructor(private hairdresserService: HairDresserService) {}
 
-  ngOnInit(): void {
-    let loggedInUserId = localStorage.getItem('id');
-    
-    if (loggedInUserId != null) {
-      this.hairdresserService.getUserWithRoleById(loggedInUserId)
-      .subscribe({
-        next: (response) => {
-          
-          this.loggedInUserInfo = response;
-        },
-        error: (e) =>  {},
-      });
-    }
-  }
-
-  assignCustomerRole() {
-    
-    this.hairdresserService.assignRole(this.loggedInUserInfo.username, "customer")
-    .subscribe({
-      next: (response) => {
+    ngOnInit(): void {
+        let loggedInUserId = localStorage.getItem('id');
         
-        window.location.reload();
-      },
-      error: (e) =>  {},
-    });
-  }
+        if (loggedInUserId != null) {
+            this.hairdresserService.getUserWithRoleById(loggedInUserId)
+            .subscribe({
+                next: (response) => this.loggedInUserInfo = response,
+            });
+        }
+    }
 
-  logOutUser() {
-    this.hairdresserService.logOutUser();
-  }
+    assignCustomerRole() {
+        this.hairdresserService.assignRole(this.loggedInUserInfo.username, "customer")
+        .subscribe({
+            next: (response) => window.location.reload(),
+        });
+    }
 
+    logOutUser() {
+        this.hairdresserService.logOutUser();
+    }
 }

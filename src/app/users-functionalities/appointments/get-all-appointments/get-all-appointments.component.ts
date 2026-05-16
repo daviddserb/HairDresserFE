@@ -5,27 +5,27 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-get-all-appointments',
-  templateUrl: './get-all-appointments.component.html',
-  styleUrls: ['./get-all-appointments.component.css']
+    selector: 'app-get-all-appointments',
+    templateUrl: './get-all-appointments.component.html',
+    styleUrls: ['./get-all-appointments.component.css']
 })
 export class GetAllAppointmentsComponent implements OnInit {
-  displayedColumns: string[] = ['#', 'employeeName', 'customerName','startDate', 'endDate', 'hairServices', 'price', 'review', 'canceled'];
-  totalRatingStars: number = 5;
-  allAppointments$: any;
+    displayedColumns: string[] = ['#', 'employeeName', 'customerName','startDate', 'endDate', 'hairServices', 'price', 'review', 'canceled'];
+    totalRatingStars: number = 5;
+    allAppointments$: any;
   
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public hairdresserService: HairDresserService) { }
+    constructor(public hairdresserService: HairDresserService) { }
 
-  ngOnInit(): void {
-    //hard-coded pageNumber and pageSize
-    this.hairdresserService.getAllAppointments(1, 1000)
-    .subscribe(res => {
-      this.allAppointments$ = new MatTableDataSource(res);
-      this.allAppointments$.paginator = this.paginator;
-      this.allAppointments$.sort = this.sort;
-    });
-  }
+    ngOnInit(): void {
+        //hard-coded pageNumber and pageSize
+        this.hairdresserService.getAllAppointments(1, 1000)
+        .subscribe(res => {
+            this.allAppointments$ = new MatTableDataSource(res);
+            this.allAppointments$.paginator = this.paginator;
+            this.allAppointments$.sort = this.sort;
+        });
+    }
 }

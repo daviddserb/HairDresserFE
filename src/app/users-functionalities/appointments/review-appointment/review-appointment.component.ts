@@ -7,55 +7,52 @@ import { Router } from '@angular/router';
 import { Review } from 'src/app/models/Review';
 
 @Component({
-  selector: 'app-review-appointment',
-  templateUrl: './review-appointment.component.html',
-  styleUrls: ['./review-appointment.component.css']
+    selector: 'app-review-appointment',
+    templateUrl: './review-appointment.component.html',
+    styleUrls: ['./review-appointment.component.css']
 })
 export class ReviewAppointmentComponent implements OnInit {
-  public appointmentId!: number;
+    public appointmentId!: number;
 
-  public formAppointmentReview = new FormGroup({
-    rating: new FormControl(0, Validators.required),
-    comments: new FormControl('', Validators.required),
-  });
-
-  //private review: Review;
-
-  public hoveredStars: number = 0;
-  public selectedStars: number = 0;
-
-  constructor
-  (
-    private hairdresserService: HairDresserService,
-    private route: ActivatedRoute,
-    private popUpMessagesService: PopUpMessagesService,
-    private router: Router,
-  ) {}
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.appointmentId = Number(params.get('appointmentId'));
+    public formAppointmentReview = new FormGroup({
+        rating: new FormControl(0, Validators.required),
+        comments: new FormControl('', Validators.required),
     });
-  }
+    
+    public hoveredStars: number = 0;
+    public selectedStars: number = 0;
 
-  get formAppointmentReviewGetter () { return this.formAppointmentReview.controls; }
+    constructor(
+        private hairdresserService: HairDresserService,
+        private route: ActivatedRoute,
+        private popUpMessagesService: PopUpMessagesService,
+        private router: Router) {}
 
-  createAppointmentReview() {
-    let review: Review = {
-      CustomerId: localStorage.getItem('id'),
-      Rating: this.formAppointmentReview.value.rating,
-      Comments: this.formAppointmentReview.value.comments
+    ngOnInit(): void {
+        this.route.paramMap.subscribe(params => {
+            this.appointmentId = Number(params.get('appointmentId'));
+        });
     }
-    this.hairdresserService.reviewAppointment(this.appointmentId, review)
-    .subscribe({
-      next: (res) => this.popUpMessagesService.showPopUpMessage("Appointment successfully reviewed!", "OK", "success"),
-      error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to review the appointment!", "OK", "error"),
-      complete: () => this.router.navigate(['profile/customer/appointment/finished'])
-    });
-  }
 
-  onStarClicked(star: number) {
-    this.selectedStars = star;
-    this.formAppointmentReview.patchValue({ rating: star });
-  }
+    get formAppointmentReviewGetter () { return this.formAppointmentReview.controls; }
+
+    createAppointmentReview() {
+        let review: Review = {
+            CustomerId: localStorage.getItem('id'),
+            Rating: this.formAppointmentReview.value.rating,
+            Comments: this.formAppointmentReview.value.comments
+        }
+
+        this.hairdresserService.reviewAppointment(this.appointmentId, review)
+        .subscribe({
+            next: (res) => this.popUpMessagesService.showPopUpMessage("Appointment successfully reviewed!", "OK", "success"),
+            error: (err) => this.popUpMessagesService.showPopUpMessage("Failed to review the appointment!", "OK", "error"),
+            complete: () => this.router.navigate(['profile/customer/appointment/finished'])
+        });
+    }
+
+    onStarClicked(star: number) {
+        this.selectedStars = star;
+        this.formAppointmentReview.patchValue({ rating: star });
+    }
 }

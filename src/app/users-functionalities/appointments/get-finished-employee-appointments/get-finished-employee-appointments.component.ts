@@ -3,32 +3,32 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
-  selector: 'app-get-finished-employee-appointments',
-  templateUrl: './get-finished-employee-appointments.component.html',
-  styleUrls: ['./get-finished-employee-appointments.component.css']
+    selector: 'app-get-finished-employee-appointments',
+    templateUrl: './get-finished-employee-appointments.component.html',
+    styleUrls: ['./get-finished-employee-appointments.component.css']
 })
 export class GetFinishedEmployeeAppointmentsComponent implements OnInit {
-  employeeAppointmentsFinished$: any;
-  displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'review'];
-  totalRatingStars: number = 5;
+    employeeAppointmentsFinished$: any;
+    displayedColumns: string[] = ['#', 'employeeName', 'startDate', 'endDate', 'hairServices', 'price', 'review'];
+    totalRatingStars: number = 5;
 
   constructor(
     private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-  ) { }
+    private popUpMessagesService: PopUpMessagesService) { }
 
-  ngOnInit(): void {
-    let employeeId = String(localStorage.getItem('id'));
-    this.hairdresserService.getFinishedAppointmentsByEmployeeId(employeeId)
-    .subscribe({
-      next: (res) =>  { this.employeeAppointmentsFinished$ = res; },
-      error: (e) => {
-        if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.message, "OK", "error");
-        } else {
-          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
-        }
-      },
-    });
-  }
+    ngOnInit(): void {
+        let employeeId = String(localStorage.getItem('id'));
+
+        this.hairdresserService.getFinishedAppointmentsByEmployeeId(employeeId)
+        .subscribe({
+            next: (res) =>  { this.employeeAppointmentsFinished$ = res; },
+            error: (e) => {
+                if (typeof e.error == "object") {
+                this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+                } else {
+                this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+                }
+            },
+        });
+    }
 }

@@ -1,42 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { WorkingInterval } from 'src/app/models/WorkingInterval';
 import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.service';
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
-  selector: 'app-create-working-interval',
-  templateUrl: './create-working-interval.component.html',
-  styleUrls: ['./create-working-interval.component.css']
+    selector: 'app-create-working-interval',
+    templateUrl: './create-working-interval.component.html',
+    styleUrls: ['./create-working-interval.component.css']
 })
 export class CreateWorkingIntervalComponent implements OnInit {
-  formWorkingInterval = new FormGroup({
-    workingDayId: new FormControl('', Validators.required),
-    employeeId: new FormControl(), //
-    startTime: new FormControl('', Validators.required),
-    endTime: new FormControl('', Validators.required),
-  });
-
-  constructor(
-    private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-    ) {}
-
-  ngOnInit(): void {
-  }
-
-  get formGetter() { return this.formWorkingInterval.controls; }
-
-  createWorkingInterval() {
-    
-
-    let infoWorkingInterval = this.formWorkingInterval.value;
-    infoWorkingInterval.employeeId = String(localStorage.getItem('id'));
-
-    this.hairdresserService.postWorkingInterval(infoWorkingInterval)
-    .subscribe({
-      error: (e) => this.popUpMessagesService.showPopUpMessage("Interval overlaping with the existing ones or the pause between is not 1 hour at least!", "OK", "error"),
-      complete: () => this.popUpMessagesService.showPopUpMessage("Interval successfully created!", "OK", "success")
+    formWorkingInterval = new FormGroup({
+        workingDayId: new FormControl('', Validators.required),
+        employeeId: new FormControl(), //
+        startTime: new FormControl('', Validators.required),
+        endTime: new FormControl('', Validators.required),
     });
-  }
+
+    constructor(
+        private hairdresserService: HairDresserService,
+        private popUpMessagesService: PopUpMessagesService) {}
+
+    ngOnInit(): void {}
+
+    get formGetter() { return this.formWorkingInterval.controls; }
+
+    createWorkingInterval() {
+        let infoWorkingInterval = this.formWorkingInterval.value;
+        infoWorkingInterval.employeeId = String(localStorage.getItem('id'));
+
+        this.hairdresserService.postWorkingInterval(infoWorkingInterval)
+        .subscribe({
+            error: (err) => this.popUpMessagesService.showPopUpMessage(err.error.Message, "OK", "error"),
+            complete: () => this.popUpMessagesService.showPopUpMessage("Interval successfully created!", "OK", "success")
+        });
+    }
 }

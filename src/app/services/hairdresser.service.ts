@@ -14,19 +14,16 @@ import { Review } from "../models/Review";
 export class HairDresserService {
     private readonly apiUrl = "https://localhost:7192/api";
 
-    //Behavior subject to keep the state of the logged in user (state true if user is logged in, false otherwise).
+    //BehaviorSubject to keep the state of the logged in user (state true if user is logged in, false otherwise).
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-    //Public Observable so we can change it.
     isLoggedIn$ = this._isLoggedIn$.asObservable();
     
     // For Back-end Authorization, to send the token, in the Header of the HTTP Request.
     headers: HttpHeaders;
 
-    constructor
-    (
+    constructor(
         private httpClient: HttpClient,
-        private router: Router
-    )
+        private router: Router)
     {
         //Get the value of the token, from the local storage, from the logged in user.
         const token = localStorage.getItem('token');
@@ -34,12 +31,12 @@ export class HairDresserService {
         //If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
         this._isLoggedIn$.next(!!token);
 
+        //Set headers
         this.headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
     }
 
-    //APPOINTMENTS:
     postAppointment(appointment: Appointment): Observable<Appointment> {
         return this.httpClient.post<Appointment>(`${this.apiUrl}/appointment`, appointment, { headers: this.headers });
     }
@@ -81,11 +78,10 @@ export class HairDresserService {
     }
 
     deleteAppointmentById(appointmentId: number): Observable<{}> {
-        const customerId = localStorage.getItem('id'); // logged-in user id
+        const customerId = localStorage.getItem('id');
         return this.httpClient.delete(`${this.apiUrl}/appointment/${customerId}/${appointmentId}`, { headers: this.headers });
     }
 
-    //HAIR SERVICES:
     postHairService(hair: object): Observable<HairService> {
         return this.httpClient.post<HairService>(`${this.apiUrl}/hairservice`, hair);
     }
@@ -140,7 +136,6 @@ export class HairDresserService {
         return this.httpClient.get(`${this.apiUrl}/hairservice/price/by-ids?${stringForApi}`);
     }
 
-    //WORKING INTERVALS:
     postWorkingInterval(workingInterval: object): Observable<WorkingInterval> {
         return this.httpClient.post<WorkingInterval>(`${this.apiUrl}/working-interval`, workingInterval);
     }
@@ -157,7 +152,6 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/working-interval/${workingIntervalId}`);
     }
 
-    //USERS:
     getAllUsers(): Observable<User[]> {
         return this.httpClient.get<User[]>(`${this.apiUrl}/user/all`);
     }
@@ -170,12 +164,10 @@ export class HairDresserService {
         return this.httpClient.get<User>(`${this.apiUrl}/user/with-role/id?userId=${userId}`);
     }
     
-    //CUSTOMER:
     getAllCustomers(): Observable<User[]> {
         return this.httpClient.get<User[]>(`${this.apiUrl}/user/customer/all`);
     }
 
-    //EMPLOYEE:
     getAllEmployees(): Observable<User[]> {
         return this.httpClient.get<User[]>(`${this.apiUrl}/user/employee/all`);
     }
@@ -210,7 +202,6 @@ export class HairDresserService {
         return this.httpClient.delete(`${this.apiUrl}/user/employee/hair-service/${employeeHairServiceId}`);
     }
 
-    //USER AUTHENTICATION (REGISTER, LOG IN/OUT):
     registerUser(userInfo: any): Observable<{}> {
         let user: User = {
             username: userInfo.username,
@@ -219,6 +210,7 @@ export class HairDresserService {
             phone: userInfo.phone,
             address: userInfo.address,
         };
+
         return this.httpClient.post<User>(`${this.apiUrl}/user/register`, user);
     }
 
@@ -227,8 +219,9 @@ export class HairDresserService {
             username: user_username,
             password: user_password
         };
+
         return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
-        .pipe(tap((response: any) => {
+            .pipe(tap((response: any) => {
                 //Save information in Local Storage as key - value (to see it: Inspect page -> Application -> Local Storage).
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('id', response.id);
@@ -236,8 +229,6 @@ export class HairDresserService {
 
                 //Use next() method to save the value in observables and it means that we know every subscriber of the public observable will be notified.
                 this._isLoggedIn$.next(true);
-
-                
             })
         );
     }
@@ -255,6 +246,7 @@ export class HairDresserService {
             username: user_username,
             role: user_role
         };
+
         return this.httpClient.post<User>(`${this.apiUrl}/user/assign-role`, user);
     }
 }

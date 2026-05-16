@@ -1,11 +1,8 @@
-<!-- Reactive Form -->
 <div class="form-wrap">
-    <!--directive [formGroup]="formNameFromTS" to bind the HTML form with the TS form (must)-->
     <form [formGroup]="registerForm" (ngSubmit)="createAccount()">
         <h1>Register</h1>
         <div>
             <label for="username">Username</label>
-            <!--directive formControlName="" to bind the username field from HTML form with the username property from TS form-->
             <input type="text" formControlName="username" class="form-control" id="username">
             <div *ngIf="formGetter.username.touched" style="color:red">
                 <div *ngIf="formGetter.username.errors?.['required']">Username is required!</div>
@@ -42,7 +39,6 @@
             <div *ngIf="formGetter.address.touched && formGetter.address.invalid" style="color:red">Address is required!</div>
         </div>
         <div [ngClass]="{'invalid-button-wrapper': registerForm.invalid, 'valid-hover-button-wrapper': registerForm.valid}">
-            <!--type="submit" => at user click, the form (ngSubmit) will be triggered (must)-->
             <button type="submit" [disabled]="!registerForm.valid">Submit</button>
             <a routerLink="../log-in" class="btn btn-link">Already have an account? Log in here.</a>
         </div>

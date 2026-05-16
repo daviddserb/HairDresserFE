@@ -27,84 +27,82 @@ import { AuthGuard } from 'src/guards/auth.guard';
 
 // When add path here => go and add it in routingComponents too.
 const routes: Routes = [
+    {path: '', component: HomeComponent, children: [
+        {path: 'register', component: RegisterComponent},
+        {path: 'log-in', component: LogInComponent},
+    ]},
+    
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children:
+        [
+            {path: 'admin', children: [
+                {path: 'hair-service', component: CreateHairServiceComponent},
+                {path: 'hair-service/all', component: GetAllHairServicesComponent},
+                {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
+                {path: 'appointment/all', component: GetAllAppointmentsComponent},
+                {path: 'employee/all', component: GetAllEmployeesComponent},
+            ]},
 
-  {path: '', component: HomeComponent, children: [
-    {path: 'register', component: RegisterComponent},
-    {path: 'log-in', component: LogInComponent},
-  ]},
+            {path: 'employee', children: [
+                {path: 'hair-service', component: AddHairServiceComponent},
+                {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
+                {path: 'appointment', children: [
+                    {path: 'all', component: GetAllEmployeeAppointmentsComponent},
+                    {path: 'finished', component: GetFinishedEmployeeAppointmentsComponent},
+                    {path: 'in-work', component: GetInWorkEmployeeAppointmentsComponent},
+                ]},
+            {path: 'working-interval', component: CreateWorkingIntervalComponent},
+            {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
+            ]},
 
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], children:
-    [
-      {path: 'admin', children: [
-        {path: 'hair-service', component: CreateHairServiceComponent},
-        {path: 'hair-service/all', component: GetAllHairServicesComponent},
-        {path: 'hair-service/update/:id', component: UpdateHairServiceComponent},
-        {path: 'appointment/all', component: GetAllAppointmentsComponent},
-        {path: 'employee/all', component: GetAllEmployeesComponent},
-      ]},
+            {path: 'customer', children: [
+                {path: 'appointment', component: CreateAppointmentComponent},
+                {path: 'appointment', children: [
+                    {path: 'all', component: GetAllCustomerAppointmentsComponent},
+                    {path: 'finished', component: GetFinishedCustomerAppointmentsComponent},
+                    {path: 'in-work', component: GetInWorkCustomerAppointmentsComponent},
+                    {path: ':appointmentId/review', component: ReviewAppointmentComponent},
+                ]},
+            ]},
 
-      {path: 'employee', children: [
-        {path: 'hair-service', component: AddHairServiceComponent},
-        {path: 'hair-service/all', component: GetEmployeeHairServicesComponent},
-        {path: 'appointment', children: [
-          {path: 'all', component: GetAllEmployeeAppointmentsComponent},
-          {path: 'finished', component: GetFinishedEmployeeAppointmentsComponent},
-          {path: 'in-work', component: GetInWorkEmployeeAppointmentsComponent},
-        ]},
-        {path: 'working-interval', component: CreateWorkingIntervalComponent},
-        {path: 'working-interval/all', component: GetAllEmployeeWorkingIntervalsComponent},
-      ]},
+            {path: 'hair-service', component: GetAllHairServicesComponent}
+        ]
+    },
 
-      {path: 'customer', children: [
-        {path: 'appointment', component: CreateAppointmentComponent},
-        {path: 'appointment', children: [
-          {path: 'all', component: GetAllCustomerAppointmentsComponent},
-          {path: 'finished', component: GetFinishedCustomerAppointmentsComponent},
-          {path: 'in-work', component: GetInWorkCustomerAppointmentsComponent},
-          {path: ':appointmentId/review', component: ReviewAppointmentComponent},
-        ]},
-      ]},
-      {path: 'hair-service', component: GetAllHairServicesComponent}
-    ]
-  },
-  {path: '**', component: PageNotFoundComponent}
+    {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-  ],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+    providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 
 export const routingComponents = [
-  HomeComponent,
-  RegisterComponent,
-  LogInComponent,
+    HomeComponent,
+    RegisterComponent,
+    LogInComponent,
 
-  ProfileComponent,
+    ProfileComponent,
 
-  CreateHairServiceComponent,
-  GetAllHairServicesComponent,
-  UpdateHairServiceComponent,
-  GetAllAppointmentsComponent,
-  GetAllEmployeesComponent,
+    CreateHairServiceComponent,
+    GetAllHairServicesComponent,
+    UpdateHairServiceComponent,
+    GetAllAppointmentsComponent,
+    GetAllEmployeesComponent,
 
-  AddHairServiceComponent,
-  GetEmployeeHairServicesComponent,
-  GetAllEmployeeAppointmentsComponent,
-  CreateWorkingIntervalComponent,
-  GetAllEmployeeWorkingIntervalsComponent,
-  GetFinishedEmployeeAppointmentsComponent,
-  GetInWorkEmployeeAppointmentsComponent,
+    AddHairServiceComponent,
+    GetEmployeeHairServicesComponent,
+    GetAllEmployeeAppointmentsComponent,
+    CreateWorkingIntervalComponent,
+    GetAllEmployeeWorkingIntervalsComponent,
+    GetFinishedEmployeeAppointmentsComponent,
+    GetInWorkEmployeeAppointmentsComponent,
 
-  CreateAppointmentComponent,
-  GetAllCustomerAppointmentsComponent,
-  GetFinishedCustomerAppointmentsComponent,
-  GetInWorkCustomerAppointmentsComponent,
-  ReviewAppointmentComponent,
+    CreateAppointmentComponent,
+    GetAllCustomerAppointmentsComponent,
+    GetFinishedCustomerAppointmentsComponent,
+    GetInWorkCustomerAppointmentsComponent,
+    ReviewAppointmentComponent,
 
-  PageNotFoundComponent
-]
+    PageNotFoundComponent]

@@ -3,35 +3,35 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
 import { HairDresserService } from 'src/app/services/hairdresser.service';
 
 @Component({
-  selector: 'app-get-all-employee-appointments',
-  templateUrl: './get-all-employee-appointments.component.html',
-  styleUrls: ['./get-all-employee-appointments.component.css']
+    selector: 'app-get-all-employee-appointments',
+    templateUrl: './get-all-employee-appointments.component.html',
+    styleUrls: ['./get-all-employee-appointments.component.css']
 })
 export class GetAllEmployeeAppointmentsComponent implements OnInit {
-  allEmployeeAppointments$: any;
-  displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
+    allEmployeeAppointments$: any;
+    displayedColumns: string[] = ['#', 'customerName', 'startDate', 'endDate', 'hairServices', 'price'];
 
-  constructor(
-    private hairdresserService: HairDresserService,
-    private popUpMessagesService: PopUpMessagesService,
-    ) {}
+    constructor(
+        private hairdresserService: HairDresserService,
+        private popUpMessagesService: PopUpMessagesService) {}
 
-  ngOnInit(): void {
-    this.getAllEmployeeAppointments();
-  }
+    ngOnInit(): void {
+        this.getAllEmployeeAppointments();
+    }
 
-  getAllEmployeeAppointments() {
-    let employeeId = String(localStorage.getItem('id'));
-    this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
-    .subscribe({
-      next: (res) => { this.allEmployeeAppointments$ = res; },
-      error: (e) => {
-        if (typeof e.error == "object") {
-          this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
-        } else {
-          this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
-        }
-      },
-    });
-  }
+    getAllEmployeeAppointments() {
+        let employeeId = String(localStorage.getItem('id'));
+        
+        this.hairdresserService.getAllAppointmentsByEmployeeId(employeeId)
+        .subscribe({
+            next: (res) => { this.allEmployeeAppointments$ = res; },
+            error: (e) => {
+                if (typeof e.error == "object") {
+                    this.popUpMessagesService.showPopUpMessage(e.error.Message, "OK", "error");
+                } else {
+                    this.popUpMessagesService.showPopUpMessage(e.error, "OK", "error");
+                }
+            },
+        });
+    }
 }
