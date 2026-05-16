@@ -12,7 +12,6 @@ import { PopUpMessagesService } from 'src/app/pop-up-messages/pop-up-messages.se
     styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-    isLinear = true; // ???TODO - What does it do. Investigate.
     firstFormGroup = this._formBuilder.group({
         firstCtrl: [Validators.required],
     });
