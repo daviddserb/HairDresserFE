@@ -49,20 +49,12 @@ export class HairDresserService {
         return this.httpClient.get<Appointment>(`${this.apiUrl}/appointment/${appointmentId}`);
     }
 
-    getAllAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
-        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/customer/${customerId}`);
-    }
-
     getFinishedAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/finished/customer/${customerId}`, { headers: this.headers });
     }
 
     getInWorkAppointmentsByCustomerId(customerId: string): Observable<Appointment[]> {
         return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/in-work/customer/${customerId}`, { headers: this.headers });
-    }
-
-    getAllAppointmentsByEmployeeId(employeeId: string): Observable<Appointment[]> {
-        return this.httpClient.get<Appointment[]>(`${this.apiUrl}/appointment/all/employee/${employeeId}`);
     }
 
     getFinishedAppointmentsByEmployeeId(employeeId: string): Observable<Appointment[]> {
