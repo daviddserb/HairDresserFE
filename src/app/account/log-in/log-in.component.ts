@@ -31,8 +31,6 @@ export class LogInComponent {
     }
 
     decodeToken(token: string): MyToken {
-        //keep for debugging purposes
-        const decodedToken = jwt_decode<MyToken>(token);
-        return jwt_decode(token);
+        return jwt_decode<MyToken>(token);
     }
 }

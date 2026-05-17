@@ -18,7 +18,7 @@ export class HairDresserService {
     private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
     isLoggedIn$ = this._isLoggedIn$.asObservable();
     
-    // For Back-end Authorization, to send the token, in the Header of the HTTP Request.
+    //For Back-end Authorization, to send the token, in the Header of the HTTP Request.
     headers: HttpHeaders;
 
     constructor(
@@ -31,7 +31,7 @@ export class HairDresserService {
         //If it is a value in the token => state of the isLoggedIn will be true (because user is logged in), false otherwise.
         this._isLoggedIn$.next(!!token);
 
-        //Set headers
+        //Set headers.
         this.headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
@@ -212,8 +212,8 @@ export class HairDresserService {
             password: user_password
         };
 
-        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user)
-            .pipe(tap((response: any) => {
+        return this.httpClient.post<User>(`${this.apiUrl}/user/login`, user).pipe(
+            tap((response: any) => {
                 //Save information in Local Storage as key - value (to see it: Inspect page -> Application -> Local Storage).
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('id', response.id);

@@ -23,7 +23,7 @@ import { GetFinishedCustomerAppointmentsComponent } from './users-functionalitie
 import { ReviewAppointmentComponent } from './users-functionalities/appointments/review-appointment/review-appointment.component';
 import { AuthGuard } from 'src/guards/auth.guard';
 
-// When add path here => go and add it in routingComponents too.
+//When add path here => go and add it in routingComponents too.
 const routes: Routes = [
     {path: '', component: HomeComponent, children: [
         {path: 'register', component: RegisterComponent},

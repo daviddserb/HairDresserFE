@@ -16,7 +16,7 @@ export class UpdateHairServiceComponent implements OnInit {
         price: new FormControl(),
     });
 
-  hairServiceId!: number;
+    hairServiceId!: number;
 
     constructor(
         private hairdresserService: HairDresserService,
@@ -26,7 +26,7 @@ export class UpdateHairServiceComponent implements OnInit {
     get formGetter() { return this.formHairServiceEdited.controls; }
 
     ngOnInit(): void {
-        // Get the id, from the route, of the selected hair service.
+        //Get the id, from the route, of the selected hair service.
         this.hairServiceId = this.router.snapshot.params['id'];
 
         this.hairdresserService.getHairServiceById(this.router.snapshot.params['id'])

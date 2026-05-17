@@ -12,14 +12,14 @@ export class PopUpMessagesService {
         this.snackBar.openFromComponent(
             NotifierComponent,
             {
-                // What we pass to the component.
+                //What we pass to the component.
                 data: {
                     message: displayMessage,
                     type: messageType,
                     buttonText: buttonText
                 },
 
-            // What we do to the button.
+            //What we do to the button.
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',

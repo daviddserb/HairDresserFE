@@ -22,7 +22,7 @@ export class CreateAppointmentComponent implements OnInit {
     allHairServices$!: any;
     displayedColumns: string[] = ['checkBox', '#', 'name', 'duration', 'price'];
 
-    // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
+    //SelectionModel has 2 parameters (bolean for multiple selection, initial value).
     selection = new SelectionModel<any>(true, []);
 
     employeesByHairServices!: any;
@@ -50,7 +50,7 @@ export class CreateAppointmentComponent implements OnInit {
         this.allHairServices$ = this.hairdresserService.getAllHairServices();
     }
 
-    // Prevent Saturday and Sunday from being selected.
+    //Prevent Weekend (Saturday and Sunday) from being selected.
     weekendFilter = (d: Date | null): boolean => {
         const day = (d || new Date()).getDay();
         return day !== 0 && day !== 6;

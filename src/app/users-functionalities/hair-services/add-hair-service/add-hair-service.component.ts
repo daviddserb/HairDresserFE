@@ -14,7 +14,7 @@ export class AddHairServiceComponent implements OnInit {
     missingHairServices$!: any;
     displayedColumns: string[] = ['checkBox', '#', 'name', 'duration', 'price'];
 
-    // SelectionModel has 2 parameters (bolean for multiple selection, initial value).
+    //SelectionModel has 2 parameters (bolean for multiple selection, initial value).
     selection = new SelectionModel<any>(true, []);
   
     constructor(

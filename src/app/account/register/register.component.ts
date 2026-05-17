@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // To access the input values in the HTML
+    //To access the input values in the HTML.
     get formGetter() { return this.registerForm.controls; }
 
     createAccount() {
@@ -50,13 +50,13 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    // Custom Validation
+    //Custom Validation.
     noWhitespaceAllowed(control: FormControl): {[s: string]: boolean} {
         if(/\s/.test(control.value)) return {'noSpaceAllowed': true}
         return null;
     }
 
-    // Custom Async Validation
+    //Custom Async Validation.
     uniqueUsername(control: FormControl): Promise<any> | Observable<any> {
         const response = new Promise((resolve, reject) => {
             const usernameExists = this.allUsers.some((user) => user.username === control.value);
